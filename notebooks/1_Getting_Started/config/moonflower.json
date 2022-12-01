@@ -1,0 +1,35 @@
+{
+    "verbose_level": "interactive",
+    "io": {
+        "rfile": null,
+        "autosave": {
+            "active": false
+        },
+        "autoplot": {
+            "active": false
+        },
+        "interaction": {
+            "active": false
+        }
+    },
+    "scans": {
+        "MF": {
+            "name": "Full",
+            "data": {
+                "name": "MoonFlowerScan",
+                "shape": 128,
+                "num_frames": 200,
+                "save": null,
+                "density": 0.2,
+                "photons": 1e8,
+                "psf": 0.0
+            }
+        }
+    },
+    "engines": {
+        "engine00": {
+            "name": "DM",
+            "numiter": 80
+        }
+    }
+}
