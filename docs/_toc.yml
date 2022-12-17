@@ -1,0 +1,48 @@
+# Table of contents
+
+format: jb-book
+root: intro
+parts:
+- caption: Getting Started with PtyPy
+  numbered: true
+  chapters:
+  - file: notebooks/Getting_Started_with_PtyPy/1_the_parameter_tree
+  - file: notebooks/Getting_Started_with_PtyPy/2_yaml_json_config
+  - file: notebooks/Getting_Started_with_PtyPy/3_input_output
+  - file: notebooks/Getting_Started_with_PtyPy/4_scan_models
+  - file: notebooks/Getting_Started_with_PtyPy/5_reconstruction_engines
+- caption: From Data to Reconstruction
+  numbered: true
+  chapters:
+  - file: notebooks/From_Data_to_Reconstruction/6_the_hdf5_loader
+  - file: notebooks/From_Data_to_Reconstruction/7_working_with_electron_data
+  - file: notebooks/From_Data_to_Reconstruction/8_chaining_multiple_engines
+  - file: notebooks/From_Data_to_Reconstruction/9_applying_a_support_constraint
+- caption: Processing Large Datasets
+  numbered: true
+  chapters:
+  - file: notebooks/Processing_Large_Datasets/10_the_block_scan_model
+  - file: notebooks/Processing_Large_Datasets/11_using_gpu_accelerated_engines
+  - file: notebooks/Processing_Large_Datasets/12_switching_between_scan_models
+  - file: notebooks/Processing_Large_Datasets/13_nearfield_ptychography
+- caption: Working with Messy Data
+  numbered: true
+  chapters:
+  - file: notebooks/Working_with_Messy_Data/14_partial_coherence
+  - file: notebooks/Working_with_Messy_Data/15_position_refinement
+  - file: notebooks/Working_with_Messy_Data/16_blank_and_bad_detector_pixels
+  - file: notebooks/Working_with_Messy_Data/17_missing_detector_frames
+  - file: notebooks/Working_with_Messy_Data/18_phase_wrapping
+- caption: Advanced Topcs
+  numbered: true
+  chapters:
+  - file: notebooks/Advanced_Topics/19_live_visualisation
+  - file: notebooks/Advanced_Topics/20_simulating_data
+- caption: Modifying Algorithms
+  numbered: true
+  chapters:
+  - file: notebooks/Modifying_Algorithms/21_object_regularisation
+  - file: notebooks/Modifying_Algorithms/22_implementing_your_own_engine
+  - file: notebooks/Modifying_Algorithms/23_implementing_multislice
+
+
