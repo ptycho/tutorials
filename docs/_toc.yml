@@ -33,11 +33,11 @@ parts:
   - file: notebooks/Working_with_Messy_Data/16_blank_and_bad_detector_pixels
   - file: notebooks/Working_with_Messy_Data/17_missing_detector_frames
   - file: notebooks/Working_with_Messy_Data/18_phase_wrapping
-- caption: Advanced Topcs
-  numbered: true
-  chapters:
-  - file: notebooks/Advanced_Topics/19_live_visualisation
-  - file: notebooks/Advanced_Topics/20_simulating_data
+# - caption: Advanced Topcs
+#   numbered: true
+#   chapters:
+#   - file: notebooks/Advanced_Topics/19_live_visualisation
+#   - file: notebooks/Advanced_Topics/20_simulating_data
 - caption: Modifying Algorithms
   numbered: true
   chapters:
