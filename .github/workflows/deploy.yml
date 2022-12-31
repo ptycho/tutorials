@@ -29,7 +29,9 @@ jobs:
     - name: Build the book
       run: |
         ln -s notebooks docs/notebooks
+        ls docs/
         python scripts/convert.py
+        ls docs/
         jupyter-book build docs
 
     # Push the book's HTML to github-pages
