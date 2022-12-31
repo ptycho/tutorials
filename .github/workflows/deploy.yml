@@ -5,6 +5,8 @@ on:
   push:
     branches:
     - actions
+    paths:
+    - docs/**
 
 # This job installs dependencies, builds the book, and pushes it to `gh-pages`
 jobs:
