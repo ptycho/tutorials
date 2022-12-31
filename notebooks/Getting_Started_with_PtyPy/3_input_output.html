@@ -1,0 +1,694 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>3. Input/Output Parameters &#8212; Tutorials</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4. Scan Models" href="4_scan_models.html" />
+    <link rel="prev" title="2. JSON/YAML Config Files" href="2_yaml_json_config.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Tutorials</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started with PtyPy
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1_the_parameter_tree.html">
+   1. The Parameter Tree
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2_yaml_json_config.html">
+   2. JSON/YAML Config Files
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   3. Input/Output Parameters
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4_scan_models.html">
+   4. Scan Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5_reconstruction_engines.html">
+   5. Reconstruction Engines
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  From Data to Reconstruction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../From_Data_to_Reconstruction/6_the_hdf5_loader.html">
+   6. The HDF5 Loader
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../From_Data_to_Reconstruction/7_working_with_electron_data.html">
+   7. Working With Electron Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../From_Data_to_Reconstruction/8_chaining_multiple_engines.html">
+   8. Chaining Multiple Engines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../From_Data_to_Reconstruction/9_applying_a_support_constraint.html">
+   9. Applying a Support Constraint
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Processing Large Datasets
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Processing_Large_Datasets/10_the_block_scan_model.html">
+   10. The Block Scan Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Processing_Large_Datasets/11_using_gpu_accelerated_engines.html">
+   11. Using the GPU-accelerated Engines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Processing_Large_Datasets/12_switching_between_scan_models.html">
+   12. Switching between Scan Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Processing_Large_Datasets/13_nearfield_ptychography.html">
+   13. Nearfield Ptychography
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Working with Messy Data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/14_partial_coherence.html">
+   14. Partial Coherence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/15_position_refinement.html">
+   15. Position Refinement
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/16_blank_and_bad_detector_pixels.html">
+   16. Blank and Bad Detector Pixels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/17_missing_detector_frames.html">
+   17. Missing Detector Frames
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/18_phase_wrapping.html">
+   19. Phase Wrapping
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Modifying Algorithms
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Modifying_Algorithms/21_object_regularisation.html">
+   20. Object regularisation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Modifying_Algorithms/22_implementing_your_own_engine.html">
+   21. Implementing Your Own Engine
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Modifying_Algorithms/23_implementing_multislice.html">
+   22. A multislice implementation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ptycho/tutorials/master?urlpath=tree/docs/notebooks/Getting_Started_with_PtyPy/3_input_output.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ptycho/tutorials"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Getting_Started_with_PtyPy/3_input_output.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/Getting_Started_with_PtyPy/3_input_output.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#saving-intermediates-to-file">
+   3.1. Saving intermediates to file
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#live-plotting">
+   3.2. Live-plotting
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Input/Output Parameters</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#saving-intermediates-to-file">
+   3.1. Saving intermediates to file
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#live-plotting">
+   3.2. Live-plotting
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="input-output-parameters">
+<h1><span class="section-number">3. </span>Input/Output Parameters<a class="headerlink" href="#input-output-parameters" title="Permalink to this headline">#</a></h1>
+<p><strong>Learning more about the <code class="docutils literal notranslate"><span class="pre">io</span></code> section of the parameter tree - how to save the final result and intermediates into <code class="docutils literal notranslate"><span class="pre">.ptyr</span></code> files, and how to use live plotting with Jupyter notebooks.</strong></p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">p.io</span></code> section of the parameter tree we can specify where we would like our output to be written to. First, we can set a root directory for all further input/output operations, e.g. “/tmp”</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">home</span> <span class="o">=</span> <span class="s2">&quot;/tmp&quot;</span>
+</pre></div>
+</div>
+<p>PtyPy saves its results into <code class="docutils literal notranslate"><span class="pre">.ptyr</span></code> files which are basically <a class="reference external" href="https://docs.hdfgroup.org/hdf5/develop/">HDF5</a> files and can therefore be inspected by any software/library that supports the HDF5 format, e.g. <a class="reference external" href="https://docs.h5py.org/en/stable/">h5py</a>. We can now specify that the main output file should be placed in a subfolder <code class="docutils literal notranslate"><span class="pre">recon</span></code>  relative to the root directory</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span>  <span class="s2">&quot;recons/</span><span class="si">%(run)s</span><span class="s2">_</span><span class="si">%(engine)s</span><span class="s2">_</span><span class="si">%(iterations)04d</span><span class="s2">.ptyr&quot;</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">%(run)s</span></code> is dynamically replaced by the string defined in <code class="docutils literal notranslate"><span class="pre">p.run</span></code>, <code class="docutils literal notranslate"><span class="pre">%(engine)s</span></code> by the name of the engine used for the reconstructions and <code class="docutils literal notranslate"><span class="pre">%(iterations)04d</span></code> by the total number of iterations at the end formatted as a 4-digit integer.</p>
+<section id="saving-intermediates-to-file">
+<h2><span class="section-number">3.1. </span>Saving intermediates to file<a class="headerlink" href="#saving-intermediates-to-file" title="Permalink to this headline">#</a></h2>
+<p>There is also the option to auto-save intermediate states of the reconstruction at a given <code class="docutils literal notranslate"><span class="pre">interval</span></code> into a subfolder <code class="docutils literal notranslate"><span class="pre">dumps</span></code> relative to the root directory</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span><span class="o">.</span><span class="n">active</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="s1">&#39;dumps/</span><span class="si">%(run)s</span><span class="s1">_</span><span class="si">%(engine)s</span><span class="s1">_</span><span class="si">%(iterations)04d</span><span class="s1">.ptyr&#39;</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">%(run)s</span></code>, <code class="docutils literal notranslate"><span class="pre">%(engine)s</span></code> and <code class="docutils literal notranslate"><span class="pre">%(iterations)04d</span></code> are again dynamic labels.</p>
+<div class="alert alert-warning" markdown="1">
+    <strong>Exersice</strong><br>Modify the <code>p.io.home</code> path in the example below to wherever you would like the PtyPy output to be, run the reconstruction and observe all the new files saved to <code>p.io.home</code>. Use <code>ptypy.utils.plot_recon_from_ptyr</code> to look at the MoonFlower reconstruction at different iterations. 
+</div><div class="alert alert-success" markdown="1">
+    <strong>Hint</strong><br>You can use shell commands within Jupyter Notebooks to explore the filesystem, i.e. <code>ls /tmp</code> to list all files in /tmp.
+</div></section>
+<section id="live-plotting">
+<h2><span class="section-number">3.2. </span>Live-plotting<a class="headerlink" href="#live-plotting" title="Permalink to this headline">#</a></h2>
+<p>And finally, PtyPy has live-viewing capabilities that can be controlled with <code class="docutils literal notranslate"><span class="pre">p.io.interaction</span></code> and <code class="docutils literal notranslate"><span class="pre">p.io.autoplot</span></code>, these are mostly useful when running a reconstruction script from a terminal with graphics enabled. They can also be used in a server-client setup, where the plotclient is running on a different machine than the reconstruction (server), see <span class="xref myst">Live visualisation</span> for more details. Since we are working with Jupyter notebooks for most parts of this tutorial, we turn off those features</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Instead, we can use <code class="docutils literal notranslate"><span class="pre">p.io.jupyter_autoplot</span></code> to enable live plotting displayed within the notebook itself</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">jupyter_autoplot</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which will display the current status of the reconstruction after every contiguous block of iterations (<code class="docutils literal notranslate"><span class="pre">p.engines.engine00.numiter_contiguous</span></code>) using <code class="docutils literal notranslate"><span class="pre">ptypy.utils.plot_recon</span></code> with default settings. For the object subplot, the level of cropping and auto-scaling can be modified using <code class="docutils literal notranslate"><span class="pre">p.io.jupyter_autoplot.cropping</span></code> and <code class="docutils literal notranslate"><span class="pre">p.io.jupyter_plotting.outlier_percentile</span></code>.</p>
+<div class="alert alert-info" markdown="1">
+<strong>Note</strong><br><code>p.io.jupyter_autoplot</code> only works with Jupyter notebooks in conjunction with <code>p.verbose_level = "interactive"</code>.
+</div><div class="alert alert-warning" markdown="1">
+    <strong>Exersice</strong><br>Modify the <code>p.io.jupyter_autoplot.cropping</code> and <code>p.io.jupyter_autoplot.outlier_percentile</code> to observe the effect these parameters have on the live reconstruction plot.  
+</div><hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy
+import ptypy.utils as u
+
+p = u.Param()
+p.verbose_level = &quot;interactive&quot;
+
+# Run label (ID)
+p.run = &quot;moonflower&quot;
+
+# I/O settings
+p.io = u.Param()
+
+# Set the root path for all input/output operations
+# Change this to wherever you would like 
+p.io.home = &quot;/tmp&quot;
+
+# Path to final .ptyr output file 
+# using variables p.run, engine name and total nr. of iterations
+p.io.rfile =  &quot;recons/%(run)s_%(engine)s_%(iterations)04d.ptyr&quot;
+
+# Save intermediate .ptyr files (dumps) every 10 iterations
+p.io.autosave = u.Param()
+p.io.autosave.active = True
+p.io.autosave.interval = 10
+p.io.autosave.rfile = &#39;dumps/%(run)s_%(engine)s_%(iterations)04d.ptyr&#39;
+
+# Turn off traditional auto plotting
+p.io.autoplot = u.Param(active=False)
+p.io.interaction = u.Param(active=False)
+
+# Live-plotting during the reconstruction
+# that works with jupyter notebooks
+p.io.jupyter_autoplot = u.Param(active=True)
+p.io.jupyter_autoplot.cropping = 0.2
+p.io.jupyter_autoplot.outlier_percentile = 0.1
+
+p.scans = u.Param()
+p.scans.MF = u.Param()
+p.scans.MF.name = &quot;Full&quot;
+p.scans.MF.data= u.Param()
+p.scans.MF.data.name = &quot;MoonFlowerScan&quot;
+p.scans.MF.data.shape = 128
+p.scans.MF.data.num_frames = 200
+p.scans.MF.data.save = None
+p.scans.MF.data.density = 0.2
+p.scans.MF.data.photons = 1e8
+p.scans.MF.data.psf = 0
+
+p.engines = u.Param()
+p.engines.engine00 = u.Param()
+p.engines.engine00.name = &quot;DM&quot;
+p.engines.engine00.numiter = 80
+p.engines.engine00.numiter_contiguous = 5
+
+P = ptypy.core.Ptycho(p,level=5)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy.utils as u
+import os
+ptyr_filename = os.path.join(p.io.home, &quot;dumps/moonflower_DM_0010.ptyr&quot;)
+u.plot_recon_from_ptyr(ptyr_filename)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ptypy_pycuda"
+        },
+        kernelOptions: {
+            kernelName: "ptypy_pycuda",
+            path: "./notebooks/Getting_Started_with_PtyPy"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ptypy_pycuda'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="2_yaml_json_config.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">2. </span>JSON/YAML Config Files</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="4_scan_models.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Scan Models</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Benedikt J.Daurer<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

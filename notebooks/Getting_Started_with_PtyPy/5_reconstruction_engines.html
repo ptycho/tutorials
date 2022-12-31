@@ -1,0 +1,936 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>5. Reconstruction Engines &#8212; Tutorials</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="6. The HDF5 Loader" href="../From_Data_to_Reconstruction/6_the_hdf5_loader.html" />
+    <link rel="prev" title="4. Scan Models" href="4_scan_models.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Tutorials</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started with PtyPy
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1_the_parameter_tree.html">
+   1. The Parameter Tree
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2_yaml_json_config.html">
+   2. JSON/YAML Config Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3_input_output.html">
+   3. Input/Output Parameters
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4_scan_models.html">
+   4. Scan Models
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   5. Reconstruction Engines
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  From Data to Reconstruction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../From_Data_to_Reconstruction/6_the_hdf5_loader.html">
+   6. The HDF5 Loader
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../From_Data_to_Reconstruction/7_working_with_electron_data.html">
+   7. Working With Electron Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../From_Data_to_Reconstruction/8_chaining_multiple_engines.html">
+   8. Chaining Multiple Engines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../From_Data_to_Reconstruction/9_applying_a_support_constraint.html">
+   9. Applying a Support Constraint
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Processing Large Datasets
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Processing_Large_Datasets/10_the_block_scan_model.html">
+   10. The Block Scan Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Processing_Large_Datasets/11_using_gpu_accelerated_engines.html">
+   11. Using the GPU-accelerated Engines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Processing_Large_Datasets/12_switching_between_scan_models.html">
+   12. Switching between Scan Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Processing_Large_Datasets/13_nearfield_ptychography.html">
+   13. Nearfield Ptychography
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Working with Messy Data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/14_partial_coherence.html">
+   14. Partial Coherence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/15_position_refinement.html">
+   15. Position Refinement
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/16_blank_and_bad_detector_pixels.html">
+   16. Blank and Bad Detector Pixels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/17_missing_detector_frames.html">
+   17. Missing Detector Frames
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/18_phase_wrapping.html">
+   19. Phase Wrapping
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Modifying Algorithms
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Modifying_Algorithms/21_object_regularisation.html">
+   20. Object regularisation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Modifying_Algorithms/22_implementing_your_own_engine.html">
+   21. Implementing Your Own Engine
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Modifying_Algorithms/23_implementing_multislice.html">
+   22. A multislice implementation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ptycho/tutorials/master?urlpath=tree/docs/notebooks/Getting_Started_with_PtyPy/5_reconstruction_engines.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ptycho/tutorials"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Getting_Started_with_PtyPy/5_reconstruction_engines.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/Getting_Started_with_PtyPy/5_reconstruction_engines.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#difference-map-dm-algorithm">
+   5.1. Difference Map (DM) algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-fourier-update">
+     5.1.1. The Fourier update
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-overlap-update">
+     5.1.2. The overlap update
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#epie-algorithm">
+   5.2. ePIE algorithm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-likelihood-ml-algorithm">
+   5.3. Maximum Likelihood (ML) algorithm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gpu-accelerated-engines">
+   5.4. GPU-accelerated engines
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Reconstruction Engines</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#difference-map-dm-algorithm">
+   5.1. Difference Map (DM) algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-fourier-update">
+     5.1.1. The Fourier update
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-overlap-update">
+     5.1.2. The overlap update
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#epie-algorithm">
+   5.2. ePIE algorithm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-likelihood-ml-algorithm">
+   5.3. Maximum Likelihood (ML) algorithm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gpu-accelerated-engines">
+   5.4. GPU-accelerated engines
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="reconstruction-engines">
+<h1><span class="section-number">5. </span>Reconstruction Engines<a class="headerlink" href="#reconstruction-engines" title="Permalink to this headline">#</a></h1>
+<p><strong>Learning more about the different engines and their parameters.</strong></p>
+<p>PtyPy offers a range of different reconstruction engines that can be grouped into the 3 main categories of</p>
+<ul class="simple">
+<li><p>Projectional engines (DM, RAAR)</p></li>
+<li><p>Stochastic engines (ePIE, SDR)</p></li>
+<li><p>Gradient-based engines (ML)</p></li>
+</ul>
+<p>These engine groups share similar sets of parameters. In this example, we pick one from each category and look at some of their parameters.</p>
+<section id="difference-map-dm-algorithm">
+<h2><span class="section-number">5.1. </span>Difference Map (DM) algorithm<a class="headerlink" href="#difference-map-dm-algorithm" title="Permalink to this headline">#</a></h2>
+<p>In PtyPy we have implemented a generalised version of the difference map algorithm with the following update for the exit wave <span class="math notranslate nohighlight">\(\psi\)</span> of every view</p>
+<div class="math notranslate nohighlight">
+\[
+\psi_{j+1} = \{\alpha (\mathbb{I} - \mathcal{O}) + \mathcal{F} [(1 + \alpha) \mathcal{O} - \alpha \mathbb{I}]\}(\psi_{j})
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{O}\)</span> and <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> are the overlap and Fourier update, respectively. <span class="math notranslate nohighlight">\(\mathbb{I}\)</span> is the idenity matrix and <span class="math notranslate nohighlight">\(\alpha\)</span> is a tuning parameter that blends pure alternating projections (<span class="math notranslate nohighlight">\(\alpha=0\)</span>) with the original DM algorithm (<span class="math notranslate nohighlight">\(\alpha=1\)</span>). By its very nature, <span class="math notranslate nohighlight">\(\alpha=1\)</span> is more exploratory but can be a bit too “aggressive” in some cases, whereas <span class="math notranslate nohighlight">\(\alpha=0\)</span> has a tendency to get stuck in local minima. In practice, <span class="math notranslate nohighlight">\(\alpha=0.95\)</span> seems to be a good and robust compromise. In our moonflower example, we can adjust the <code class="docutils literal notranslate"><span class="pre">alpha</span></code> parameter accordingly</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.95</span>
+
+</pre></div>
+</div>
+<section id="the-fourier-update">
+<h3><span class="section-number">5.1.1. </span>The Fourier update<a class="headerlink" href="#the-fourier-update" title="Permalink to this headline">#</a></h3>
+<p>During the Fourier update <span class="math notranslate nohighlight">\(\mathcal{F}[\Psi]\)</span>, the model <span class="math notranslate nohighlight">\(\Psi\)</span> - transformed into the Fourier domain - is being updated such that its intensity is replaced by the measured data <span class="math notranslate nohighlight">\(I\)</span> while its phase remains unchanged</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{F}[\Psi] = \Psi \cdot \frac{\sqrt{|I|} + \rho \cdot (|\Psi| - \sqrt{|I|})}{|\Psi|}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\rho\)</span> is a renormalisation factor defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\rho = \begin{cases}
+         1  &amp; \text{if } b \geq \langle(|\Psi| - \sqrt{|I|})^2\rangle \\
+         \sqrt{b / \langle(|\Psi| - \sqrt{|I|})^2\rangle}  &amp; \text{if } b &lt; \langle(|\Psi| - \sqrt{|I|})^2\rangle \\
+         0  &amp; \text{if } b = \text{None}
+         \end{cases}
+\end{split}\]</div>
+<p>with <span class="math notranslate nohighlight">\(b\)</span> being the so called power bound, which can be modified using the <code class="docutils literal notranslate"><span class="pre">fourier_power_bound</span></code> engine parameter. For Poisson-sampled data, the theoretical value for this power bound parameter is <span class="math notranslate nohighlight">\(0.25\)</span>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">fourier_power_bound</span> <span class="o">=</span> <span class="mf">0.25</span>
+</pre></div>
+</div>
+</section>
+<section id="the-overlap-update">
+<h3><span class="section-number">5.1.2. </span>The overlap update<a class="headerlink" href="#the-overlap-update" title="Permalink to this headline">#</a></h3>
+<p>During the Overlap update <span class="math notranslate nohighlight">\(\mathcal{O}[\psi]\)</span>, the exit wave model <span class="math notranslate nohighlight">\(\psi\)</span> - back-transformed into the real domain - is being used to update object <span class="math notranslate nohighlight">\(O\)</span> and probe <span class="math notranslate nohighlight">\(P\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+O = \frac{\sum_k P^* \cdot \psi_k}{\sum_k|P|^2}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+P = \frac{\sum_k O_k^* \cdot \psi_k}{\sum_k|O_k|^2}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sum_k\)</span> is the summation over all views and <span class="math notranslate nohighlight">\(^*\)</span> denotes the complex conjugate. Based on these updates, the new model is being updated such that</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{O}[\psi]_k = P \cdot O_k
+\]</div>
+<p>for all views <span class="math notranslate nohighlight">\(k\)</span>. Since object and probe update depend on each other, both are repeated several times to reach convergence. In PtyPy, termination of this inner loop is triggered by reaching <code class="docutils literal notranslate"><span class="pre">overlap_max_iterations</span></code> or if the root mean square difference between the current and previous estimate of the probe is smaller than <code class="docutils literal notranslate"><span class="pre">overlap_converge_factor</span></code>. Additionally, the behaviour of the overlap update can be controlled by delaying the first update of the probe using <code class="docutils literal notranslate"><span class="pre">probe_update_first</span></code> or by swapping the order of the object and probe update using <code class="docutils literal notranslate"><span class="pre">update_object_first</span></code> which is <code class="docutils literal notranslate"><span class="pre">True</span></code> by default.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">overlap_converge_factor</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">overlap_max_iterations</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">update_object_first</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<div class="alert alert-warning" markdown="1">
+    <strong>Exersice</strong><br>Modify different DM engine parameters and observe their impact on the outcome of the reconstruction.
+</div><hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy
+import ptypy.utils as u
+
+p = u.Param()
+p.verbose_level = &quot;interactive&quot;
+p.io = u.Param()
+p.io.rfile = None
+p.io.autosave = u.Param(active=False)
+p.io.autoplot = u.Param(active=False)
+p.io.interaction = u.Param(active=False)
+p.io.jupyter_autoplot = u.Param(active=True)
+
+p.scans = u.Param()
+p.scans.MF = u.Param()
+p.scans.MF.name = &quot;Full&quot;
+p.scans.MF.data= u.Param()
+p.scans.MF.data.name = &quot;MoonFlowerScan&quot;
+p.scans.MF.data.shape = 128
+p.scans.MF.data.num_frames = 200
+p.scans.MF.data.save = None
+p.scans.MF.data.density = 0.2
+p.scans.MF.data.photons = 1e8
+p.scans.MF.data.psf = 0.
+
+# Define reconstruction engines
+p.engines = u.Param()
+
+# Difference Map (DM) engine
+p.engines.engine00 = u.Param()
+p.engines.engine00.name = &quot;DM&quot;
+p.engines.engine00.numiter = 80
+
+# General update
+p.engines.engine00.alpha = 0.95
+
+# Fourier update
+p.engines.engine00.fourier_power_bound = 0.25
+
+# Overlap update
+p.engines.engine00.overlap_converge_factor = 0.05
+p.engines.engine00.overlap_max_iterations = 10
+p.engines.engine00.update_object_first = True
+p.engines.engine00.probe_update_start = 2
+
+P = ptypy.core.Ptycho(p,level=5)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="epie-algorithm">
+<h2><span class="section-number">5.2. </span>ePIE algorithm<a class="headerlink" href="#epie-algorithm" title="Permalink to this headline">#</a></h2>
+<p>The exit wave update in standard ePIE is basically like alternating projections in that</p>
+<div class="math notranslate nohighlight">
+\[
+\Psi_{j+1} = \mathcal{F} (\mathcal{O}(\Psi_{j}))
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{O}\)</span> and <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> are again the overlap and Fourier update, respectively. In contrast to projectional methods ePIE is following a stochastic approach where the exit wave is updated sequentially for randomly selected views. In each of these randomized steps as part of the overlap update, the probe <span class="math notranslate nohighlight">\(P_{j}\)</span> and object <span class="math notranslate nohighlight">\(O_{j}\)</span> are modified like this</p>
+<div class="math notranslate nohighlight">
+\[
+O_{j+1} = O_{j} + \alpha \cdot P_{j}^{*} \cdot [\Psi_{\prime} - \Psi_{j+1}] / ||P_{j}||_{max}^2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+P_{j+1} = P_{j} + \beta \cdot O_{j+1}^{*} \cdot [\Psi_{\prime} - \Psi_{j+1}] / ||O_{j}||_{max}^2
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Psi_{\prime} = \mathcal{O}(\Psi_{j}) = P_{j} \cdot O_{j}\)</span> is the exit wave from the previously updated view, <span class="math notranslate nohighlight">\(^{*}\)</span> is the complex conjugate and <span class="math notranslate nohighlight">\(||\cdot||_{max}\)</span> is the maximum norm. The parameters <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> control the strength of object and probe update, respectively and are both equal to <span class="math notranslate nohighlight">\(1\)</span> by default. Lowering <span class="math notranslate nohighlight">\(\alpha\)</span> or <span class="math notranslate nohighlight">\(\beta\)</span> will lower the impact of the object/probe update in each stochastic update, which slows down convergence but might help in escaping artefacts that can occur in some cases. In practice, <span class="math notranslate nohighlight">\(\alpha=0.1\)</span> and <span class="math notranslate nohighlight">\(\beta=0.9\)</span> seems to be a good alternative choicefor for some tricky experimental datasets. In our moonflower example we can stick to the default values for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EPIE&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>During the probe update of the original ePIE algorithm, the maximum norm is calculated and applied seperately for each view which can lead to big changes in the probe depending on the random sequence of views. A different approach is to always calculate the maximum norm over the entire object resulting in less jumpy changes during the probe update. This can be controlled using <code class="docutils literal notranslate"><span class="pre">object_norm_is_global</span></code> which is <code class="docutils literal notranslate"><span class="pre">False</span></code> by default.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">object_norm_is_global</span> <span class="o">=</span> <span class="kc">False</span>
+
+</pre></div>
+</div>
+<div class="alert alert-warning" markdown="1">
+    <strong>Exersice</strong><br>Modify different ePIE engine parameters and observe their impact on the outcome of the reconstruction.
+</div><hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy
+import ptypy.utils as u
+
+p = u.Param()
+p.verbose_level = &quot;interactive&quot;
+p.io = u.Param()
+p.io.rfile = None
+p.io.autosave = u.Param(active=False)
+p.io.autoplot = u.Param(active=False)
+p.io.interaction = u.Param(active=False)
+p.io.jupyter_autoplot = u.Param(active=True)
+
+p.scans = u.Param()
+p.scans.MF = u.Param()
+p.scans.MF.name = &quot;Full&quot;
+p.scans.MF.data= u.Param()
+p.scans.MF.data.name = &quot;MoonFlowerScan&quot;
+p.scans.MF.data.shape = 128
+p.scans.MF.data.num_frames = 200
+p.scans.MF.data.save = None
+p.scans.MF.data.density = 0.2
+p.scans.MF.data.photons = 1e8
+p.scans.MF.data.psf = 0.
+
+# Define reconstruction engines
+p.engines = u.Param()
+
+# ePIE engine
+p.engines.engine00 = u.Param()
+p.engines.engine00.name = &quot;EPIE&quot;
+p.engines.engine00.numiter = 200
+p.engines.engine00.numiter_contiguous = 10
+p.engines.engine00.alpha = 1
+p.engines.engine00.beta = 1
+p.engines.engine00.object_norm_is_global = False
+
+P = ptypy.core.Ptycho(p,level=5)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="maximum-likelihood-ml-algorithm">
+<h2><span class="section-number">5.3. </span>Maximum Likelihood (ML) algorithm<a class="headerlink" href="#maximum-likelihood-ml-algorithm" title="Permalink to this headline">#</a></h2>
+<p>In contrast to the projectional and stochastic algorithms, the maximum-likelihood approach allows to explicitely define a noise model for the ptychographic reconstruction.
+For ptychography, the negative log-likelihood can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L} = - \log \prod_k \prod_q p(I_{kq}|PO) 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(p(I_{kq}|PO)\)</span> is the probability of measuring a photon <span class="math notranslate nohighlight">\(I_{kq}\)</span> at scan view <span class="math notranslate nohighlight">\(k\)</span> and detector pixel <span class="math notranslate nohighlight">\(q\)</span> given probe <span class="math notranslate nohighlight">\(P\)</span> and object <span class="math notranslate nohighlight">\(O\)</span>. For a Gaussian distribution the likelihood reduces to a sum of least squares</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L} = \sum_k \sum_q \frac{(|\Psi_{kq}|^2 - I_{kq})^2}{2\sigma^2_{kq}}
+\]</div>
+<p>which can be used to minimise with respect to <span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(O\)</span> using a non-linear conjugate gradient (CG) approach by defining the gradient</p>
+<div class="math notranslate nohighlight">
+\[
+g = \left(\frac{\partial \mathcal{L}}{\partial P}, \frac{\partial\mathcal{L}}{\partial O}\right)
+\]</div>
+<p>which in turn can be used to define the new conjugate search direction for the <span class="math notranslate nohighlight">\(n-th\)</span> iteration step</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta^{(n)} = -g^{(n)} + \beta^{(n)}\Delta^{(n-1)}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\beta^{(n)}\)</span> can be calculated via the Polak-Ribiere formula. For more details about this maximum-likeilihood based CG algorithm, see <a class="reference external" href="http://dx.doi.org/10.1088/1367-2630/14/6/063004">Thibault P. and Guizar-Sicairos M. (2012)</a> which also includes a description of preconditioners and regularisers that can help with the convergence of the algorithm. In particular, the scale preconditioner can be useful for weakly scattering objects - assuming that the object deviates only weakly from unity - by enforcing a near equality between the probe and object gradients. This parameter can be controlled using <code class="docutils literal notranslate"><span class="pre">scale_precond</span></code> which is <code class="docutils literal notranslate"><span class="pre">True</span></code> by default and <code class="docutils literal notranslate"><span class="pre">scale_probe_object</span></code> which is <span class="math notranslate nohighlight">\(1.0\)</span> by default.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">scale_precond</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">scale_probe_object</span> <span class="o">=</span> <span class="mf">1.</span>
+</pre></div>
+</div>
+<p>In addition, regularisers can be used to reduce difficulties that can arise from ill-posed problems such as the inverse phase problem in ptychography. To impose some form of smoothness in the final reconstruction, we can use a simple Gaussian regulariser which can be toggled using <code class="docutils literal notranslate"><span class="pre">reg_del2</span></code> (<code class="docutils literal notranslate"><span class="pre">True</span></code> by default) and tuned using <code class="docutils literal notranslate"><span class="pre">reg_del2_amplitude</span></code> which defaults to <span class="math notranslate nohighlight">\(0.01\)</span>. In this moonflower example, we are changing the amplitude to <span class="math notranslate nohighlight">\(1.\)</span> for a more aggressive smoothing strategy.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">reg_del2</span> <span class="o">=</span> <span class="kc">True</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">reg_del2_amplitude</span> <span class="o">=</span> <span class="mf">1.</span>
+</pre></div>
+</div>
+<div class="alert alert-warning" markdown="1">
+    <strong>Exersice</strong><br>Modify different ML engine parameters and observe their impact on the outcome of the reconstruction.
+</div><hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy
+import ptypy.utils as u
+
+p = u.Param()
+p.verbose_level = &quot;interactive&quot;
+p.io = u.Param()
+p.io.rfile = None
+p.io.autosave = u.Param(active=False)
+p.io.autoplot = u.Param(active=False)
+p.io.interaction = u.Param(active=False)
+p.io.jupyter_autoplot = u.Param(active=True)
+
+p.scans = u.Param()
+p.scans.MF = u.Param()
+p.scans.MF.name = &quot;Full&quot;
+p.scans.MF.data= u.Param()
+p.scans.MF.data.name = &quot;MoonFlowerScan&quot;
+p.scans.MF.data.shape = 128
+p.scans.MF.data.num_frames = 200
+p.scans.MF.data.save = None
+p.scans.MF.data.density = 0.2
+p.scans.MF.data.photons = 1e8
+p.scans.MF.data.psf = 0.
+
+# Define reconstruction engines
+p.engines = u.Param()
+
+# Maximum Likelihood (ML) engine
+p.engines.engine00 = u.Param()
+p.engines.engine00.name = &quot;ML&quot;
+p.engines.engine00.ML_type = &quot;Gaussian&quot;
+p.engines.engine00.numiter = 300
+p.engines.engine00.numiter_contiguous = 10
+p.engines.engine00.reg_del2 = True 
+p.engines.engine00.reg_del2_amplitude = 1.
+p.engines.engine00.scale_precond = True
+p.engines.engine00.scale_probe_object = 1.
+
+P = ptypy.core.Ptycho(p,level=5)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="gpu-accelerated-engines">
+<h2><span class="section-number">5.4. </span>GPU-accelerated engines<a class="headerlink" href="#gpu-accelerated-engines" title="Permalink to this headline">#</a></h2>
+<p>For running the GPU-accelerated equivalent of the engines described above, simple add this line at the top of the script</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ptypy</span><span class="o">.</span><span class="n">load_gpu_engines</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and add “_pycuda” to the engine name, for example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Difference Map (DM) engine</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM_pycuda&quot;</span>
+</pre></div>
+</div>
+<div class="alert alert-warning" markdown="1">
+    <strong>Exersice</strong><br>Run the GPU-accelerated version of the above examples with different engines and observe the increase in reconstruction speed.
+</div><hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy
+import ptypy.utils as u
+
+ptypy.load_gpu_engines(&quot;cuda&quot;)
+
+# Copy the parameter tree here
+# ...
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ptypy_pycuda"
+        },
+        kernelOptions: {
+            kernelName: "ptypy_pycuda",
+            path: "./notebooks/Getting_Started_with_PtyPy"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ptypy_pycuda'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="4_scan_models.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">4. </span>Scan Models</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../From_Data_to_Reconstruction/6_the_hdf5_loader.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>The HDF5 Loader</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Benedikt J.Daurer<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

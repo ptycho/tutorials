@@ -1,0 +1,676 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>12. Switching between Scan Models &#8212; Tutorials</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="13. Nearfield Ptychography" href="13_nearfield_ptychography.html" />
+    <link rel="prev" title="11. Using the GPU-accelerated Engines" href="11_using_gpu_accelerated_engines.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Tutorials</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started with PtyPy
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Getting_Started_with_PtyPy/1_the_parameter_tree.html">
+   1. The Parameter Tree
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Getting_Started_with_PtyPy/2_yaml_json_config.html">
+   2. JSON/YAML Config Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Getting_Started_with_PtyPy/3_input_output.html">
+   3. Input/Output Parameters
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Getting_Started_with_PtyPy/4_scan_models.html">
+   4. Scan Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Getting_Started_with_PtyPy/5_reconstruction_engines.html">
+   5. Reconstruction Engines
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  From Data to Reconstruction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../From_Data_to_Reconstruction/6_the_hdf5_loader.html">
+   6. The HDF5 Loader
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../From_Data_to_Reconstruction/7_working_with_electron_data.html">
+   7. Working With Electron Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../From_Data_to_Reconstruction/8_chaining_multiple_engines.html">
+   8. Chaining Multiple Engines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../From_Data_to_Reconstruction/9_applying_a_support_constraint.html">
+   9. Applying a Support Constraint
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Processing Large Datasets
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_the_block_scan_model.html">
+   10. The Block Scan Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_using_gpu_accelerated_engines.html">
+   11. Using the GPU-accelerated Engines
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   12. Switching between Scan Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13_nearfield_ptychography.html">
+   13. Nearfield Ptychography
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Working with Messy Data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/14_partial_coherence.html">
+   14. Partial Coherence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/15_position_refinement.html">
+   15. Position Refinement
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/16_blank_and_bad_detector_pixels.html">
+   16. Blank and Bad Detector Pixels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/17_missing_detector_frames.html">
+   17. Missing Detector Frames
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/18_phase_wrapping.html">
+   19. Phase Wrapping
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Modifying Algorithms
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Modifying_Algorithms/21_object_regularisation.html">
+   20. Object regularisation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Modifying_Algorithms/22_implementing_your_own_engine.html">
+   21. Implementing Your Own Engine
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Modifying_Algorithms/23_implementing_multislice.html">
+   22. A multislice implementation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ptycho/tutorials/master?urlpath=tree/docs/notebooks/Processing_Large_Datasets/12_switching_between_scan_models.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ptycho/tutorials"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Processing_Large_Datasets/12_switching_between_scan_models.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/Processing_Large_Datasets/12_switching_between_scan_models.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Switching between Scan Models</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="switching-between-scan-models">
+<h1><span class="section-number">12. </span>Switching between Scan Models<a class="headerlink" href="#switching-between-scan-models" title="Permalink to this headline">#</a></h1>
+<p><strong>Learning how to switch between different scan models and use this strategy to reconstruct large electron datasets.</strong></p>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy, os
+import ptypy.utils as u
+
+# This will import the EpsicHdf5Loader class
+ptypy.load_ptyscan_module(&quot;epsic_loader&quot;)
+
+# This will import the GPU engines
+ptypy.load_gpu_engines(&quot;cuda&quot;)  
+
+# Root directory of tutorial data
+tutorial_data_home = &quot;/global/homes/b/benedikt/workshop_data/&quot;
+
+# Dataset for this tutorial
+dataset = &quot;dls_epsic_80kV_graphene/20200130_163208.h5&quot;
+
+# Absolute path to HDF5 file with raw data
+path_to_data = os.path.join(tutorial_data_home, dataset)
+
+# Create parameter tree
+p = u.Param()
+
+# Set verbose level to info
+p.verbose_level = &quot;interactive&quot;
+
+# Scan label
+p.run = &quot;dls_epsic_graphene&quot;
+
+# Make sure bigger than nr. of frames 
+# because of ePIE
+p.frames_per_block = 100000
+
+# Set io settings (no files saved)
+p.io = u.Param()
+p.io.rfile = None
+p.io.autosave = u.Param(active=False)
+p.io.autoplot = u.Param(active=False)
+p.io.interaction = u.Param(active=False)
+
+# Live-plotting during the reconstruction
+# only works with jupyter notebooks
+p.io.jupyter_autoplot = u.Param()
+p.io.jupyter_autoplot.active = True
+p.io.jupyter_autoplot.cropping = 0.3
+
+# Define the scan model
+p.scans = u.Param()
+p.scans.scan_00 = u.Param()
+p.scans.scan_00.name = &#39;BlockGradFull&#39;
+
+# Initial illumination (based on simulated optics)
+p.scans.scan_00.illumination = u.Param()
+p.scans.scan_00.illumination.model = None
+p.scans.scan_00.illumination.photons = None
+p.scans.scan_00.illumination.aperture = u.Param()
+p.scans.scan_00.illumination.aperture.form = &quot;circ&quot;
+p.scans.scan_00.illumination.aperture.size = 0.011
+p.scans.scan_00.illumination.propagation = u.Param()
+p.scans.scan_00.illumination.propagation.focussed = 0.1732
+p.scans.scan_00.illumination.propagation.parallel = -1.5e-8
+p.scans.scan_00.illumination.diversity = u.Param()
+p.scans.scan_00.illumination.diversity.power = 0.1
+p.scans.scan_00.illumination.diversity.noise = [0.5,0.2]
+
+# Initial object
+p.scans.scan_00.sample = u.Param()
+p.scans.scan_00.sample.model = None
+p.scans.scan_00.sample.diversity = None
+p.scans.scan_00.sample.process = None
+
+# Coherence parameters (modes)
+p.scans.scan_00.coherence = u.Param()
+p.scans.scan_00.coherence.num_probe_modes = 1
+p.scans.scan_00.coherence.num_object_modes = 1
+
+# Data loader
+p.scans.scan_00.data = u.Param()
+p.scans.scan_00.data.name = &#39;EpsicHdf5LoaderFast&#39;
+p.scans.scan_00.data.orientation = 2
+
+# Read diffraction data
+p.scans.scan_00.data.intensities = u.Param()
+p.scans.scan_00.data.intensities.file = path_to_data
+p.scans.scan_00.data.intensities.key = &quot;data/frames&quot;
+
+# Scan positions
+p.scans.scan_00.data.rotation = 60
+p.scans.scan_00.data.stepsize = 3.71875e-11
+p.scans.scan_00.data.numpos = 255
+# p.scans.scan_00.data.positions = u.Param()
+# p.scans.scan_00.data.positions.bounding_box = u.Param()
+# p.scans.scan_00.data.positions.bounding_box.fast_axis_bounds = [50,200]
+# p.scans.scan_00.data.positions.bounding_box.slow_axis_bounds = [50,200]
+
+# Meta information
+# electron_data needs to be set to True 
+# if energy is given as electron energy in kV
+p.scans.scan_00.data.electron_data = True
+p.scans.scan_00.data.psize = 220e-6
+p.scans.scan_00.data.energy = 80
+p.scans.scan_00.data.distance = 0.1732
+
+# Read detector mask
+# p.scans.scan_00.data.mask = u.Param()
+# p.scans.scan_00.data.mask.file = path_to_data
+# p.scans.scan_00.data.mask.key = &quot;data/mask&quot;
+# p.scans.scan_00.data.mask.invert = True
+
+# Determine diffraction center from the data
+p.scans.scan_00.data.auto_center = True
+
+# Reconstruct using GPU-accelerated ePIE
+p.engines = u.Param()
+p.engines.engine = u.Param()
+p.engines.engine.name = &quot;EPIE_pycuda&quot;
+p.engines.engine.numiter = 5
+p.engines.engine.numiter_contiguous = 1
+p.engines.engine.alpha = 0.9
+p.engines.engine.beta = 0.1
+p.engines.engine.object_norm_is_global = True
+p.engines.engine.probe_support = None
+p.engines.engine.probe_fourier_support = None
+p.engines.engine.probe_update_start = 0
+p.engines.engine.record_local_error = False
+#p.engines.engine.fft_lib = &quot;cuda&quot;
+
+# Run reconstruction
+P = ptypy.core.Ptycho(p,level=5)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>## Add second script that reads from output
+# Maybe this is a good example of using JSON or YAML file
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ptypy_pycuda"
+        },
+        kernelOptions: {
+            kernelName: "ptypy_pycuda",
+            path: "./notebooks/Processing_Large_Datasets"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ptypy_pycuda'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="11_using_gpu_accelerated_engines.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">11. </span>Using the GPU-accelerated Engines</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="13_nearfield_ptychography.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Nearfield Ptychography</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Benedikt J.Daurer<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,674 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>1. The Parameter Tree &#8212; Tutorials</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2. JSON/YAML Config Files" href="2_yaml_json_config.html" />
+    <link rel="prev" title="Introduction" href="../../intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Tutorials</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started with PtyPy
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1. The Parameter Tree
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2_yaml_json_config.html">
+   2. JSON/YAML Config Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3_input_output.html">
+   3. Input/Output Parameters
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4_scan_models.html">
+   4. Scan Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5_reconstruction_engines.html">
+   5. Reconstruction Engines
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  From Data to Reconstruction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../From_Data_to_Reconstruction/6_the_hdf5_loader.html">
+   6. The HDF5 Loader
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../From_Data_to_Reconstruction/7_working_with_electron_data.html">
+   7. Working With Electron Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../From_Data_to_Reconstruction/8_chaining_multiple_engines.html">
+   8. Chaining Multiple Engines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../From_Data_to_Reconstruction/9_applying_a_support_constraint.html">
+   9. Applying a Support Constraint
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Processing Large Datasets
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Processing_Large_Datasets/10_the_block_scan_model.html">
+   10. The Block Scan Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Processing_Large_Datasets/11_using_gpu_accelerated_engines.html">
+   11. Using the GPU-accelerated Engines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Processing_Large_Datasets/12_switching_between_scan_models.html">
+   12. Switching between Scan Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Processing_Large_Datasets/13_nearfield_ptychography.html">
+   13. Nearfield Ptychography
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Working with Messy Data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/14_partial_coherence.html">
+   14. Partial Coherence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/15_position_refinement.html">
+   15. Position Refinement
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/16_blank_and_bad_detector_pixels.html">
+   16. Blank and Bad Detector Pixels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/17_missing_detector_frames.html">
+   17. Missing Detector Frames
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Working_with_Messy_Data/18_phase_wrapping.html">
+   19. Phase Wrapping
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Modifying Algorithms
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Modifying_Algorithms/21_object_regularisation.html">
+   20. Object regularisation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Modifying_Algorithms/22_implementing_your_own_engine.html">
+   21. Implementing Your Own Engine
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Modifying_Algorithms/23_implementing_multislice.html">
+   22. A multislice implementation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ptycho/tutorials/master?urlpath=tree/docs/notebooks/Getting_Started_with_PtyPy/1_the_parameter_tree.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ptycho/tutorials"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Getting_Started_with_PtyPy/1_the_parameter_tree.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/Getting_Started_with_PtyPy/1_the_parameter_tree.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>The Parameter Tree</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="the-parameter-tree">
+<h1><span class="section-number">1. </span>The Parameter Tree<a class="headerlink" href="#the-parameter-tree" title="Permalink to this headline">#</a></h1>
+<p><strong>Getting familiar with the PtyPy parameter tree using the MoonFlower simulation/reconstruction.</strong></p>
+<p>A ptychographic reconstruction requires a lot of input, from details about the data to the specifics of the reconstruction algorithm among others. All this information is typically summarised in a parameter tree. In PtyPy, the parameter tree is a Python object - more specifically a dictionary-like <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.utils.html#ptypy.utils.parameters.Param">ptypy.utils.Param</a> object. This means that we can put together a Python script (or Jupyter notebook), define all relevant parameters and execute the script (notebook) to run a ptychographic reconstruction! Let’s have a look at this parameter tree and its building blocks…</p>
+<div class="alert alert-success" markdown="1">
+<strong>Tip</strong><br>A full list of available parameters can be found here: <a href="https://ptycho.github.io/ptypy/rst/parameters.html">https://ptycho.github.io/ptypy/rst/parameters.html</a>
+</div><p>First, we need to import <code class="docutils literal notranslate"><span class="pre">ptypy</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy</span>
+<span class="kn">import</span> <span class="nn">ptypy.utils</span> <span class="k">as</span> <span class="nn">u</span>
+</pre></div>
+</div>
+<p>We start by creating an empty root parameter tree <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>We set the <code class="docutils literal notranslate"><span class="pre">verbose_level</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;interactive&quot;</span></code> which is preferred for Jupyter notebooks since it gives a more condensed user output. You can use <code class="docutils literal notranslate"><span class="pre">&quot;info&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;debug&quot;</span></code> for a more detailed output.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">verbose_level</span> <span class="o">=</span> <span class="s2">&quot;interactive&quot;</span>
+</pre></div>
+</div>
+<p>Next we create a subtree for input/output related parameters. For this particular example, we don’t save any files and turn off autoplotting.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">io</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="alert alert-info" markdown="1">
+<strong>Note</strong><br>Parameters can be specified as arguments to the <code>u.Param</code> class when creating a tree/subtree, like
+<pre><code>p.io.interaction = u.Param(active=False)
+</code></pre>
+instead of
+<pre><code>p.io.interaction = u.Param()
+p.io.interaction.active = False
+</code></pre>
+</div><p>PtyPy allows us to define multiple scans in a single reconstruction, but in most cases we just define a single scan instance. In this case, we create a scan of type (scan model) <code class="docutils literal notranslate"><span class="pre">&quot;Full&quot;</span></code> called <code class="docutils literal notranslate"><span class="pre">MF</span></code> (named after the <strong>M</strong>oon<strong>F</strong>lower simulation example used here).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Full&quot;</span>
+</pre></div>
+</div>
+<p>The scan model creates the <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.classes.View">Views</a>, <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.classes.Container">Containers</a> and <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.classes.Storage">Storages</a> for the <code class="docutils literal notranslate"><span class="pre">object</span></code>, <code class="docutils literal notranslate"><span class="pre">probe</span></code> and other data structures including the <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.classes.POD">PODs</a> which links them all together.</p>
+<div class="alert alert-success" markdown="1">
+<strong>Tip</strong><br>To learn more about these classes and their underlying concepts, visit this <a href url="https://ptycho.github.io/ptypy/rst/concept.html">tutorial</a> from the main PtyPy documentation.
+</div><p>As part of the scan we also need to define a <code class="docutils literal notranslate"><span class="pre">data</span></code> subtree, holding all relevant information related to the data (or simulated data) we are trying to reconstruct. For a real experiment, users can create their own data loader by subclassing <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.data.PtyScan">ptypy.core.data.PtyScan</a> or using the generic <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.data.PtyScan">ptypy.experiment.hdf5_loader.Hdf5Loader</a>. In this example, we are using the <code class="docutils literal notranslate"><span class="pre">MoonFlowerScan</span></code> which provides simulated diffraction data from a synthetic probe (the moon) and a synthetic object (the flower).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;MoonFlowerScan&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">num_frames</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">save</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">photons</span> <span class="o">=</span> <span class="mf">1e8</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">psf</span> <span class="o">=</span> <span class="mf">0.</span>
+</pre></div>
+</div>
+<div class="alert alert-success" markdown="1">
+<strong>Tip</strong><br>To learn more about data management and how to subclass <code>PtyScan</code>, visit this <a href url="https://ptycho.github.io/ptypy/rst/data_management.html">tutorial</a> from the main PtyPy documentation.
+</div><p>Finally, we need to define one (or more) reconstruction engines which specify which ptychographic algorithm(s) should be used in the reconstruction. In this example, we define <code class="docutils literal notranslate"><span class="pre">engine00</span></code> to use the difference map (DM) algorithm with 80 iterations.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>At the end of our script (notebook) we can create a <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.ptycho.Ptycho">ptypy.core.Ptycho</a> object by passing the parameter tree <code class="docutils literal notranslate"><span class="pre">p</span></code> and <code class="docutils literal notranslate"><span class="pre">level=5</span></code> which initialises everything and starts the reconstruction.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After loading/simulating the diffraction data, initialising the model/engine and running 80 iterations of difference map the output should look something like this</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Full: loading data <span class="k">for</span> scan MF <span class="o">(</span><span class="m">161</span> diffraction frames, <span class="m">161</span> PODs, <span class="m">1</span> probe<span class="o">(</span>s<span class="o">)</span> and <span class="m">1</span> object<span class="o">(</span>s<span class="o">))</span>
+Full: loading data <span class="k">for</span> scan MF <span class="o">(</span>reformatting probe/obj/exit<span class="o">)</span>
+Full: loading data <span class="k">for</span> scan MF <span class="o">(</span>initializing probe/obj/exit<span class="o">)</span>
+DM: initializing engine
+DM: preparing engine
+DM: Iteration <span class="c1"># 80/80 :: Fourier 5.37e+01, Photons 1.55e+01, Exit 4.78e+00</span>
+<span class="o">====</span> This reconstruction relied on the following <span class="nv">work</span> <span class="o">==========================</span>
+The Ptypy framework:
+    Enders B. and Thibault P., <span class="s2">&quot;A computational framework for ptychographic reconstructions&quot;</span> Proc. Royal Soc. A <span class="m">472</span> <span class="o">(</span><span class="m">2016</span><span class="o">)</span> <span class="m">20160640</span>, doi: <span class="m">10</span>.1098/rspa.2016.0640.
+The difference map reconstruction algorithm:
+    Thibault et al., <span class="s2">&quot;Probe retrieval in ptychographic coherent diffractive imaging&quot;</span> Ultramicroscopy <span class="m">109</span> <span class="o">(</span><span class="m">2009</span><span class="o">)</span> <span class="m">338</span>, doi: <span class="m">10</span>.1016/j.ultramic.2008.12.011.
+<span class="o">================================================================================</span>
+</pre></div>
+</div>
+<p>To visualise the results of the reconstruction, we can use <code class="docutils literal notranslate"><span class="pre">u.plot_recon_from_ptycho(P)</span></code> to produce an image like this</p>
+<p><img alt="" src="../../_images/moonflower_recons_plot.png" /></p>
+<div class="alert alert-warning" markdown="1">
+    <strong>Exersice</strong><br>Run the MoonFlower example below and inspect some of the attributes of the <code>Ptycho</code> instance <code>P</code>, like <code>P.obj</code>, <code>P.probe</code> and <code>P.diff</code>. These are all containers which are connected to <code>.storages</code> and have a list of <code>.views</code>. From a single object view, we can find out information about for example the reconstructed pixelsize: <code>P.obj.views["V0000"].psize</code>.
+</div><div class="alert alert-warning" markdown="1">
+    <strong>Exersice</strong><br>Change the <code>verbose_level</code> to <code>info</code> or <code>debug</code> and observe the change in output. In the section just above the summary of the engine parameters, you should find a list of storages which also contains information about the reconstructed pixel size in the object.
+</div><div class="alert alert-warning" markdown="1">
+    <strong>Exersice</strong><br>Where the <code>Ptycho</code> instance is being created, change the <code>level</code> from 5 to 4 and observe the output. At level 4, PtyPy does all the data loading but it stops before invoking the engine. This can be useful if we would like to modify the <code>P</code> instance just before running the engine with <code>P.run()</code>
+</div><hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy
+import ptypy.utils as u
+
+# Create parameter tree
+p = u.Param()
+
+# Set verbose level, can be &quot;interactive&quot;, &quot;info&quot; or &quot;debug&quot;
+p.verbose_level = &quot;interactive&quot;
+
+# Basic I/O settings (no files saved in this case)
+p.io = u.Param()
+p.io.rfile = None
+p.io.autosave = u.Param(active=False)
+p.io.autoplot = u.Param(active=False)
+p.io.interaction = u.Param(active=False)
+
+# Define the scan model
+p.scans = u.Param()
+p.scans.MF = u.Param()
+p.scans.MF.name = &quot;Full&quot;
+
+# Data loader / simulator 
+# Generate 200 frames (128x128px) of diffraction data
+p.scans.MF.data= u.Param()
+p.scans.MF.data.name = &quot;MoonFlowerScan&quot;
+p.scans.MF.data.shape = 128
+p.scans.MF.data.num_frames = 200
+p.scans.MF.data.save = None
+p.scans.MF.data.density = 0.2
+p.scans.MF.data.photons = 1e8
+p.scans.MF.data.psf = 0.
+
+# Define reconstruction engine
+p.engines = u.Param()
+p.engines.engine00 = u.Param()
+p.engines.engine00.name = &quot;DM&quot;
+p.engines.engine00.numiter = 80
+p.engines.engine00.numiter_contiguous = 1
+
+# Prepare and run
+P = ptypy.core.Ptycho(p,level=5)
+
+# Display the results
+u.plot_recon_from_ptycho(P)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ptypy_pycuda"
+        },
+        kernelOptions: {
+            kernelName: "ptypy_pycuda",
+            path: "./notebooks/Getting_Started_with_PtyPy"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ptypy_pycuda'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../../intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introduction</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="2_yaml_json_config.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>JSON/YAML Config Files</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Benedikt J.Daurer<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
