@@ -529,11 +529,15 @@ title="Print to PDF"
 </pre></div>
 </div>
 <p>where <code class="docutils literal notranslate"><span class="pre">%(run)s</span></code>, <code class="docutils literal notranslate"><span class="pre">%(engine)s</span></code> and <code class="docutils literal notranslate"><span class="pre">%(iterations)04d</span></code> are again dynamic labels.</p>
-<div class="alert alert-warning" markdown="1">
-    <strong>Exersice</strong><br>Modify the <code>p.io.home</code> path in the example below to wherever you would like the PtyPy output to be, run the reconstruction and observe all the new files saved to <code>p.io.home</code>. Use <code>ptypy.utils.plot_recon_from_ptyr</code> to look at the MoonFlower reconstruction at different iterations. 
-</div><div class="alert alert-success" markdown="1">
-    <strong>Hint</strong><br>You can use shell commands within Jupyter Notebooks to explore the filesystem, i.e. <code>ls /tmp</code> to list all files in /tmp.
-</div></section>
+<div class="attention admonition">
+<p class="admonition-title">Exercise</p>
+<p>Modify the <code>p.io.home</code> path in the example below to wherever you would like the PtyPy output to be, run the reconstruction and observe all the new files saved to <code>p.io.home</code>. Use <code>ptypy.utils.plot_recon_from_ptyr</code> to look at the MoonFlower reconstruction at different iterations.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Tip</p>
+<p>You can use shell commands within Jupyter Notebooks to explore the filesystem, i.e. <code>ls /tmp</code> to list all files in /tmp.</p>
+</div>
+</section>
 <section id="live-plotting">
 <h2><span class="section-number">3.2. </span>Live-plotting<a class="headerlink" href="#live-plotting" title="Permalink to this headline">#</a></h2>
 <p>And finally, PtyPy has live-viewing capabilities that can be controlled with <code class="docutils literal notranslate"><span class="pre">p.io.interaction</span></code> and <code class="docutils literal notranslate"><span class="pre">p.io.autoplot</span></code>, these are mostly useful when running a reconstruction script from a terminal with graphics enabled. They can also be used in a server-client setup, where the plotclient is running on a different machine than the reconstruction (server), see <span class="xref myst">Live visualisation</span> for more details. Since we are working with Jupyter notebooks for most parts of this tutorial, we turn off those features</p>
@@ -546,11 +550,15 @@ title="Print to PDF"
 </pre></div>
 </div>
 <p>which will display the current status of the reconstruction after every contiguous block of iterations (<code class="docutils literal notranslate"><span class="pre">p.engines.engine00.numiter_contiguous</span></code>) using <code class="docutils literal notranslate"><span class="pre">ptypy.utils.plot_recon</span></code> with default settings. For the object subplot, the level of cropping and auto-scaling can be modified using <code class="docutils literal notranslate"><span class="pre">p.io.jupyter_autoplot.cropping</span></code> and <code class="docutils literal notranslate"><span class="pre">p.io.jupyter_plotting.outlier_percentile</span></code>.</p>
-<div class="alert alert-info" markdown="1">
-<strong>Note</strong><br><code>p.io.jupyter_autoplot</code> only works with Jupyter notebooks in conjunction with <code>p.verbose_level = "interactive"</code>.
-</div><div class="alert alert-warning" markdown="1">
-    <strong>Exersice</strong><br>Modify the <code>p.io.jupyter_autoplot.cropping</code> and <code>p.io.jupyter_autoplot.outlier_percentile</code> to observe the effect these parameters have on the live reconstruction plot.  
-</div><hr class="docutils" />
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p><code>p.io.jupyter_autoplot</code> only works with Jupyter notebooks in conjunction with <code>p.verbose_level = “interactive”</code>.</p>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">Exercise</p>
+<p>Modify the <code>p.io.jupyter_autoplot.cropping</code> and <code>p.io.jupyter_autoplot.outlier_percentile</code> to observe the effect these parameters have on the live reconstruction plot.</p>
+</div>
+<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy

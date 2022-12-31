@@ -464,9 +464,11 @@ title="Print to PDF"
 <h1><span class="section-number">1. </span>The Parameter Tree<a class="headerlink" href="#the-parameter-tree" title="Permalink to this headline">#</a></h1>
 <p><strong>Getting familiar with the PtyPy parameter tree using the MoonFlower simulation/reconstruction.</strong></p>
 <p>A ptychographic reconstruction requires a lot of input, from details about the data to the specifics of the reconstruction algorithm among others. All this information is typically summarised in a parameter tree. In PtyPy, the parameter tree is a Python object - more specifically a dictionary-like <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.utils.html#ptypy.utils.parameters.Param">ptypy.utils.Param</a> object. This means that we can put together a Python script (or Jupyter notebook), define all relevant parameters and execute the script (notebook) to run a ptychographic reconstruction! Let’s have a look at this parameter tree and its building blocks…</p>
-<div class="alert alert-success" markdown="1">
-<strong>Tip</strong><br>A full list of available parameters can be found here: <a href="https://ptycho.github.io/ptypy/rst/parameters.html">https://ptycho.github.io/ptypy/rst/parameters.html</a>
-</div><p>First, we need to import <code class="docutils literal notranslate"><span class="pre">ptypy</span></code>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Tip</p>
+<p>A full list of available parameters can be found here: <a href="https://ptycho.github.io/ptypy/rst/parameters.html">https://ptycho.github.io/ptypy/rst/parameters.html</a></p>
+</div>
+<p>First, we need to import <code class="docutils literal notranslate"><span class="pre">ptypy</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy</span>
 <span class="kn">import</span> <span class="nn">ptypy.utils</span> <span class="k">as</span> <span class="nn">u</span>
 </pre></div>
@@ -487,24 +489,30 @@ title="Print to PDF"
 <span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="alert alert-info" markdown="1">
-<strong>Note</strong><br>Parameters can be specified as arguments to the <code>u.Param</code> class when creating a tree/subtree, like
-<pre><code>p.io.interaction = u.Param(active=False)
-</code></pre>
-instead of
-<pre><code>p.io.interaction = u.Param()
-p.io.interaction.active = False
-</code></pre>
-</div><p>PtyPy allows us to define multiple scans in a single reconstruction, but in most cases we just define a single scan instance. In this case, we create a scan of type (scan model) <code class="docutils literal notranslate"><span class="pre">&quot;Full&quot;</span></code> called <code class="docutils literal notranslate"><span class="pre">MF</span></code> (named after the <strong>M</strong>oon<strong>F</strong>lower simulation example used here).</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>Parameters can be specified as arguments to the <code>u.Param</code> class when creating a tree/subtree, like</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>instead of</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">active</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+<p>PtyPy allows us to define multiple scans in a single reconstruction, but in most cases we just define a single scan instance. In this case, we create a scan of type (scan model) <code class="docutils literal notranslate"><span class="pre">&quot;Full&quot;</span></code> called <code class="docutils literal notranslate"><span class="pre">MF</span></code> (named after the <strong>M</strong>oon<strong>F</strong>lower simulation example used here).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Full&quot;</span>
 </pre></div>
 </div>
 <p>The scan model creates the <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.classes.View">Views</a>, <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.classes.Container">Containers</a> and <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.classes.Storage">Storages</a> for the <code class="docutils literal notranslate"><span class="pre">object</span></code>, <code class="docutils literal notranslate"><span class="pre">probe</span></code> and other data structures including the <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.classes.POD">PODs</a> which links them all together.</p>
-<div class="alert alert-success" markdown="1">
-<strong>Tip</strong><br>To learn more about these classes and their underlying concepts, visit this <a href url="https://ptycho.github.io/ptypy/rst/concept.html">tutorial</a> from the main PtyPy documentation.
-</div><p>As part of the scan we also need to define a <code class="docutils literal notranslate"><span class="pre">data</span></code> subtree, holding all relevant information related to the data (or simulated data) we are trying to reconstruct. For a real experiment, users can create their own data loader by subclassing <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.data.PtyScan">ptypy.core.data.PtyScan</a> or using the generic <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.data.PtyScan">ptypy.experiment.hdf5_loader.Hdf5Loader</a>. In this example, we are using the <code class="docutils literal notranslate"><span class="pre">MoonFlowerScan</span></code> which provides simulated diffraction data from a synthetic probe (the moon) and a synthetic object (the flower).</p>
+<div class="tip admonition">
+<p class="admonition-title">Tip</p>
+<p>To learn more about these classes and their underlying concepts, visit this <a href url="https://ptycho.github.io/ptypy/rst/concept.html">tutorial</a> from the main PtyPy documentation.</p>
+</div>
+<p>As part of the scan we also need to define a <code class="docutils literal notranslate"><span class="pre">data</span></code> subtree, holding all relevant information related to the data (or simulated data) we are trying to reconstruct. For a real experiment, users can create their own data loader by subclassing <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.data.PtyScan">ptypy.core.data.PtyScan</a> or using the generic <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.data.PtyScan">ptypy.experiment.hdf5_loader.Hdf5Loader</a>. In this example, we are using the <code class="docutils literal notranslate"><span class="pre">MoonFlowerScan</span></code> which provides simulated diffraction data from a synthetic probe (the moon) and a synthetic object (the flower).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;MoonFlowerScan&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="mi">128</span>
@@ -515,9 +523,11 @@ p.io.interaction.active = False
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">psf</span> <span class="o">=</span> <span class="mf">0.</span>
 </pre></div>
 </div>
-<div class="alert alert-success" markdown="1">
-<strong>Tip</strong><br>To learn more about data management and how to subclass <code>PtyScan</code>, visit this <a href url="https://ptycho.github.io/ptypy/rst/data_management.html">tutorial</a> from the main PtyPy documentation.
-</div><p>Finally, we need to define one (or more) reconstruction engines which specify which ptychographic algorithm(s) should be used in the reconstruction. In this example, we define <code class="docutils literal notranslate"><span class="pre">engine00</span></code> to use the difference map (DM) algorithm with 80 iterations.</p>
+<div class="tip admonition">
+<p class="admonition-title">Tip</p>
+<p>To learn more about data management and how to subclass <code>PtyScan</code>, visit this <a href url="https://ptycho.github.io/ptypy/rst/data_management.html">tutorial</a> from the main PtyPy documentation.</p>
+</div>
+<p>Finally, we need to define one (or more) reconstruction engines which specify which ptychographic algorithm(s) should be used in the reconstruction. In this example, we define <code class="docutils literal notranslate"><span class="pre">engine00</span></code> to use the difference map (DM) algorithm with 80 iterations.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM&quot;</span>
@@ -546,13 +556,19 @@ The difference map reconstruction algorithm:
 </div>
 <p>To visualise the results of the reconstruction, we can use <code class="docutils literal notranslate"><span class="pre">u.plot_recon_from_ptycho(P)</span></code> to produce an image like this</p>
 <p><img alt="" src="../../_images/moonflower_recons_plot.png" /></p>
-<div class="alert alert-warning" markdown="1">
-    <strong>Exersice</strong><br>Run the MoonFlower example below and inspect some of the attributes of the <code>Ptycho</code> instance <code>P</code>, like <code>P.obj</code>, <code>P.probe</code> and <code>P.diff</code>. These are all containers which are connected to <code>.storages</code> and have a list of <code>.views</code>. From a single object view, we can find out information about for example the reconstructed pixelsize: <code>P.obj.views["V0000"].psize</code>.
-</div><div class="alert alert-warning" markdown="1">
-    <strong>Exersice</strong><br>Change the <code>verbose_level</code> to <code>info</code> or <code>debug</code> and observe the change in output. In the section just above the summary of the engine parameters, you should find a list of storages which also contains information about the reconstructed pixel size in the object.
-</div><div class="alert alert-warning" markdown="1">
-    <strong>Exersice</strong><br>Where the <code>Ptycho</code> instance is being created, change the <code>level</code> from 5 to 4 and observe the output. At level 4, PtyPy does all the data loading but it stops before invoking the engine. This can be useful if we would like to modify the <code>P</code> instance just before running the engine with <code>P.run()</code>
-</div><hr class="docutils" />
+<div class="attention admonition">
+<p class="admonition-title">Exercise</p>
+<p>Run the MoonFlower example below and inspect some of the attributes of the <code>Ptycho</code> instance <code>P</code>, like <code>P.obj</code>, <code>P.probe</code> and <code>P.diff</code>. These are all containers which are connected to <code>.storages</code> and have a list of <code>.views</code>. From a single object view, we can find out information about for example the reconstructed pixelsize: <code>P.obj.views[“V0000”].psize</code>.</p>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">Exercise</p>
+<p>Change the <code>verbose_level</code> to <code>info</code> or <code>debug</code> and observe the change in output. In the section just above the summary of the engine parameters, you should find a list of storages which also contains information about the reconstructed pixel size in the object.</p>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">Exercise</p>
+<p>Where the <code>Ptycho</code> instance is being created, change the <code>level</code> from 5 to 4 and observe the output. At level 4, PtyPy does all the data loading but it stops before invoking the engine. This can be useful if we would like to modify the <code>P</code> instance just before running the engine with <code>P.run()</code></p>
+</div>
+<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy

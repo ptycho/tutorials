@@ -622,9 +622,11 @@ P = \frac{\sum_k O_k^* \cdot \psi_k}{\sum_k|O_k|^2}
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
-<div class="alert alert-warning" markdown="1">
-    <strong>Exersice</strong><br>Modify different DM engine parameters and observe their impact on the outcome of the reconstruction.
-</div><hr class="docutils" />
+<div class="attention admonition">
+<p class="admonition-title">Exercise</p>
+<p>Modify different DM engine parameters and observe their impact on the outcome of the reconstruction.</p>
+</div>
+<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy
@@ -707,9 +709,11 @@ P_{j+1} = P_{j} + \beta \cdot O_{j+1}^{*} \cdot [\Psi_{\prime} - \Psi_{j+1}] / |
 
 </pre></div>
 </div>
-<div class="alert alert-warning" markdown="1">
-    <strong>Exersice</strong><br>Modify different ePIE engine parameters and observe their impact on the outcome of the reconstruction.
-</div><hr class="docutils" />
+<div class="attention admonition">
+<p class="admonition-title">Exercise</p>
+<p>Modify different ePIE engine parameters and observe their impact on the outcome of the reconstruction.</p>
+</div>
+<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy
@@ -787,9 +791,11 @@ g = \left(\frac{\partial \mathcal{L}}{\partial P}, \frac{\partial\mathcal{L}}{\p
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">reg_del2_amplitude</span> <span class="o">=</span> <span class="mf">1.</span>
 </pre></div>
 </div>
-<div class="alert alert-warning" markdown="1">
-    <strong>Exersice</strong><br>Modify different ML engine parameters and observe their impact on the outcome of the reconstruction.
-</div><hr class="docutils" />
+<div class="attention admonition">
+<p class="admonition-title">Exercise</p>
+<p>Modify different ML engine parameters and observe their impact on the outcome of the reconstruction.</p>
+</div>
+<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy
@@ -848,9 +854,11 @@ P = ptypy.core.Ptycho(p,level=5)
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM_pycuda&quot;</span>
 </pre></div>
 </div>
-<div class="alert alert-warning" markdown="1">
-    <strong>Exersice</strong><br>Run the GPU-accelerated version of the above examples with different engines and observe the increase in reconstruction speed.
-</div><hr class="docutils" />
+<div class="attention admonition">
+<p class="admonition-title">Exercise</p>
+<p>Run the GPU-accelerated version of the above examples with different engines and observe the increase in reconstruction speed.</p>
+</div>
+<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy
