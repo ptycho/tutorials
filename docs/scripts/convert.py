@@ -2,9 +2,17 @@
 import json
 import glob
 import os
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--actions", action="store_true", help="GitHub actions")
+args = parser.parse_args()
 
 # Source notebooks
-notebook_dir = os.path.dirname(__file__) + "/../converted/"
+if args.actions:
+    notebook_dir = os.path.dirname(__file__) + "/../notebooks/"
+else:
+    notebook_dir = os.path.dirname(__file__) + "/../converted/"
 notebooks = glob.glob(notebook_dir + "*/*.ipynb")
 
 def replace_div_with_admonition(cell, label="Note", type="note"):
