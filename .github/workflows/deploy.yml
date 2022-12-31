@@ -28,7 +28,7 @@ jobs:
     # Build the book
     - name: Build the book
       run: |
-        ln -s notebooks docs/notebooks
+        mv notebooks docs/
         ls docs/
         python docs/scripts/convert.py
         ls docs/notebooks
