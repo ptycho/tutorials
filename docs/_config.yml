@@ -23,7 +23,7 @@ bibtex_bibfiles:
 repository:
   url: https://github.com/ptycho/tutorials  # Online location of your book
   path_to_book: docs  # Optional path to your book, relative to the repository root
-  branch: master  # Which branch of the repository should be used when creating links (optional)
+  branch: main  # Which branch of the repository should be used when creating links (optional)
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
@@ -35,6 +35,6 @@ html:
 launch_buttons:
   notebook_interface        : jupyterlab  # The interface interactive links will activate ["classic", "jupyterlab"]
   binderhub_url             : "" # The URL of the BinderHub (e.g., https://mybinder.org)
-  jupyterhub_url            : https://jupyter.nersc.gov  # The URL of the JupyterHub (e.g., https://datahub.berkeley.edu)
+  jupyterhub_url            : "" # The URL of the JupyterHub (e.g., https://datahub.berkeley.edu)
   thebe                     : false  # Add a thebe button to pages (requires the repository to run on Binder)
   colab_url                 : "" # The URL of Google Colab (https://colab.research.google.com)

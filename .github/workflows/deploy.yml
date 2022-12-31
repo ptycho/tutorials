@@ -4,9 +4,9 @@ name: deploy-book
 on:
   push:
     branches:
-    - actions
-    # paths:
-    # - docs/**
+    - main
+    paths:
+    - notebooks/**
 
 # This job installs dependencies, builds the book, and pushes it to `gh-pages`
 jobs:
