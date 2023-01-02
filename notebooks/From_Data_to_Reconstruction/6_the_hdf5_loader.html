@@ -445,6 +445,16 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="the-hdf5-loader">
 <h1><span class="section-number">6. </span>The HDF5 Loader<a class="headerlink" href="#the-hdf5-loader" title="Permalink to this headline">#</a></h1>
 <p><strong>Loading ptychographic X-ray data into PtyPy from an HDF5 file, running a phase retrieval engine and inspecting the output.</strong></p>
+<p>PtyPy uses the <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.data.PtyScan">PtyScan</a> class to interact with experimental data and traditionally it was recommended that users write their own PtyScan subclass for each experiment or beamline, as documented in this tutorial on <a class="reference external" href="https://ptycho.github.io/ptypy/rst/data_management.html">Data Management</a>. This approach is extremely flexible since it allows users full control on defining how their data should be loaded based on whatever file format their data is stored with, but it requires some programming efforts and can therefore be a barrier for new ptychography users. However, if your exprimental data is stored in an HDF5 file - a file format adopted by most instruments and facilities - it is much simpler to just use the <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.experiment.html#ptypy.experiment.hdf5_loader.Hdf5Loader">Hdf5Loader</a> PtyScan subclass which provides a generic interface to load ptychographic data a single or multiple HDF5 files into Ptypy.</p>
+<p>This example helps you getting started with using the Hdf5Loader, which is also being used throughout the rest of the tutorial. First, we need to make sure that the <code class="docutils literal notranslate"><span class="pre">hdf5_loader</span></code> module is loaded</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ptypy</span><span class="o">.</span><span class="n">load_ptyscan_module</span><span class="p">(</span><span class="s2">&quot;hdf5_loader&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which enables us to use <code class="docutils literal notranslate"><span class="pre">'Hdf5Loader'</span></code> as our data loading class</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Hdf5Loader&#39;</span>
+</pre></div>
+</div>
 <hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -502,7 +512,6 @@ p.scans.scan_00.illumination.propagation.parallel = 45e-6
 # Data loader
 p.scans.scan_00.data = u.Param()
 p.scans.scan_00.data.name = &#39;Hdf5Loader&#39;
-p.scans.scan_00.data.orientation = 0
 
 # Read diffraction data
 p.scans.scan_00.data.intensities = u.Param()
