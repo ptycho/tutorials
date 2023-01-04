@@ -483,7 +483,7 @@ title="Print to PDF"
 <span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">active</span><span class="o">=</span><span class="kc">True</span>
 <span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">threaded</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="s2">&quot;jupyter&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mi">10</span>
 
 <span class="c1"># Define the scan model</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
@@ -584,16 +584,16 @@ title="Print to PDF"
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "ptypy_pycuda"
         },
         kernelOptions: {
-            kernelName: "conda-env-DLS_Conda-python3.10-kernel.json",
+            kernelName: "ptypy_pycuda",
             path: "./notebooks/From_Data_to_Reconstruction"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'conda-env-DLS_Conda-python3.10-kernel.json'</script>
+    <script>kernelName = 'ptypy_pycuda'</script>
 
               </div>
               
