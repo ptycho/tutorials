@@ -443,8 +443,18 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-data">
+   6.1. The data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-the-data">
+   6.2. Loading the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#initial-probe">
-   6.1. Initial probe
+   6.3. Initial probe
   </a>
  </li>
 </ul>
@@ -467,8 +477,18 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-data">
+   6.1. The data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-the-data">
+   6.2. Loading the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#initial-probe">
-   6.1. Initial probe
+   6.3. Initial probe
   </a>
  </li>
 </ul>
@@ -485,15 +505,8 @@ title="Print to PDF"
 <h1><span class="section-number">6. </span>The HDF5 Loader<a class="headerlink" href="#the-hdf5-loader" title="Permalink to this headline">#</a></h1>
 <p><strong>Loading ptychographic X-ray data into PtyPy from an HDF5 file, running a phase retrieval engine and inspecting the output.</strong></p>
 <p>PtyPy uses the <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.data.PtyScan">PtyScan</a> class to interact with experimental data and traditionally it was recommended that users write their own PtyScan subclass for each experiment or beamline, as documented in this tutorial on <a class="reference external" href="https://ptycho.github.io/ptypy/rst/data_management.html">Data Management</a>. This approach is extremely flexible since it allows users full control on defining how their data should be loaded based on whatever file format their data is stored with, but it requires some programming efforts and can therefore be a barrier for new ptychography users. However, if your exprimental data is stored in an HDF5 file - a file format adopted by most instruments and facilities - it is much simpler to just use the <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.experiment.html#ptypy.experiment.hdf5_loader.Hdf5Loader">Hdf5Loader</a> PtyScan subclass which already provides a generic interface to load ptychographic data of a single or multiple HDF5 files into Ptypy.</p>
-<p>This example helps you getting started with using the Hdf5Loader, which is going to be used throughout the rest of the tutorials. First, we need to make sure that the <code class="docutils literal notranslate"><span class="pre">hdf5_loader</span></code> module is loaded</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ptypy</span><span class="o">.</span><span class="n">load_ptyscan_module</span><span class="p">(</span><span class="s2">&quot;hdf5_loader&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>which enables us to use <code class="docutils literal notranslate"><span class="pre">'Hdf5Loader'</span></code> as our data loading class</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Hdf5Loader&#39;</span>
-</pre></div>
-</div>
+<section id="the-data">
+<h2><span class="section-number">6.1. </span>The data<a class="headerlink" href="#the-data" title="Permalink to this headline">#</a></h2>
 <p>In this example, the experimental data including some meta information is saved in an HDF5 file named “dls_i08_nanogold_small.h5” that was specifically created for the purpose of this tutorial. We can use the following code</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span><span class="o">,</span> <span class="nn">os</span>
 <span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;/global/homes/b/benedikt/workshop_data/&quot;</span>
@@ -513,6 +526,32 @@ title="Print to PDF"
 <span class="w">	</span><span class="p">|</span>-<span class="w"> </span>energy_ev<span class="w">     	</span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">()</span>
 <span class="w">	</span><span class="p">|</span>-<span class="w"> </span>posx_mm<span class="w">       	</span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">707</span>,<span class="o">)</span>
 <span class="w">	</span><span class="p">|</span>-<span class="w"> </span>posy_mm<span class="w">       	</span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">707</span>,<span class="o">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span><span class="o">,</span> <span class="nn">os</span>
+<span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;/global/homes/b/benedikt/workshop_data/&quot;</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="s2">&quot;small_data/dls_i08_nanogold_small.h5&quot;</span>
+<span class="n">path_to_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The file </span><span class="si">{}</span><span class="s2"> has the following entries: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">* </span><span class="si">{0:&lt;13}</span><span class="s1"> </span><span class="se">\t</span><span class="s1">shape = </span><span class="si">{1:}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="loading-the-data">
+<h2><span class="section-number">6.2. </span>Loading the data<a class="headerlink" href="#loading-the-data" title="Permalink to this headline">#</a></h2>
+<p>This example helps us getting started with using the Hdf5Loader, which is going to be used throughout the rest of the tutorials. First, we need to make sure that the <code class="docutils literal notranslate"><span class="pre">hdf5_loader</span></code> module is loaded</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ptypy</span><span class="o">.</span><span class="n">load_ptyscan_module</span><span class="p">(</span><span class="s2">&quot;hdf5_loader&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which enables us to use <code class="docutils literal notranslate"><span class="pre">'Hdf5Loader'</span></code> as our data loading class</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Hdf5Loader&#39;</span>
 </pre></div>
 </div>
 <p>Now, the only thing left to do is pointing the different data parameters to the relevant files and keys. For the diffraction intensities, we specify</p>
@@ -555,8 +594,9 @@ title="Print to PDF"
 <p class="admonition-title">Note</p>
 <p>Instead of reading energy, distance or pixel size from the file we can also provide them directly by setting <code>p.scans.scan_00.data.energy</code>, <code>p.scans.scan_00.data.distance</code> or <code>p.scans.scan_00.data.psize</code> in SI units.</p>
 </div>
+</section>
 <section id="initial-probe">
-<h2><span class="section-number">6.1. </span>Initial probe<a class="headerlink" href="#initial-probe" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">6.3. </span>Initial probe<a class="headerlink" href="#initial-probe" title="Permalink to this headline">#</a></h2>
 <p>When working with experimental data, choosing a good starting guess for the illumination (probe) can be very important. For this example based on data collected at the I08-1 instrument at the Diamond Light Source, we use the following settings to model the I08-1 Fresnel Zone Plate (FZP)</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
@@ -575,19 +615,6 @@ title="Print to PDF"
 <p>Modify the optical parameters used for estimating the initial probe and observe if/how it might improve the quality or convergence of the reconstruction.</p>
 </div>
 <hr class="docutils" />
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span><span class="o">,</span> <span class="nn">os</span>
-<span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;/global/homes/b/benedikt/workshop_data/&quot;</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="s2">&quot;small_data/dls_i08_nanogold_small.h5&quot;</span>
-<span class="n">path_to_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
-<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The file </span><span class="si">{}</span><span class="s2"> has the following entries: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">* </span><span class="si">{0:&lt;13}</span><span class="s1"> </span><span class="se">\t</span><span class="s1">shape = </span><span class="si">{1:}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy</span><span class="o">,</span> <span class="nn">os</span>
