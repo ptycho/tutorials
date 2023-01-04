@@ -448,141 +448,141 @@ title="Print to PDF"
 <hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy, os
-import ptypy.utils as u
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy</span><span class="o">,</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">ptypy.utils</span> <span class="k">as</span> <span class="nn">u</span>
 
-# This will import the EpsicHdf5Loader class
-ptypy.load_ptyscan_module(&quot;epsic_loader&quot;)
+<span class="c1"># This will import the EpsicHdf5Loader class</span>
+<span class="n">ptypy</span><span class="o">.</span><span class="n">load_ptyscan_module</span><span class="p">(</span><span class="s2">&quot;epsic_loader&quot;</span><span class="p">)</span>
 
-# This will import the GPU engines
-ptypy.load_gpu_engines(&quot;cuda&quot;)  
+<span class="c1"># This will import the GPU engines</span>
+<span class="n">ptypy</span><span class="o">.</span><span class="n">load_gpu_engines</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>  
 
-# Root directory of tutorial data
-tutorial_data_home = &quot;/global/homes/b/benedikt/workshop_data/&quot;
+<span class="c1"># Root directory of tutorial data</span>
+<span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;/global/homes/b/benedikt/workshop_data/&quot;</span>
 
-# Dataset for this tutorial
-dataset = &quot;dls_epsic_80kV_graphene/20200130_163208.h5&quot;
+<span class="c1"># Dataset for this tutorial</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="s2">&quot;dls_epsic_80kV_graphene/20200130_163208.h5&quot;</span>
 
-# Absolute path to HDF5 file with raw data
-path_to_data = os.path.join(tutorial_data_home, dataset)
+<span class="c1"># Absolute path to HDF5 file with raw data</span>
+<span class="n">path_to_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
 
-# Create parameter tree
-p = u.Param()
+<span class="c1"># Create parameter tree</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 
-# Set verbose level to info
-p.verbose_level = &quot;interactive&quot;
+<span class="c1"># Set verbose level to info</span>
+<span class="n">p</span><span class="o">.</span><span class="n">verbose_level</span> <span class="o">=</span> <span class="s2">&quot;interactive&quot;</span>
 
-# Scan label
-p.run = &quot;dls_epsic_graphene&quot;
+<span class="c1"># Scan label</span>
+<span class="n">p</span><span class="o">.</span><span class="n">run</span> <span class="o">=</span> <span class="s2">&quot;dls_epsic_graphene&quot;</span>
 
-# Make sure bigger than nr. of frames 
-# because of ePIE
-p.frames_per_block = 100000
+<span class="c1"># Make sure bigger than nr. of frames </span>
+<span class="c1"># because of ePIE</span>
+<span class="n">p</span><span class="o">.</span><span class="n">frames_per_block</span> <span class="o">=</span> <span class="mi">100000</span>
 
-# Set io settings (no files saved)
-p.io = u.Param()
-p.io.rfile = None
-p.io.autosave = u.Param(active=False)
-p.io.autoplot = u.Param(active=False)
-p.io.interaction = u.Param(active=False)
+<span class="c1"># Set io settings (no files saved)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-# Live-plotting during the reconstruction
-# only works with jupyter notebooks
-p.io.jupyter_autoplot = u.Param()
-p.io.jupyter_autoplot.active = True
-p.io.jupyter_autoplot.cropping = 0.3
+<span class="c1"># Live-plotting during the reconstruction</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">active</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">threaded</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="s2">&quot;jupyter&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mi">1</span>
 
-# Define the scan model
-p.scans = u.Param()
-p.scans.scan_00 = u.Param()
-p.scans.scan_00.name = &#39;BlockGradFull&#39;
+<span class="c1"># Define the scan model</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;BlockGradFull&#39;</span>
 
-# Initial illumination (based on simulated optics)
-p.scans.scan_00.illumination = u.Param()
-p.scans.scan_00.illumination.model = None
-p.scans.scan_00.illumination.photons = None
-p.scans.scan_00.illumination.aperture = u.Param()
-p.scans.scan_00.illumination.aperture.form = &quot;circ&quot;
-p.scans.scan_00.illumination.aperture.size = 0.011
-p.scans.scan_00.illumination.propagation = u.Param()
-p.scans.scan_00.illumination.propagation.focussed = 0.1732
-p.scans.scan_00.illumination.propagation.parallel = -1.5e-8
-p.scans.scan_00.illumination.diversity = u.Param()
-p.scans.scan_00.illumination.diversity.power = 0.1
-p.scans.scan_00.illumination.diversity.noise = [0.5,0.2]
+<span class="c1"># Initial illumination (based on simulated optics)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">photons</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">form</span> <span class="o">=</span> <span class="s2">&quot;circ&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mf">0.011</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">focussed</span> <span class="o">=</span> <span class="mf">0.1732</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">parallel</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.5e-8</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">diversity</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">diversity</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">diversity</span><span class="o">.</span><span class="n">noise</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.2</span><span class="p">]</span>
 
-# Initial object
-p.scans.scan_00.sample = u.Param()
-p.scans.scan_00.sample.model = None
-p.scans.scan_00.sample.diversity = None
-p.scans.scan_00.sample.process = None
+<span class="c1"># Initial object</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">sample</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">diversity</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="kc">None</span>
 
-# Coherence parameters (modes)
-p.scans.scan_00.coherence = u.Param()
-p.scans.scan_00.coherence.num_probe_modes = 1
-p.scans.scan_00.coherence.num_object_modes = 1
+<span class="c1"># Coherence parameters (modes)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">coherence</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">coherence</span><span class="o">.</span><span class="n">num_probe_modes</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">coherence</span><span class="o">.</span><span class="n">num_object_modes</span> <span class="o">=</span> <span class="mi">1</span>
 
-# Data loader
-p.scans.scan_00.data = u.Param()
-p.scans.scan_00.data.name = &#39;EpsicHdf5LoaderFast&#39;
-p.scans.scan_00.data.orientation = 2
+<span class="c1"># Data loader</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;EpsicHdf5LoaderFast&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mi">2</span>
 
-# Read diffraction data
-p.scans.scan_00.data.intensities = u.Param()
-p.scans.scan_00.data.intensities.file = path_to_data
-p.scans.scan_00.data.intensities.key = &quot;data/frames&quot;
+<span class="c1"># Read diffraction data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;data/frames&quot;</span>
 
-# Scan positions
-p.scans.scan_00.data.rotation = 60
-p.scans.scan_00.data.stepsize = 3.71875e-11
-p.scans.scan_00.data.numpos = 255
-# p.scans.scan_00.data.positions = u.Param()
-# p.scans.scan_00.data.positions.bounding_box = u.Param()
-# p.scans.scan_00.data.positions.bounding_box.fast_axis_bounds = [50,200]
-# p.scans.scan_00.data.positions.bounding_box.slow_axis_bounds = [50,200]
+<span class="c1"># Scan positions</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">rotation</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">stepsize</span> <span class="o">=</span> <span class="mf">3.71875e-11</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpos</span> <span class="o">=</span> <span class="mi">255</span>
+<span class="c1"># p.scans.scan_00.data.positions = u.Param()</span>
+<span class="c1"># p.scans.scan_00.data.positions.bounding_box = u.Param()</span>
+<span class="c1"># p.scans.scan_00.data.positions.bounding_box.fast_axis_bounds = [50,200]</span>
+<span class="c1"># p.scans.scan_00.data.positions.bounding_box.slow_axis_bounds = [50,200]</span>
 
-# Meta information
-# electron_data needs to be set to True 
-# if energy is given as electron energy in kV
-p.scans.scan_00.data.electron_data = True
-p.scans.scan_00.data.psize = 220e-6
-p.scans.scan_00.data.energy = 80
-p.scans.scan_00.data.distance = 0.1732
+<span class="c1"># Meta information</span>
+<span class="c1"># electron_data needs to be set to True </span>
+<span class="c1"># if energy is given as electron energy in kV</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">electron_data</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">psize</span> <span class="o">=</span> <span class="mf">220e-6</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">distance</span> <span class="o">=</span> <span class="mf">0.1732</span>
 
-# Read detector mask
-# p.scans.scan_00.data.mask = u.Param()
-# p.scans.scan_00.data.mask.file = path_to_data
-# p.scans.scan_00.data.mask.key = &quot;data/mask&quot;
-# p.scans.scan_00.data.mask.invert = True
+<span class="c1"># Read detector mask</span>
+<span class="c1"># p.scans.scan_00.data.mask = u.Param()</span>
+<span class="c1"># p.scans.scan_00.data.mask.file = path_to_data</span>
+<span class="c1"># p.scans.scan_00.data.mask.key = &quot;data/mask&quot;</span>
+<span class="c1"># p.scans.scan_00.data.mask.invert = True</span>
 
-# Determine diffraction center from the data
-p.scans.scan_00.data.auto_center = True
+<span class="c1"># Determine diffraction center from the data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">auto_center</span> <span class="o">=</span> <span class="kc">True</span>
 
-# Reconstruct using GPU-accelerated ePIE
-p.engines = u.Param()
-p.engines.engine = u.Param()
-p.engines.engine.name = &quot;EPIE_pycuda&quot;
-p.engines.engine.numiter = 5
-p.engines.engine.numiter_contiguous = 1
-p.engines.engine.alpha = 0.9
-p.engines.engine.beta = 0.1
-p.engines.engine.object_norm_is_global = True
-p.engines.engine.probe_support = None
-p.engines.engine.probe_fourier_support = None
-p.engines.engine.probe_update_start = 0
-p.engines.engine.record_local_error = False
-#p.engines.engine.fft_lib = &quot;cuda&quot;
+<span class="c1"># Reconstruct using GPU-accelerated ePIE</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EPIE_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">object_norm_is_global</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_fourier_support</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">record_local_error</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="c1">#p.engines.engine.fft_lib = &quot;cuda&quot;</span>
 
-# Run reconstruction
-P = ptypy.core.Ptycho(p,level=5)
+<span class="c1"># Run reconstruction</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>## Add second script that reads from output
-# Maybe this is a good example of using JSON or YAML file
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Add second script that reads from output</span>
+<span class="c1"># Maybe this is a good example of using JSON or YAML file</span>
 </pre></div>
 </div>
 </div>
@@ -598,16 +598,16 @@ P = ptypy.core.Ptycho(p,level=5)
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ptypy_pycuda"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "ptypy_pycuda",
+            kernelName: "conda-env-DLS_Conda-python3.10-kernel.json",
             path: "./notebooks/Processing_Large_Datasets"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ptypy_pycuda'</script>
+    <script>kernelName = 'conda-env-DLS_Conda-python3.10-kernel.json'</script>
 
               </div>
               

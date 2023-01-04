@@ -536,7 +536,7 @@ The<span class="w"> </span>difference<span class="w"> </span>map<span class="w">
 <span class="o">================================================================================</span>
 </pre></div>
 </div>
-<p>To visualise the results of the reconstruction, we can use <code class="docutils literal notranslate"><span class="pre">u.plot_recon_from_ptycho(P)</span></code> to produce an image like this</p>
+<p>To visualise the results of the reconstruction, we can use <code class="docutils literal notranslate"><span class="pre">ptypy.utils.plot_client.figure_from_ptycho(P)</span></code> to produce an image like this</p>
 <p><img alt="" src="../../_images/moonflower_recons_plot.png" /></p>
 <div class="attention admonition">
 <p class="admonition-title">Exercise</p>
@@ -553,50 +553,50 @@ The<span class="w"> </span>difference<span class="w"> </span>map<span class="w">
 <hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy
-import ptypy.utils as u
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy</span>
+<span class="kn">import</span> <span class="nn">ptypy.utils</span> <span class="k">as</span> <span class="nn">u</span>
 
-# Create parameter tree
-p = u.Param()
+<span class="c1"># Create parameter tree</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 
-# Set verbose level, can be &quot;interactive&quot;, &quot;info&quot; or &quot;debug&quot;
-p.verbose_level = &quot;interactive&quot;
+<span class="c1"># Set verbose level, can be &quot;interactive&quot;, &quot;info&quot; or &quot;debug&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">verbose_level</span> <span class="o">=</span> <span class="s2">&quot;interactive&quot;</span>
 
-# Basic I/O settings (no files saved in this case)
-p.io = u.Param()
-p.io.rfile = None
-p.io.autosave = u.Param(active=False)
-p.io.autoplot = u.Param(active=False)
-p.io.interaction = u.Param(active=False)
+<span class="c1"># Basic I/O settings (no files saved in this case)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-# Define the scan model
-p.scans = u.Param()
-p.scans.MF = u.Param()
-p.scans.MF.name = &quot;Full&quot;
+<span class="c1"># Define the scan model</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Full&quot;</span>
 
-# Data loader / simulator 
-# Generate 200 frames (128x128px) of diffraction data
-p.scans.MF.data= u.Param()
-p.scans.MF.data.name = &quot;MoonFlowerScan&quot;
-p.scans.MF.data.shape = 128
-p.scans.MF.data.num_frames = 200
-p.scans.MF.data.save = None
-p.scans.MF.data.density = 0.2
-p.scans.MF.data.photons = 1e8
-p.scans.MF.data.psf = 0.
+<span class="c1"># Data loader / simulator </span>
+<span class="c1"># Generate 200 frames (128x128px) of diffraction data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;MoonFlowerScan&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">num_frames</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">save</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">photons</span> <span class="o">=</span> <span class="mf">1e8</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">psf</span> <span class="o">=</span> <span class="mf">0.</span>
 
-# Define reconstruction engine
-p.engines = u.Param()
-p.engines.engine00 = u.Param()
-p.engines.engine00.name = &quot;DM&quot;
-p.engines.engine00.numiter = 80
-p.engines.engine00.numiter_contiguous = 1
+<span class="c1"># Define reconstruction engine</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
 
-# Prepare and run
-P = ptypy.core.Ptycho(p,level=5)
+<span class="c1"># Prepare and run</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-# Display the results
-u.plot_recon_from_ptycho(P)
+<span class="c1"># Display the results</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">plot_client</span><span class="o">.</span><span class="n">figure_from_ptycho</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -612,16 +612,16 @@ u.plot_recon_from_ptycho(P)
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ptypy_pycuda"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "ptypy_pycuda",
+            kernelName: "conda-env-DLS_Conda-python3.10-kernel.json",
             path: "./notebooks/Getting_Started_with_PtyPy"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ptypy_pycuda'</script>
+    <script>kernelName = 'conda-env-DLS_Conda-python3.10-kernel.json'</script>
 
               </div>
               

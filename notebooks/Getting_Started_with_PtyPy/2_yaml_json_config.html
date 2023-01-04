@@ -523,7 +523,7 @@ title="Print to PDF"
 <span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
 <span class="c1"># Display the results</span>
-<span class="n">u</span><span class="o">.</span><span class="n">plot_recon_from_ptycho</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+<span class="n">ptypy</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">plot_client</span><span class="o">.</span><span class="n">figure_from_ptycho</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>and the same from a YAML file</p>
@@ -538,7 +538,7 @@ title="Print to PDF"
 <span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
 <span class="c1"># Display the results</span>
-<span class="n">u</span><span class="o">.</span><span class="n">plot_recon_from_ptycho</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+<span class="n">ptypy</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">plot_client</span><span class="o">.</span><span class="n">figure_from_ptycho</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="attention admonition">
@@ -552,36 +552,36 @@ title="Print to PDF"
 <hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy
-import ptypy.utils as u
-import json
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy</span>
+<span class="kn">import</span> <span class="nn">ptypy.utils</span> <span class="k">as</span> <span class="nn">u</span>
+<span class="kn">import</span> <span class="nn">json</span>
 
-# Parameter tree
-p = u.param_from_json(&quot;config/moonflower.json&quot;)
+<span class="c1"># Parameter tree</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">param_from_json</span><span class="p">(</span><span class="s2">&quot;config/moonflower.json&quot;</span><span class="p">)</span>
 
-# Prepare and run
-P = ptypy.core.Ptycho(p,level=5)
+<span class="c1"># Prepare and run</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-# Display the results
-u.plot_recon_from_ptycho(P)
+<span class="c1"># Display the results</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">plot_client</span><span class="o">.</span><span class="n">figure_from_ptycho</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ptypy
-import ptypy.utils as u
-import yaml
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy</span>
+<span class="kn">import</span> <span class="nn">ptypy.utils</span> <span class="k">as</span> <span class="nn">u</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
 
-# Parameter tree
-p = u.param_from_yaml(&quot;config/moonflower.yaml&quot;)
+<span class="c1"># Parameter tree</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">param_from_yaml</span><span class="p">(</span><span class="s2">&quot;config/moonflower.yaml&quot;</span><span class="p">)</span>
 
-# Prepare and run
-P = ptypy.core.Ptycho(p,level=5)
+<span class="c1"># Prepare and run</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-# Display the results
-u.plot_recon_from_ptycho(P)
+<span class="c1"># Display the results</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">plot_client</span><span class="o">.</span><span class="n">figure_from_ptycho</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -597,16 +597,16 @@ u.plot_recon_from_ptycho(P)
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ptypy_pycuda"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "ptypy_pycuda",
+            kernelName: "conda-env-DLS_Conda-python3.10-kernel.json",
             path: "./notebooks/Getting_Started_with_PtyPy"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ptypy_pycuda'</script>
+    <script>kernelName = 'conda-env-DLS_Conda-python3.10-kernel.json'</script>
 
               </div>
               
