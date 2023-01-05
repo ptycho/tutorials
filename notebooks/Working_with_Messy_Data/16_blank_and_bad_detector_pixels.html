@@ -563,7 +563,6 @@ title="Print to PDF"
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">tau</span> <span class="o">=</span> <span class="mf">0.1</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">compute_log_likelihood</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">compute_exit_error</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="c1">#p.engines.engine_dr.fft_lib = &quot;cuda&quot;</span>
 
 <span class="c1"># Run reconstruction</span>
 <span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -585,16 +584,16 @@ title="Print to PDF"
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "ptypy_pycuda"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: "ptypy_pycuda",
             path: "./notebooks/Working_with_Messy_Data"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'ptypy_pycuda'</script>
 
               </div>
               
