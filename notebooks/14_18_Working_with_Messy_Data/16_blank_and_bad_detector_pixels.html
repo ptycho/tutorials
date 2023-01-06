@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>10. The Block Scan Model &#8212; Tutorials</title>
+    <title>16. Blank and Bad Detector Pixels &#8212; Tutorials</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="11. Using the GPU-accelerated Engines" href="11_using_gpu_accelerated_engines.html" />
-    <link rel="prev" title="9. Fixing Issues Related to Data (Loading)" href="../From_Data_to_Reconstruction/9_fixing_data_issues.html" />
+    <link rel="next" title="17. Missing Detector Frames" href="17_missing_detector_frames.html" />
+    <link rel="prev" title="15. Position Refinement" href="15_position_refinement.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -120,27 +120,27 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Getting_Started_with_PtyPy/1_the_parameter_tree.html">
+  <a class="reference internal" href="../01_05_Getting_Started_with_PtyPy/1_the_parameter_tree.html">
    1. The Parameter Tree
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Getting_Started_with_PtyPy/2_yaml_json_config.html">
+  <a class="reference internal" href="../01_05_Getting_Started_with_PtyPy/2_yaml_json_config.html">
    2. JSON/YAML Config Files
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Getting_Started_with_PtyPy/3_input_output.html">
+  <a class="reference internal" href="../01_05_Getting_Started_with_PtyPy/3_input_output.html">
    3. Input/Output Parameters
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Getting_Started_with_PtyPy/4_scan_models.html">
+  <a class="reference internal" href="../01_05_Getting_Started_with_PtyPy/4_scan_models.html">
    4. Scan Models
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Getting_Started_with_PtyPy/5_reconstruction_engines.html">
+  <a class="reference internal" href="../01_05_Getting_Started_with_PtyPy/5_reconstruction_engines.html">
    5. Reconstruction Engines
   </a>
  </li>
@@ -152,22 +152,22 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../From_Data_to_Reconstruction/6_the_hdf5_loader.html">
+  <a class="reference internal" href="../06_09_From_Data_to_Reconstruction/6_the_hdf5_loader.html">
    6. The HDF5 Loader
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../From_Data_to_Reconstruction/7_working_with_electron_data.html">
+  <a class="reference internal" href="../06_09_From_Data_to_Reconstruction/7_working_with_electron_data.html">
    7. Working With Electron Data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../From_Data_to_Reconstruction/8_chaining_multiple_engines.html">
+  <a class="reference internal" href="../06_09_From_Data_to_Reconstruction/8_chaining_multiple_engines.html">
    8. Chaining Multiple Engines
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../From_Data_to_Reconstruction/9_fixing_data_issues.html">
+  <a class="reference internal" href="../06_09_From_Data_to_Reconstruction/9_fixing_data_issues.html">
    9. Fixing Issues Related to Data (Loading)
   </a>
  </li>
@@ -177,24 +177,24 @@ const thebe_selector_output = ".output, .cell_output"
   Processing Large Datasets
  </span>
 </p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../10_13_Processing_Large_Datasets/10_the_block_scan_model.html">
    10. The Block Scan Model
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="11_using_gpu_accelerated_engines.html">
+  <a class="reference internal" href="../10_13_Processing_Large_Datasets/11_using_gpu_accelerated_engines.html">
    11. Using the GPU-accelerated Engines
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="12_switching_between_scan_models.html">
+  <a class="reference internal" href="../10_13_Processing_Large_Datasets/12_switching_between_scan_models.html">
    12. Switching between Scan Models
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="13_nearfield_ptychography.html">
+  <a class="reference internal" href="../10_13_Processing_Large_Datasets/13_nearfield_ptychography.html">
    13. Nearfield Ptychography
   </a>
  </li>
@@ -204,29 +204,29 @@ const thebe_selector_output = ".output, .cell_output"
   Working with Messy Data
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Working_with_Messy_Data/14_partial_coherence.html">
+  <a class="reference internal" href="14_partial_coherence.html">
    14. Partial Coherence
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Working_with_Messy_Data/15_position_refinement.html">
+  <a class="reference internal" href="15_position_refinement.html">
    15. Position Refinement
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Working_with_Messy_Data/16_blank_and_bad_detector_pixels.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    16. Blank and Bad Detector Pixels
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Working_with_Messy_Data/17_missing_detector_frames.html">
+  <a class="reference internal" href="17_missing_detector_frames.html">
    17. Missing Detector Frames
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Working_with_Messy_Data/18_phase_wrapping.html">
+  <a class="reference internal" href="18_phase_wrapping.html">
    19. Phase Wrapping
   </a>
  </li>
@@ -238,17 +238,17 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Modifying_Algorithms/21_object_regularisation.html">
+  <a class="reference internal" href="../21_23_Modifying_Algorithms/21_object_regularisation.html">
    20. Object regularisation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Modifying_Algorithms/22_implementing_your_own_engine.html">
+  <a class="reference internal" href="../21_23_Modifying_Algorithms/22_implementing_your_own_engine.html">
    21. Implementing Your Own Engine
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Modifying_Algorithms/23_implementing_multislice.html">
+  <a class="reference internal" href="../21_23_Modifying_Algorithms/23_implementing_multislice.html">
    22. A multislice implementation
   </a>
  </li>
@@ -353,7 +353,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Processing_Large_Datasets/10_the_block_scan_model.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/14_18_Working_with_Messy_Data/16_blank_and_bad_detector_pixels.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -381,7 +381,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../_sources/notebooks/Processing_Large_Datasets/10_the_block_scan_model.ipynb"
+        <a href="../../_sources/notebooks/14_18_Working_with_Messy_Data/16_blank_and_bad_detector_pixels.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -430,7 +430,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>The Block Scan Model</h1>
+                <h1>Blank and Bad Detector Pixels</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -442,9 +442,9 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="the-block-scan-model">
-<h1><span class="section-number">10. </span>The Block Scan Model<a class="headerlink" href="#the-block-scan-model" title="Permalink to this headline">#</a></h1>
-<p><strong>Learning about the new block scan models and why they should be used for large datasets.</strong></p>
+  <section class="tex2jax_ignore mathjax_ignore" id="blank-and-bad-detector-pixels">
+<h1><span class="section-number">16. </span>Blank and Bad Detector Pixels<a class="headerlink" href="#blank-and-bad-detector-pixels" title="Permalink to this headline">#</a></h1>
+<p><strong>Learning how to deal with missing data and bad detector pixels.</strong></p>
 <hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -458,13 +458,24 @@ title="Print to PDF"
 <span class="n">ptypy</span><span class="o">.</span><span class="n">load_gpu_engines</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>  
 
 <span class="c1"># Root directory of tutorial data</span>
-<span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;/global/homes/b/benedikt/workshop_data/&quot;</span>
+<span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;/dls/science/groups/imaging/ptypy_tutorials/&quot;</span>
 
-<span class="c1"># Dataset for this tutorial</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="s2">&quot;dls_i08_nanogold_spiral/i08-1-5776.nxs&quot;</span>
+<span class="c1"># Path to HDF5 file with raw data and positions</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="s2">&quot;dls_i13_butterfly/raw/excalibur_306517_vds.h5&quot;</span>
+<span class="n">positions</span> <span class="o">=</span> <span class="s2">&quot;dls_i13_butterfly/processing/pos/306517.h5&quot;</span>
 
-<span class="c1"># Absolute path to HDF5 file with raw data</span>
+<span class="c1"># Path to a previous reconstruction</span>
+<span class="n">init_probe</span> <span class="o">=</span> <span class="s2">&quot;dls_i13_butterfly/processing/ptypy/testing/303079_ML_pycuda_1500.ptyr&quot;</span>
+
+<span class="c1"># Path to HDF5 file with mask</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="s2">&quot;dls_i13_butterfly/processing/masks/excalibur_512x512.h5&quot;</span>
+
+<span class="c1"># Absolute paths to HDF5 files with raw data, positions</span>
+<span class="c1"># initial probe and mask</span>
 <span class="n">path_to_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+<span class="n">path_to_pos</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">positions</span><span class="p">)</span>
+<span class="n">path_to_probe</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">init_probe</span><span class="p">)</span>
+<span class="n">path_to_mask</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
 
 <span class="c1"># Create parameter tree</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
@@ -473,41 +484,32 @@ title="Print to PDF"
 <span class="n">p</span><span class="o">.</span><span class="n">verbose_level</span> <span class="o">=</span> <span class="s2">&quot;interactive&quot;</span>
 
 <span class="c1"># Scan label</span>
-<span class="n">p</span><span class="o">.</span><span class="n">run</span> <span class="o">=</span> <span class="s2">&quot;dls_i08_nanogold&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">run</span> <span class="o">=</span> <span class="s2">&quot;dls_i13_butterfly&quot;</span>
 
 <span class="c1"># Data loading and processing should </span>
 <span class="c1"># happen in chunks of this size</span>
-<span class="n">p</span><span class="o">.</span><span class="n">frames_per_block</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">p</span><span class="o">.</span><span class="n">frames_per_block</span> <span class="o">=</span> <span class="mi">264</span>
 
 <span class="c1"># Set io settings (no files saved)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">io</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="c1"># Live-plotting during the reconstruction</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">active</span><span class="o">=</span><span class="kc">True</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">threaded</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="s2">&quot;jupyter&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mi">10</span>
 
 <span class="c1"># Define the scan model</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;BlockFull&#39;</span>
 
-<span class="c1"># Initial illumination (based on simulated optics)</span>
+<span class="c1"># Initial illumination (based on previous reconstruction)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;recon&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">recon</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">recon</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="n">path_to_probe</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">photons</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">form</span> <span class="o">=</span> <span class="s2">&quot;circ&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mf">333e-6</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">focussed</span> <span class="o">=</span> <span class="mf">13.725e-3</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">parallel</span> <span class="o">=</span> <span class="mf">100e-6</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">antialiasing</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">form</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">diversity</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">diversity</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="mf">0.1</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">diversity</span><span class="o">.</span><span class="n">noise</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.0</span><span class="p">]</span>
@@ -526,63 +528,47 @@ title="Print to PDF"
 <span class="c1"># Data loader</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Hdf5LoaderFast&#39;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mi">0</span>
 
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;entry/axis/data&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;data&quot;</span>
 
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_key</span> <span class="o">=</span> <span class="s2">&quot;entry/axis/SampleY_value&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_key</span> <span class="o">=</span> <span class="s2">&quot;entry/axis/SampleX_value&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">bounding_box</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">bounding_box</span><span class="o">.</span><span class="n">fast_axis_bounds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">]</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_pos</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_key</span> <span class="o">=</span> <span class="s2">&quot;slow&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_multiplier</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_key</span> <span class="o">=</span> <span class="s2">&quot;fast&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_multiplier</span> <span class="o">=</span> <span class="mf">1e-6</span>
 
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;entry/instrument/energyFocus/value&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_mask</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;data&quot;</span>
 
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">darkfield</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">darkfield</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">darkfield</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;entry/instrument/darkFieldCollector/darkField&quot;</span>
-
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">framefilter</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">framefilter</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">framefilter</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;entry/axis_sum/sum&quot;</span>
-
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">distance</span> <span class="o">=</span> <span class="mf">0.072</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">psize</span> <span class="o">=</span> <span class="mf">11e-6</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1024</span><span class="p">,</span><span class="mi">1024</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">rebin</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">distance</span> <span class="o">=</span> <span class="mf">14.65</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="mf">9.7</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">psize</span> <span class="o">=</span> <span class="mf">55e-6</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">auto_center</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1038</span><span class="p">,</span><span class="mi">1018</span><span class="p">]</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="mf">903.5</span><span class="p">,</span> <span class="mf">1018.</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">save</span> <span class="o">=</span> <span class="kc">None</span>
 
-<span class="c1"># Reconstruct using GPU-accelerated DM</span>
+<span class="c1"># Reconstruct using GPU-accelerated SDR</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM_pycuda&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">500</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_fourier_support</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">record_local_error</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.95</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">fourier_power_bound</span> <span class="o">=</span> <span class="mf">0.25</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">overlap_converge_factor</span> <span class="o">=</span> <span class="mf">0.001</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">overlap_max_iterations</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">update_object_first</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">obj_smooth_std</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">object_inertia</span> <span class="o">=</span> <span class="mf">0.001</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_inertia</span> <span class="o">=</span> <span class="mf">0.001</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">clip_object</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;SDR_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">tau</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">compute_log_likelihood</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">compute_exit_error</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="c1"># Run reconstruction</span>
 <span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Display the results</span>
+<span class="n">u</span><span class="o">.</span><span class="n">plot_recon_from_ptycho</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">cropping</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">pmin</span><span class="o">=-</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">pmax</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -602,7 +588,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "ptypy_pycuda",
-            path: "./notebooks/Processing_Large_Datasets"
+            path: "./notebooks/14_18_Working_with_Messy_Data"
         },
         predefinedOutput: true
     }
@@ -616,17 +602,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../From_Data_to_Reconstruction/9_fixing_data_issues.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="15_position_refinement.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">9. </span>Fixing Issues Related to Data (Loading)</p>
+            <p class="prev-next-title"><span class="section-number">15. </span>Position Refinement</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="11_using_gpu_accelerated_engines.html" title="next page">
+    <a class='right-next' id="next-link" href="17_missing_detector_frames.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">11. </span>Using the GPU-accelerated Engines</p>
+        <p class="prev-next-title"><span class="section-number">17. </span>Missing Detector Frames</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

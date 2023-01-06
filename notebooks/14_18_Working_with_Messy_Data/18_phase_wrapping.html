@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>17. Missing Detector Frames &#8212; Tutorials</title>
+    <title>19. Phase Wrapping &#8212; Tutorials</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="19. Phase Wrapping" href="18_phase_wrapping.html" />
-    <link rel="prev" title="16. Blank and Bad Detector Pixels" href="16_blank_and_bad_detector_pixels.html" />
+    <link rel="next" title="20. Object regularisation" href="../21_23_Modifying_Algorithms/21_object_regularisation.html" />
+    <link rel="prev" title="17. Missing Detector Frames" href="17_missing_detector_frames.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -120,27 +120,27 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Getting_Started_with_PtyPy/1_the_parameter_tree.html">
+  <a class="reference internal" href="../01_05_Getting_Started_with_PtyPy/1_the_parameter_tree.html">
    1. The Parameter Tree
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Getting_Started_with_PtyPy/2_yaml_json_config.html">
+  <a class="reference internal" href="../01_05_Getting_Started_with_PtyPy/2_yaml_json_config.html">
    2. JSON/YAML Config Files
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Getting_Started_with_PtyPy/3_input_output.html">
+  <a class="reference internal" href="../01_05_Getting_Started_with_PtyPy/3_input_output.html">
    3. Input/Output Parameters
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Getting_Started_with_PtyPy/4_scan_models.html">
+  <a class="reference internal" href="../01_05_Getting_Started_with_PtyPy/4_scan_models.html">
    4. Scan Models
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Getting_Started_with_PtyPy/5_reconstruction_engines.html">
+  <a class="reference internal" href="../01_05_Getting_Started_with_PtyPy/5_reconstruction_engines.html">
    5. Reconstruction Engines
   </a>
  </li>
@@ -152,22 +152,22 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../From_Data_to_Reconstruction/6_the_hdf5_loader.html">
+  <a class="reference internal" href="../06_09_From_Data_to_Reconstruction/6_the_hdf5_loader.html">
    6. The HDF5 Loader
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../From_Data_to_Reconstruction/7_working_with_electron_data.html">
+  <a class="reference internal" href="../06_09_From_Data_to_Reconstruction/7_working_with_electron_data.html">
    7. Working With Electron Data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../From_Data_to_Reconstruction/8_chaining_multiple_engines.html">
+  <a class="reference internal" href="../06_09_From_Data_to_Reconstruction/8_chaining_multiple_engines.html">
    8. Chaining Multiple Engines
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../From_Data_to_Reconstruction/9_fixing_data_issues.html">
+  <a class="reference internal" href="../06_09_From_Data_to_Reconstruction/9_fixing_data_issues.html">
    9. Fixing Issues Related to Data (Loading)
   </a>
  </li>
@@ -179,22 +179,22 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Processing_Large_Datasets/10_the_block_scan_model.html">
+  <a class="reference internal" href="../10_13_Processing_Large_Datasets/10_the_block_scan_model.html">
    10. The Block Scan Model
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Processing_Large_Datasets/11_using_gpu_accelerated_engines.html">
+  <a class="reference internal" href="../10_13_Processing_Large_Datasets/11_using_gpu_accelerated_engines.html">
    11. Using the GPU-accelerated Engines
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Processing_Large_Datasets/12_switching_between_scan_models.html">
+  <a class="reference internal" href="../10_13_Processing_Large_Datasets/12_switching_between_scan_models.html">
    12. Switching between Scan Models
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Processing_Large_Datasets/13_nearfield_ptychography.html">
+  <a class="reference internal" href="../10_13_Processing_Large_Datasets/13_nearfield_ptychography.html">
    13. Nearfield Ptychography
   </a>
  </li>
@@ -220,13 +220,13 @@ const thebe_selector_output = ".output, .cell_output"
    16. Blank and Bad Detector Pixels
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_missing_detector_frames.html">
    17. Missing Detector Frames
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="18_phase_wrapping.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    19. Phase Wrapping
   </a>
  </li>
@@ -238,17 +238,17 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Modifying_Algorithms/21_object_regularisation.html">
+  <a class="reference internal" href="../21_23_Modifying_Algorithms/21_object_regularisation.html">
    20. Object regularisation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Modifying_Algorithms/22_implementing_your_own_engine.html">
+  <a class="reference internal" href="../21_23_Modifying_Algorithms/22_implementing_your_own_engine.html">
    21. Implementing Your Own Engine
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Modifying_Algorithms/23_implementing_multislice.html">
+  <a class="reference internal" href="../21_23_Modifying_Algorithms/23_implementing_multislice.html">
    22. A multislice implementation
   </a>
  </li>
@@ -353,7 +353,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Working_with_Messy_Data/17_missing_detector_frames.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/14_18_Working_with_Messy_Data/18_phase_wrapping.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -381,7 +381,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../_sources/notebooks/Working_with_Messy_Data/17_missing_detector_frames.ipynb"
+        <a href="../../_sources/notebooks/14_18_Working_with_Messy_Data/18_phase_wrapping.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -418,70 +418,23 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   17. Missing Detector Frames
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#todo">
-   18. todo
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Missing Detector Frames</h1>
+                <h1>Phase Wrapping</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   17. Missing Detector Frames
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#todo">
-   18. todo
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -489,13 +442,17 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="missing-detector-frames">
-<h1><span class="section-number">17. </span>Missing Detector Frames<a class="headerlink" href="#missing-detector-frames" title="Permalink to this headline">#</a></h1>
-<p><strong>Learning how to deal with missing detector frames and how bad they can affect the reconstruction.</strong></p>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="phase-wrapping">
+<h1><span class="section-number">19. </span>Phase Wrapping<a class="headerlink" href="#phase-wrapping" title="Permalink to this headline">#</a></h1>
+<p><strong>Learning about phase wrapping, why it occurs and how to correct for it.</strong></p>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="todo">
-<h1><span class="section-number">18. </span>todo<a class="headerlink" href="#todo" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use nearfield? or butterfly?</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -507,16 +464,16 @@ title="Print to PDF"
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ptypy_pycuda"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "ptypy_pycuda",
-            path: "./notebooks/Working_with_Messy_Data"
+            kernelName: "python3",
+            path: "./notebooks/14_18_Working_with_Messy_Data"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ptypy_pycuda'</script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               
@@ -525,17 +482,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="16_blank_and_bad_detector_pixels.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="17_missing_detector_frames.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">16. </span>Blank and Bad Detector Pixels</p>
+            <p class="prev-next-title"><span class="section-number">17. </span>Missing Detector Frames</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="18_phase_wrapping.html" title="next page">
+    <a class='right-next' id="next-link" href="../21_23_Modifying_Algorithms/21_object_regularisation.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">19. </span>Phase Wrapping</p>
+        <p class="prev-next-title"><span class="section-number">20. </span>Object regularisation</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
