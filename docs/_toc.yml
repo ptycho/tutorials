@@ -17,7 +17,7 @@ parts:
   - file: notebooks/From_Data_to_Reconstruction/6_the_hdf5_loader
   - file: notebooks/From_Data_to_Reconstruction/7_working_with_electron_data
   - file: notebooks/From_Data_to_Reconstruction/8_chaining_multiple_engines
-  - file: notebooks/From_Data_to_Reconstruction/9_applying_a_support_constraint
+  - file: notebooks/From_Data_to_Reconstruction/9_fixing_data_issues
 - caption: Processing Large Datasets
   numbered: true
   chapters:
