@@ -169,8 +169,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="9_applying_a_support_constraint.html">
-   9. Applying a Support Constraint
+  <a class="reference internal" href="9_fixing_data_issues.html">
+   9. Fixing Issues Related to Data (Loading)
   </a>
  </li>
 </ul>
@@ -517,7 +517,7 @@ title="Print to PDF"
 <p>PtyPy uses the <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.data.PtyScan">PtyScan</a> class to interact with experimental data and traditionally it was recommended that users write their own PtyScan subclass for each experiment or beamline, as documented in this tutorial on <a class="reference external" href="https://ptycho.github.io/ptypy/rst/data_management.html">Data Management</a>. This approach is extremely flexible since it allows users full control on defining how their data should be loaded based on whatever file format their data is stored with, but it requires some programming efforts and can therefore be a barrier for new ptychography users. However, if your exprimental data is stored in an HDF5 file - a file format adopted by most instruments and facilities - it is much simpler to just use the <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.experiment.html#ptypy.experiment.hdf5_loader.Hdf5Loader">Hdf5Loader</a> PtyScan subclass which already provides a generic interface to load ptychographic data of a single or multiple HDF5 files into Ptypy.</p>
 <section id="the-data">
 <h2><span class="section-number">6.1. </span>The data<a class="headerlink" href="#the-data" title="Permalink to this headline">#</a></h2>
-<p>In this example, we use an experimental data set collected at the I08-1 instrument at the Diamond Light Source on a test sample (gold nanostructures deposited on a Carbon film). A subset of the experimental data including some meta information has been saved in an HDF5 file named “dls_i08_nanogold_small.h5” that was specifically created for the purpose of this tutorial. We can use the following code</p>
+<p>In this example, we use an experimental data set collected at the I08-1 instrument at the Diamond Light Source on a test sample (gold nanostructures deposited on a carbon film). A subset of the experimental data including some meta information has been saved in an HDF5 file named “dls_i08_nanogold_small.h5” that was specifically created for the purpose of this tutorial. We can use the following code</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span><span class="o">,</span> <span class="nn">os</span>
 <span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;/global/homes/b/benedikt/workshop_data/&quot;</span>
 <span class="n">dataset</span> <span class="o">=</span> <span class="s2">&quot;small_data/dls_i08_nanogold_small.h5&quot;</span>

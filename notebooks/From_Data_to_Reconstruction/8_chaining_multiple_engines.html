@@ -50,9 +50,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="9. Applying a Support Constraint" href="9_applying_a_support_constraint.html" />
+    <link rel="next" title="9. Fixing Issues Related to Data (Loading)" href="9_fixing_data_issues.html" />
     <link rel="prev" title="7. Working With Electron Data" href="7_working_with_electron_data.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -167,8 +169,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="9_applying_a_support_constraint.html">
-   9. Applying a Support Constraint
+  <a class="reference internal" href="9_fixing_data_issues.html">
+   9. Fixing Issues Related to Data (Loading)
   </a>
  </li>
 </ul>
@@ -445,6 +447,34 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="chaining-multiple-engines">
 <h1><span class="section-number">8. </span>Chaining Multiple Engines<a class="headerlink" href="#chaining-multiple-engines" title="Permalink to this headline">#</a></h1>
 <p><strong>Learning how to chain multiple engines and running them back to back.</strong></p>
+<p>A common approach in ptychography is to use one algorithm (e.g. DM or ePIE) as a starting point and another algorithm (e.g. ML) for refinement. In PtyPy, this can be achieved by simply specifying multiple engines in the parameter tree. Continuing with the same data set from the previous tutorial on <a class="reference internal" href="7_working_with_electron_data.html"><span class="doc std std-doc">Working With Electron Data</span></a> we can now add “ML_pycuda” as a second engine to run after “EPIE_pycuda”</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EPIE_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">object_norm_is_global</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ML_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">190</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">reg_del2</span> <span class="o">=</span> <span class="kc">True</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">reg_del2_amplitude</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">scale_precond</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>with <span class="math notranslate nohighlight">\(40\)</span> iterations used for the refinement and default parameters for the ML pre-conditioner and regulariser resulting in this final reconstruction</p>
+<p><img alt="" src="../../_images/epsic_recons_ml.png" /></p>
+<div class="attention admonition">
+<p class="admonition-title">Exercise</p>
+<p>Modify the ePIE/ML engine parameters and observe if/how it might improve the quality or convergence of the reconstruction.</p>
+</div>
 <hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -559,7 +589,7 @@ title="Print to PDF"
 
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ML_pycuda&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">190</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">40</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">reg_del2</span> <span class="o">=</span> <span class="kc">True</span> 
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">reg_del2_amplitude</span> <span class="o">=</span> <span class="mf">0.01</span>
@@ -609,10 +639,10 @@ title="Print to PDF"
             <p class="prev-next-title"><span class="section-number">7. </span>Working With Electron Data</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="9_applying_a_support_constraint.html" title="next page">
+    <a class='right-next' id="next-link" href="9_fixing_data_issues.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">9. </span>Applying a Support Constraint</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Fixing Issues Related to Data (Loading)</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

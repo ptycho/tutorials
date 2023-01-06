@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>9. Applying a Support Constraint &#8212; Tutorials</title>
+    <title>9. Fixing Issues Related to Data (Loading) &#8212; Tutorials</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -168,7 +168,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   9. Applying a Support Constraint
+   9. Fixing Issues Related to Data (Loading)
   </a>
  </li>
 </ul>
@@ -353,7 +353,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/From_Data_to_Reconstruction/9_applying_a_support_constraint.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/From_Data_to_Reconstruction/9_fixing_data_issues.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -381,7 +381,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../_sources/notebooks/From_Data_to_Reconstruction/9_applying_a_support_constraint.ipynb"
+        <a href="../../_sources/notebooks/From_Data_to_Reconstruction/9_fixing_data_issues.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -430,7 +430,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Applying a Support Constraint</h1>
+                <h1>Fixing Issues Related to Data (Loading)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -442,9 +442,36 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="applying-a-support-constraint">
-<h1><span class="section-number">9. </span>Applying a Support Constraint<a class="headerlink" href="#applying-a-support-constraint" title="Permalink to this headline">#</a></h1>
-<p><strong>Learning about generic engine parameters like applying a support constraint in real or Fourier space.</strong></p>
+  <section class="tex2jax_ignore mathjax_ignore" id="fixing-issues-related-to-data-loading">
+<h1><span class="section-number">9. </span>Fixing Issues Related to Data (Loading)<a class="headerlink" href="#fixing-issues-related-to-data-loading" title="Permalink to this headline">#</a></h1>
+<p><strong>Learning how to deal with certain issues that can arise when using new experimental data.</strong></p>
+<p>When loading experimental data into a reconstruction software like PtyPy, it is important that the geometry of the experiment is modelled correctly in the software and there are few things that can easily go wrong. The most common issue is that at least one of photon energy, detector distance or detector pixel size has been wrongly defined in the parameter tree. As part of the model initialistation in PtyPy, the reconstructed pixel size is being calculated based on these three physical quantities which might give the following error</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>RuntimeError:<span class="w"> </span>Arrays<span class="w"> </span>larger<span class="w"> </span>than<span class="w"> </span>50M<span class="w"> </span>not<span class="w"> </span>supported.<span class="w"> </span>You<span class="w"> </span>requested<span class="w"> </span><span class="m">87706</span>.44M<span class="w"> </span>pixels.
+</pre></div>
+</div>
+<p>if they have not been provide correctly. Another common issue is that we often don’t know exactely the coordinate system of the detector and the scanning stage that was used during data collection, and even if we know it might not match the default coordinate system used in PtyPy. Luckily, there are only a few (8 to be precise) possible configurations and the PtyScan base class has a parameter called <a class="reference external" href="https://ptycho.github.io/ptypy/rst/parameters.html#scandata.PtyScan.orientation">orientation</a> that makes it very simple to do a brute-force search for the correct setup.</p>
+<p>Based on the small I08-1 data set that was used in the tutorial on <a class="reference internal" href="6_the_hdf5_loader.html"><span class="doc std std-doc">The HDF5 Loader</span></a> we have a created a new file named “dls_i08_nanogold_issue.h5” for which the coordinate system has been modified sligthly. The task for this tutorial is to figure out the correct <code class="docutils literal notranslate"><span class="pre">orientation</span></code> based on the data that has been provided. As a starting point, we set it to zero.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Hdf5Loader&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>In addition, we assume that no meta information has been provided from the file and we need to set the photon energy, detector distance and detector pixel size directly</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="mi">810</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">distance</span> <span class="o">=</span> <span class="mf">0.072</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">psize</span> <span class="o">=</span> <span class="mf">44e-6</span>
+</pre></div>
+</div>
+<p>which unfortunately results in the RuntimeError mentioned above</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>RuntimeError:<span class="w"> </span>Arrays<span class="w"> </span>larger<span class="w"> </span>than<span class="w"> </span>50M<span class="w"> </span>not<span class="w"> </span>supported.<span class="w"> </span>You<span class="w"> </span>requested<span class="w"> </span><span class="m">87706</span>.44M<span class="w"> </span>pixels.
+</pre></div>
+</div>
+<p>and even after we manage to fix this problem, the reconstruction does not look right</p>
+<p><img alt="" src="../../_images/i08_recons_dm_wrong.png" /></p>
+<div class="attention admonition">
+<p class="admonition-title">Exercise</p>
+<p>Fix the typo when setting <code>energy</code>, <code>distance</code> or <code>psize</code> in the parameter tree (hint: check tutorial 6 with  <code>verbose_level=”info”</code> for comparison) and find the correct <code>orientation</code>. Can you get the reconstruction to look as expected?</p>
+</div>
 <hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -461,7 +488,7 @@ title="Print to PDF"
 <span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;/global/homes/b/benedikt/workshop_data/&quot;</span>
 
 <span class="c1"># Dataset for this tutorial</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="s2">&quot;small_data/dls_i08_nanogold_small.h5&quot;</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="s2">&quot;small_data/dls_i08_nanogold_issue.h5&quot;</span>
 
 <span class="c1"># Absolute path to HDF5 file with raw data</span>
 <span class="n">path_to_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
@@ -519,63 +546,23 @@ title="Print to PDF"
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_key</span> <span class="o">=</span> <span class="s2">&quot;posx_mm&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
 
-<span class="c1"># Read meta data: photon energy</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;energy_ev&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
-
-<span class="c1"># Read meta data: detector distance</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;det_distance_mm&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
-
-<span class="c1"># Read meta data: detector pixelsize</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;det_pixelsize_um&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<span class="c1"># Provide meta information</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="mi">810</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">distance</span> <span class="o">=</span> <span class="mf">0.072</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">psize</span> <span class="o">=</span> <span class="mf">44e-6</span>
 
 <span class="c1"># Define reconstruction engine (using DM)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM_pycuda&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">200</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.9</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ML_pycuda&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">200</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">reg_del2</span> <span class="o">=</span> <span class="kc">True</span> 
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">reg_del2_amplitude</span> <span class="o">=</span> <span class="mf">0.01</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">scale_precond</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="mf">0.7</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
 
 <span class="c1"># Run reconstruction</span>
 <span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import matplotlib.pyplot as plt</span>
-<span class="c1"># import matplotlib.colors as colors</span>
-<span class="c1"># import numpy as np</span>
-
-<span class="c1"># # Plotting the FFT of the reconstructed probe</span>
-<span class="c1"># probe = P.probe.S[&quot;Sscan_00G00&quot;].data[0]</span>
-<span class="c1"># Fprobe_int = u.abs2(np.fft.fftshift(np.fft.fft2(probe)))</span>
-
-<span class="c1"># plt.figure()</span>
-<span class="c1"># plt.imshow(Fprobe_int, norm=colors.LogNorm())</span>
-<span class="c1"># plt.show()</span>
 </pre></div>
 </div>
 </div>
