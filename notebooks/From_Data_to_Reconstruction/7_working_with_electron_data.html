@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="8. Chaining Multiple Engines" href="8_chaining_multiple_engines.html" />
@@ -418,12 +420,51 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-data">
+   7.1. The data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-the-data">
+   7.2. Loading the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initial-probe">
+   7.3. Initial probe
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reconstruction-engine">
+   7.4. Reconstruction engine
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -435,6 +476,34 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-data">
+   7.1. The data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-the-data">
+   7.2. Loading the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initial-probe">
+   7.3. Initial probe
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reconstruction-engine">
+   7.4. Reconstruction engine
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -445,7 +514,108 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="working-with-electron-data">
 <h1><span class="section-number">7. </span>Working With Electron Data<a class="headerlink" href="#working-with-electron-data" title="Permalink to this headline">#</a></h1>
 <p><strong>Loading ptychographic electron data into PtyPy from an HDF5 file, running a phase retrieval engine and inspecting the output.</strong></p>
-<p>Working with electron ptychography data is very similar to working with X-ray data, the only real difference</p>
+<p>Working with electron ptychography data is very similar to working with X-ray data, the only critical part to consider is that the internal calculation of the electron wavelength is different from calculating the X-ray wavelength based on given photon/electron energies. The Hdf5Loader has a parameter <code class="docutils literal notranslate"><span class="pre">electron_data</span></code> that will take care of this difference if set to <code class="docutils literal notranslate"><span class="pre">True</span></code> when loading electron ptychography data.</p>
+<section id="the-data">
+<h2><span class="section-number">7.1. </span>The data<a class="headerlink" href="#the-data" title="Permalink to this headline">#</a></h2>
+<p>In this example, we use an experimental data set collected at the ePSIC instrument at the Diamond Light Source on a thin layer of graphene. A subset of the experimental data including some meta information has been saved in an HDF5 file named “dls_epsic_graphene_small.h5” that was specifically created for the purpose of this tutorial. We can use the following code</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span><span class="o">,</span> <span class="nn">os</span>
+<span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;/global/homes/b/benedikt/workshop_data/&quot;</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="s2">&quot;small_data/dls_epsic_graphene_small.h5&quot;</span>
+<span class="n">path_to_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The file </span><span class="si">{}</span><span class="s2"> has the following entries: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">* </span><span class="si">{0:&lt;13}</span><span class="s1"> </span><span class="se">\t</span><span class="s1">shape = </span><span class="si">{1:}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>to list all entires/keys saved at the root level</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>The<span class="w"> </span>file<span class="w"> </span>/global/homes/b/benedikt/workshop_data/small_data/dls_epsic_graphene_small.h5<span class="w"> </span>has<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>entries:<span class="w"> </span>
+
+<span class="w">	</span>*<span class="w"> </span>data<span class="w">          	</span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">2893</span>,<span class="w"> </span><span class="m">128</span>,<span class="w"> </span><span class="m">128</span><span class="o">)</span>
+<span class="w">	</span>*<span class="w"> </span>det_distance_m<span class="w"> 	</span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">()</span>
+<span class="w">	</span>*<span class="w"> </span>det_pixelsize_um<span class="w"> 	</span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">()</span>
+<span class="w">	</span>*<span class="w"> </span>energy_kev<span class="w">    	</span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">()</span>
+<span class="w">	</span>*<span class="w"> </span>mask<span class="w">          	</span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">128</span>,<span class="w"> </span><span class="m">128</span><span class="o">)</span>
+<span class="w">	</span>*<span class="w"> </span>posx_m<span class="w">        	</span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">2893</span>,<span class="o">)</span>
+<span class="w">	</span>*<span class="w"> </span>posy_m<span class="w">        	</span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">2893</span>,<span class="o">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span><span class="o">,</span> <span class="nn">os</span>
+<span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;/global/homes/b/benedikt/workshop_data/&quot;</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="s2">&quot;small_data/dls_epsic_graphene_small.h5&quot;</span>
+<span class="n">path_to_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The file </span><span class="si">{}</span><span class="s2"> has the following entries: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">* </span><span class="si">{0:&lt;13}</span><span class="s1"> </span><span class="se">\t</span><span class="s1">shape = </span><span class="si">{1:}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="loading-the-data">
+<h2><span class="section-number">7.2. </span>Loading the data<a class="headerlink" href="#loading-the-data" title="Permalink to this headline">#</a></h2>
+<p>For this electron ptychography example, the data loading instructions are similar to the previous example on using <a class="reference internal" href="6_the_hdf5_loader.html"><span class="doc std std-doc">The HDF5 Loader</span></a> but when reading the electron energy from the file, we need to specify <code class="docutils literal notranslate"><span class="pre">electron_data=True</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">electron_data</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;energy_kev&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>The detector used in this example has some inactive (dead) pixels that we can consider by loading a binary mask from the HDF5 file</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;mask&quot;</span>
+</pre></div>
+</div>
+<p>which will be used by the reconstruction engine to ignore those inactive pixels when doing the Fourier update. The convention in PtyPy is to set active (good) pixels to <span class="math notranslate nohighlight">\(1\)</span> and inactive (bad) pixels to <span class="math notranslate nohighlight">\(0\)</span>. When loading the mask with the Hdf5Loader, it is possible to use <code class="docutils literal notranslate"><span class="pre">mask.invert=True</span></code> to invert the mask in case it saved differently in the file. The binary mask in this particular example looks like this <img alt="" src="../../_images/epsic_mask.png" /></p>
+<p>Since the diffraction center in the provided intensities might not necessarily be exactly at the centre of the images, it makes sense in most cases to let PtyPy automatically determine the center based on the data using <code class="docutils literal notranslate"><span class="pre">auto_center=True</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">auto_center</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+<section id="initial-probe">
+<h2><span class="section-number">7.3. </span>Initial probe<a class="headerlink" href="#initial-probe" title="Permalink to this headline">#</a></h2>
+<p>Similar to the previous example, a good starting guess for the illumination (probe) can be very important. For this example based on data collected at the ePSIC instrument at the Diamond Light Source, we use the following settings to model the optics of the electron microscope</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">photons</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">form</span> <span class="o">=</span> <span class="s2">&quot;circ&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mf">0.011</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">focussed</span> <span class="o">=</span> <span class="mf">0.1732</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">parallel</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0e-8</span>
+</pre></div>
+</div>
+<p>which has an aperture with a diameter of <span class="math notranslate nohighlight">\(11 \,\mathrm{mm}\)</span> and a focal length of <span class="math notranslate nohighlight">\(173.2\,\mathrm{mm}\)</span>. These values have been calculated based on the given settings (e.g. semiangle) for the electron optics used in this particular data set. The sample plane was set at <span class="math notranslate nohighlight">\(-10\,\mathrm{nm}\)</span> upstream of the focus.</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>Electron microscopy users might be more familiar with parameters such as the semiangle <span class="math notranslate nohighlight">\(\alpha\)</span> in order to define the optical setup and a future upgrade of PtyPy might allow users to directly set those more familiar parameters when defining the initial probe.</p>
+</div>
+</section>
+<section id="reconstruction-engine">
+<h2><span class="section-number">7.4. </span>Reconstruction engine<a class="headerlink" href="#reconstruction-engine" title="Permalink to this headline">#</a></h2>
+<p>For many electron ptychography data sets, it makes sense to use the ePIE reconstruction engine as a first starting point. In this particular case, using <code class="docutils literal notranslate"><span class="pre">alpha=0.9</span></code>, <code class="docutils literal notranslate"><span class="pre">beta=0.1</span></code> and <code class="docutils literal notranslate"><span class="pre">object_norm_is_global=True</span></code> seems to be a reasonable of parameters</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EPIE_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">object_norm_is_global</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>resulting in the following reconstruction after 20 iterations of ePIE showing a section of the graphene sample with a hole in the center</p>
+<p><img alt="" src="../../_images/epsic_recons_epie.png" /></p>
+<div class="attention admonition">
+<p class="admonition-title">Exercise</p>
+<p>Modify the ePIE engine parameters and observe if/how it might improve the quality or convergence of the reconstruction.</p>
+</div>
 <hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -564,6 +734,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

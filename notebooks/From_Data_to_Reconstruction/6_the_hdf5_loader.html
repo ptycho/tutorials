@@ -457,6 +457,11 @@ title="Print to PDF"
    6.3. Initial probe
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reconstruction-engine">
+   6.4. Reconstruction engine
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -491,6 +496,11 @@ title="Print to PDF"
    6.3. Initial probe
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reconstruction-engine">
+   6.4. Reconstruction engine
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -507,7 +517,7 @@ title="Print to PDF"
 <p>PtyPy uses the <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.data.PtyScan">PtyScan</a> class to interact with experimental data and traditionally it was recommended that users write their own PtyScan subclass for each experiment or beamline, as documented in this tutorial on <a class="reference external" href="https://ptycho.github.io/ptypy/rst/data_management.html">Data Management</a>. This approach is extremely flexible since it allows users full control on defining how their data should be loaded based on whatever file format their data is stored with, but it requires some programming efforts and can therefore be a barrier for new ptychography users. However, if your exprimental data is stored in an HDF5 file - a file format adopted by most instruments and facilities - it is much simpler to just use the <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.experiment.html#ptypy.experiment.hdf5_loader.Hdf5Loader">Hdf5Loader</a> PtyScan subclass which already provides a generic interface to load ptychographic data of a single or multiple HDF5 files into Ptypy.</p>
 <section id="the-data">
 <h2><span class="section-number">6.1. </span>The data<a class="headerlink" href="#the-data" title="Permalink to this headline">#</a></h2>
-<p>In this example, we use an experimental data set collected at the I08-1 instrument at the Diamond Light Source on a test sample (gold nanostructures deposited on a Carbon film). All the experimental data including some meta information is saved in an HDF5 file named “dls_i08_nanogold_small.h5” that was specifically created for the purpose of this tutorial. We can use the following code</p>
+<p>In this example, we use an experimental data set collected at the I08-1 instrument at the Diamond Light Source on a test sample (gold nanostructures deposited on a Carbon film). A subset of the experimental data including some meta information has been saved in an HDF5 file named “dls_i08_nanogold_small.h5” that was specifically created for the purpose of this tutorial. We can use the following code</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span><span class="o">,</span> <span class="nn">os</span>
 <span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;/global/homes/b/benedikt/workshop_data/&quot;</span>
 <span class="n">dataset</span> <span class="o">=</span> <span class="s2">&quot;small_data/dls_i08_nanogold_small.h5&quot;</span>
@@ -609,7 +619,23 @@ title="Print to PDF"
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">parallel</span> <span class="o">=</span> <span class="mf">45e-6</span>
 </pre></div>
 </div>
-<p>which has a circular aperture at of <span class="math notranslate nohighlight">\(333 \,\mathrm{ \mu m}\)</span> and a focal length of <span class="math notranslate nohighlight">\(13.725\,\mathrm{mm}\)</span>. We also estimate the sample plane to be <span class="math notranslate nohighlight">\(45\,\mathrm{\mu m}\)</span> downstream of the focus.</p>
+<p>which has a circular aperture of <span class="math notranslate nohighlight">\(333 \,\mathrm{ \mu m}\)</span> in diameter and a focal length of <span class="math notranslate nohighlight">\(13.725\,\mathrm{mm}\)</span>. We also estimate the sample plane to be <span class="math notranslate nohighlight">\(45\,\mathrm{\mu m}\)</span> downstream of the focus.</p>
+</section>
+<section id="reconstruction-engine">
+<h2><span class="section-number">6.4. </span>Reconstruction engine<a class="headerlink" href="#reconstruction-engine" title="Permalink to this headline">#</a></h2>
+<p>For many X-ray data sets, difference map (DM) can be a good starting point for simultaneous object and probe retrieval because of the explorative nature of the algorithm. Here, we use DM with <span class="math notranslate nohighlight">\(\alpha=0.9\)</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>resulting in the following reconstruction after 200 iterations of DM showing a section of the nanogold sample</p>
+<p><img alt="" src="../../_images/i08_recons_dm.png" /></p>
 <div class="attention admonition">
 <p class="admonition-title">Exercise</p>
 <p>Modify the optical parameters used for estimating the initial probe and observe if/how it might improve the quality or convergence of the reconstruction.</p>
