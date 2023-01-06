@@ -616,7 +616,7 @@ title="Print to PDF"
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">psize</span> <span class="o">=</span> <span class="mf">11e-6</span>
 </pre></div>
 </div>
-<p>and we can specify a <code class="docutils literal notranslate"><span class="pre">shape</span></code> smaller or equal to the original shape of the data (204x2048) as well as <code class="docutils literal notranslate"><span class="pre">rebin=2</span></code></p>
+<p>and we can specify a <code class="docutils literal notranslate"><span class="pre">shape</span></code> smaller or equal to the original shape of the data (2048x2048) as well as <code class="docutils literal notranslate"><span class="pre">rebin=2</span></code></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1024</span><span class="p">,</span><span class="mi">1024</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">rebin</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">auto_center</span> <span class="o">=</span> <span class="kc">False</span>
@@ -664,6 +664,10 @@ title="Print to PDF"
 </div>
 <p>resulting in a reconstruction of the nanogold sample after <span class="math notranslate nohighlight">\(500\)</span> iterations</p>
 <p><img alt="" src="../../_images/i08_nanogold_recons_dm.png" /></p>
+<div class="attention admonition">
+<p class="admonition-title">Exercise</p>
+<p>Modify data loading (e.g. <code>rebin</code> or <code>shape</code>) parameters and engine parameters (e.g. <code>fourier_power_bound</code>) and observe if/how it improves the quality, convergence or speed of the reconstruction.</p>
+</div>
 <hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">

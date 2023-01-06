@@ -18,14 +18,18 @@ In a browser, go to [https://jupyter.nersc.gov](https://jupyter.nersc.gov) and l
 ```
 
 
-First, we need to clone the GitHub repository containing all the tutorials by a opening a terminal and executing this command:
+First, we need to clone the GitHub repository containing all the tutorials into the ```$HOME``` directory by a opening a terminal (click on "+" and then "Terminal") and executing this command:
 ```bash
 git clone https://github.com/ptycho/tutorials.git
 ```
 
-TODO: run a setup command
+followed by running this set up command
 
-Now that we have cloned the tutorials and set up the correct environment, we can simply navigate to ```tutorials``` in the file panel on the left and open the [first tutorial](./notebooks/Getting_Started_with_PtyPy/1_the_parameter_tree) from within the ```notebook``` folder.
+```bash
+/global/common/software/ntrain3/ptypy_workshop_setup.sh
+```
+
+Now that we have cloned the tutorials and set up the correct environment, we can simply navigate to ```tutorials``` in the file panel on the left and open the [first tutorial](./notebooks/Getting_Started_with_PtyPy/1_the_parameter_tree) from within the ```notebooks``` folder.
 
 
 ## How to use a Jupyter Notebook
