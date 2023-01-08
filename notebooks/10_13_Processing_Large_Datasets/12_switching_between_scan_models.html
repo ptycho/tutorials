@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="13. Nearfield Ptychography" href="13_nearfield_ptychography.html" />
@@ -436,12 +438,56 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-data">
+   12.1. The data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-the-data">
+   12.2. Loading the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-scan-model">
+   12.3. The scan model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initial-epie-reconstruction">
+   12.4. Initial ePIE reconstruction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#refinement-using-maximum-likelihood-ml-engine">
+   12.5. Refinement using maximum likelihood (ML) engine
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -453,6 +499,39 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-data">
+   12.1. The data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-the-data">
+   12.2. Loading the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-scan-model">
+   12.3. The scan model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initial-epie-reconstruction">
+   12.4. Initial ePIE reconstruction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#refinement-using-maximum-likelihood-ml-engine">
+   12.5. Refinement using maximum likelihood (ML) engine
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -462,7 +541,117 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="switching-between-scan-models">
 <h1><span class="section-number">12. </span>Switching between Scan Models<a class="headerlink" href="#switching-between-scan-models" title="Permalink to this headline">#</a></h1>
-<p><strong>Learning how to switch between different scan models and use this strategy to reconstruct large electron datasets.</strong></p>
+<p><strong>Learning how to switch between different scan models and use this strategy to reconstruct a large electron ptychography datasets.</strong></p>
+<p>In this example, we are going to reconstruct the full graphene data set from ePSIC a subsection of which was already used in <a class="reference internal" href="../06_09_From_Data_to_Reconstruction/7_working_with_electron_data.html"><span class="doc std std-doc">Working With Electron Data</span></a>. The goal is to do a few iterations of ePIE to find a reasonable probe/object
+followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, there are a few incompatibilies between these two engines in PtyPy namely that ePIE requires data to be loaded in a single block whereas ML is fine with smaller block sizes. So, instead of simply <a class="reference internal" href="../06_09_From_Data_to_Reconstruction/8_chaining_multiple_engines.html"><span class="doc std std-doc">chaining the engines</span></a> we can first run ePIE, save the results to a .ptyr file and then load the initial ePIE reconstruction into a separate ML script. This way, we can use different data loading parameters for the two parts of the reconstructions and also make use of the multi-GPU capabilities of the ML engine (ePIE by design needs to run in a single GPU instance).</p>
+<section id="the-data">
+<h2><span class="section-number">12.1. </span>The data<a class="headerlink" href="#the-data" title="Permalink to this headline">#</a></h2>
+<p>At the ePSIC instrument at the Diamond Light Source, raw data is written into HDF5 files. In this example, we are looking at the graphene data stored in <code class="docutils literal notranslate"><span class="pre">&quot;dls_epsic_80kV_graphene/20200130_163208.h5&quot;</span></code> and inspect the relevant entry</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span><span class="o">,</span> <span class="nn">os</span>
+<span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="s2">&quot;dls_epsic_80kV_graphene/20200130_163208.h5&quot;</span>
+<span class="n">path_to_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;data/frames&quot;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The file </span><span class="si">{}</span><span class="s2"> has the following relevant entries: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">* </span><span class="si">{0:&lt;30}</span><span class="s1"> shape = </span><span class="si">{1:}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>for the diffraction intensities</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>The<span class="w"> </span>file<span class="w"> </span>../../data/dls_epsic_80kV_graphene/20200130_163208.h5<span class="w"> </span>has<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>relevant<span class="w"> </span>entries:<span class="w"> </span>
+
+<span class="w">	</span>*<span class="w"> </span>data/frames<span class="w">                    </span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">65025</span>,<span class="w"> </span><span class="m">128</span>,<span class="w"> </span><span class="m">128</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>In addition, we have been provided some meta information (which is also stored in an HDF5 files for more recent data collections at ePSIC), namely</p>
+<ul class="simple">
+<li><p>scan roration: 60 degrees</p></li>
+<li><p>scan step size: 3.71875e-11 m</p></li>
+<li><p>nr. of scan positions: 255 x 255</p></li>
+<li><p>electron energy: 80 kV</p></li>
+<li><p>detector pixelsize: 220 um (4x binning, original frames are 512x512 with 55 um pixelsize)</p></li>
+<li><p>detector distance: 0.1732 m</p></li>
+</ul>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span><span class="o">,</span> <span class="nn">os</span>
+<span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="s2">&quot;dls_epsic_80kV_graphene/20200130_163208.h5&quot;</span>
+<span class="n">path_to_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;data/frames&quot;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The file </span><span class="si">{}</span><span class="s2"> has the following relevant entries: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">* </span><span class="si">{0:&lt;30}</span><span class="s1"> shape = </span><span class="si">{1:}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="loading-the-data">
+<h2><span class="section-number">12.2. </span>Loading the data<a class="headerlink" href="#loading-the-data" title="Permalink to this headline">#</a></h2>
+<p>Since we have only been provided with diffraction intensities and meta information, but no explicit scan positions, we need to use a custom <code class="docutils literal notranslate"><span class="pre">EpsicHdf5Loader</span></code> that has been created specifically for the ePSIC instrument by subclassing the <code class="docutils literal notranslate"><span class="pre">Hdf5Loader</span></code> to make the relevant calculation of e.g. the scan positons based on the given meta information. We first need to import this new PtyScan module</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ptypy</span><span class="o">.</span><span class="n">load_ptyscan_module</span><span class="p">(</span><span class="s2">&quot;epsic_loader&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>specify the loader class</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;EpsicHdf5Loader&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>provide the correct path to the intensities</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;data/frames&quot;</span>
+</pre></div>
+</div>
+<p>provide information about the scan parameters</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">rotation</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">stepsize</span> <span class="o">=</span> <span class="mf">3.71875e-11</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpos</span> <span class="o">=</span> <span class="mi">255</span>
+</pre></div>
+</div>
+<p>and other relevant meta information on the energy and detector distance/psize</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">electron_data</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">psize</span> <span class="o">=</span> <span class="mf">220e-6</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">distance</span> <span class="o">=</span> <span class="mf">0.1732</span>
+</pre></div>
+</div>
+</section>
+<section id="the-scan-model">
+<h2><span class="section-number">12.3. </span>The scan model<a class="headerlink" href="#the-scan-model" title="Permalink to this headline">#</a></h2>
+<p>As the scan model, we should in principle use the <code class="docutils literal notranslate"><span class="pre">GradFull</span></code> model which is preferable for ePIE reconstruction since it does not create the exit wave buffers. However, even though we want to read all the data in a single block of frames, we should still use the <code class="docutils literal notranslate"><span class="pre">BlockGradFull</span></code> model but with <code class="docutils literal notranslate"><span class="pre">frames_per_block</span></code> larger than the total nr. of frames. That is because in their current implementation, the block scan models are more efficient when loading data into PtyPy compare to the regular <code class="docutils literal notranslate"><span class="pre">Full</span></code> models.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make sure bigger than nr. of frames </span>
+<span class="c1"># because of ePIE</span>
+<span class="n">p</span><span class="o">.</span><span class="n">frames_per_block</span> <span class="o">=</span> <span class="mi">100000</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;BlockGradFull&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="initial-epie-reconstruction">
+<h2><span class="section-number">12.4. </span>Initial ePIE reconstruction<a class="headerlink" href="#initial-epie-reconstruction" title="Permalink to this headline">#</a></h2>
+<p>For ePIE, we use the same set of parameters as before with <code class="docutils literal notranslate"><span class="pre">alpha=0.9</span></code>, <code class="docutils literal notranslate"><span class="pre">beta=0.1</span></code> and <code class="docutils literal notranslate"><span class="pre">object_norm_is_global=True</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EPIE_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">object_norm_is_global</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_fourier_support</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">record_local_error</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>resulting in the following initial reconstruction after <span class="math notranslate nohighlight">\(5\)</span> iterations of ePIE</p>
+<p><img alt="" src="../../_images/epsic_recons_epie1.png" /></p>
 <hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -499,7 +688,8 @@ title="Print to PDF"
 
 <span class="c1"># Set io settings (no files saved)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">io</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">home</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="s2">&quot;recons/</span><span class="si">%(run)s</span><span class="s2">_</span><span class="si">%(engine)s</span><span class="s2">_</span><span class="si">%(iterations)04d</span><span class="s2">.ptyr&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
@@ -542,7 +732,7 @@ title="Print to PDF"
 
 <span class="c1"># Data loader</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;EpsicHdf5LoaderFast&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;EpsicHdf5Loader&#39;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mi">2</span>
 
 <span class="c1"># Read diffraction data</span>
@@ -596,14 +786,92 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+</section>
+<section id="refinement-using-maximum-likelihood-ml-engine">
+<h2><span class="section-number">12.5. </span>Refinement using maximum likelihood (ML) engine<a class="headerlink" href="#refinement-using-maximum-likelihood-ml-engine" title="Permalink to this headline">#</a></h2>
+<p>For the second part of the reconstruction, we use the same block scan model (<code class="docutils literal notranslate"><span class="pre">BlockGradFull</span></code>) since ML also does not require any exit wave buffers, but with a smaller block size</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">frames_per_block</span> <span class="o">=</span> <span class="mi">4000</span>
+</pre></div>
+</div>
+<p>We also need to load the previous results of the ePIE reconstruction as a starting guess for probe</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">photons</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;recon&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">recon</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">recon</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="s2">&quot;./recons/dls_epsic_graphene_EPIE_pycuda_0005.ptyr&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">form</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">diversity</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p>and object</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">sample</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;recon&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">recon</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">recon</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="s2">&quot;./recons/dls_epsic_graphene_EPIE_pycuda_0005.ptyr&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">diversity</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p>and provide standard ML engine parameters</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ML_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">195</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">ML_type</span> <span class="o">=</span> <span class="s2">&quot;Gaussian&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">reg_del2</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">reg_del2_amplitude</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">scale_precond</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">scale_probe_object</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">floating_intensities</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Finally, we save the parameter into a config file: <span class="xref myst">./config/dls_epsic_graphene_refine.yaml</span>, write a Python run script</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./ptypy_run_dls_epsic_graphene_refine.py&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">import ptypy</span>
+<span class="s2">ptypy.load_ptyscan_module(&quot;epsic_loader&quot;)</span>
+<span class="s2">ptypy.load_gpu_engines(&quot;cuda&quot;)  </span>
+<span class="s2">p = ptypy.utils.param_from_yaml(&quot;config/dls_epsic_graphene_refine.yaml&quot;)</span>
+<span class="s2">P = ptypy.core.Ptycho(p,level=5)</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and execute the ML refinement in a new terminal using 4 GPUs</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="nv">$HOME</span>/tutorials/notebooks/10_13_Processing_Large_Datasets
+srun<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w"> </span>-c<span class="w"> </span><span class="m">2</span><span class="w"> </span>--gpus-per-task<span class="o">=</span><span class="m">1</span><span class="w"> </span>--gpu-bin<span class="o">=</span>None<span class="w"> </span>python<span class="w"> </span>ptypy_run_dls_epsic_graphene_refine.py
+</pre></div>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">Exercise</p>
+<p>Run the ePSIC graphene ML refinement script in a terminal using 4 GPUs and compare the output against the initial ePIE reconstruction.</p>
+</div>
+<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Add second script that reads from output</span>
-<span class="c1"># Maybe this is a good example of using JSON or YAML file</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./ptypy_run_dls_epsic_graphene_refine.py&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">import ptypy</span>
+<span class="s2">ptypy.load_ptyscan_module(&quot;epsic_loader&quot;)</span>
+<span class="s2">ptypy.load_gpu_engines(&quot;cuda&quot;)  </span>
+<span class="s2">p = ptypy.utils.param_from_yaml(&quot;config/dls_epsic_graphene_refine.yaml&quot;)</span>
+<span class="s2">P = ptypy.core.Ptycho(p,level=5)</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy.utils.plot_client</span> <span class="k">as</span> <span class="nn">pc</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">figure_from_ptyr</span><span class="p">(</span><span class="s2">&quot;./recons/dls_i08_nanogold_DM_pycuda_0200.ptyr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
