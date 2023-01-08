@@ -48,7 +48,7 @@ engines:
   engine:
     name: ML_pycuda
     numiter: 195
-    numiter_contiguous: 1
+    numiter_contiguous: 10
     ML_type: Gaussian
     reg_del2: true
     reg_del2_amplitude: 0.01
