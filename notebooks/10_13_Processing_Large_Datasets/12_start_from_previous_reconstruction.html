@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>12. Switching between Scan Models &#8212; Tutorials</title>
+    <title>Starting From a Previous Reconstruction &#8212; Tutorials</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="13. Nearfield Ptychography" href="13_nearfield_ptychography.html" />
-    <link rel="prev" title="11. Using multiple GPUs" href="11_multi_gpu.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -179,7 +177,7 @@ const thebe_selector_output = ".output, .cell_output"
   Processing Large Datasets
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="10_working_with_large_data.html">
    10. Working With Large Data
@@ -190,14 +188,9 @@ const thebe_selector_output = ".output, .cell_output"
    11. Using multiple GPUs
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   12. Switching between Scan Models
-  </a>
- </li>
  <li class="toctree-l1">
   <a class="reference internal" href="13_nearfield_ptychography.html">
-   13. Nearfield Ptychography
+   12. Nearfield Ptychography
   </a>
  </li>
 </ul>
@@ -209,27 +202,27 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../14_18_Working_with_Messy_Data/14_partial_coherence.html">
-   14. Partial Coherence
+   13. Partial Coherence
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../14_18_Working_with_Messy_Data/15_position_refinement.html">
-   15. Position Refinement
+   14. Position Refinement
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../14_18_Working_with_Messy_Data/16_blank_and_bad_detector_pixels.html">
-   16. Blank and Bad Detector Pixels
+   15. Blank and Bad Detector Pixels
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../14_18_Working_with_Messy_Data/17_missing_detector_frames.html">
-   17. Missing Detector Frames
+   16. Missing Detector Frames
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../14_18_Working_with_Messy_Data/18_phase_wrapping.html">
-   18. Phase Wrapping
+   17. Phase Wrapping
   </a>
  </li>
 </ul>
@@ -241,17 +234,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../21_23_Modifying_Algorithms/21_object_regularisation.html">
-   19. Object regularisation
+   18. Object regularisation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../21_23_Modifying_Algorithms/22_implementing_your_own_engine.html">
-   20. Implementing Your Own Engine
+   19. Implementing Your Own Engine
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../21_23_Modifying_Algorithms/23_implementing_multislice.html">
-   21. A multislice implementation
+   20. A multislice implementation
   </a>
  </li>
 </ul>
@@ -313,7 +306,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=tree/docs/notebooks/10_13_Processing_Large_Datasets/12_switching_between_scan_models.ipynb"
+        <a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=tree/docs/notebooks/10_13_Processing_Large_Datasets/12_start_from_previous_reconstruction.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -373,7 +366,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/10_13_Processing_Large_Datasets/12_switching_between_scan_models.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/10_13_Processing_Large_Datasets/12_start_from_previous_reconstruction.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -401,7 +394,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../_sources/notebooks/10_13_Processing_Large_Datasets/12_switching_between_scan_models.ipynb"
+        <a href="../../_sources/notebooks/10_13_Processing_Large_Datasets/12_start_from_previous_reconstruction.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -462,27 +455,27 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-data">
-   12.1. The data
+   The data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#loading-the-data">
-   12.2. Loading the data
+   Loading the data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-scan-model">
-   12.3. The scan model
+   The scan model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#initial-epie-reconstruction">
-   12.4. Initial ePIE reconstruction
+   Initial ePIE reconstruction
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#refinement-using-maximum-likelihood-ml-engine">
-   12.5. Refinement using maximum likelihood (ML) engine
+   Refinement using maximum likelihood (ML) engine
   </a>
  </li>
 </ul>
@@ -494,7 +487,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Switching between Scan Models</h1>
+                <h1>Starting From a Previous Reconstruction</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -506,27 +499,27 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-data">
-   12.1. The data
+   The data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#loading-the-data">
-   12.2. Loading the data
+   Loading the data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-scan-model">
-   12.3. The scan model
+   The scan model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#initial-epie-reconstruction">
-   12.4. Initial ePIE reconstruction
+   Initial ePIE reconstruction
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#refinement-using-maximum-likelihood-ml-engine">
-   12.5. Refinement using maximum likelihood (ML) engine
+   Refinement using maximum likelihood (ML) engine
   </a>
  </li>
 </ul>
@@ -539,13 +532,13 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="switching-between-scan-models">
-<h1><span class="section-number">12. </span>Switching between Scan Models<a class="headerlink" href="#switching-between-scan-models" title="Permalink to this headline">#</a></h1>
-<p><strong>Learning how to switch between different scan models and use this strategy to reconstruct a large electron ptychography datasets.</strong></p>
+  <section class="tex2jax_ignore mathjax_ignore" id="starting-from-a-previous-reconstruction">
+<h1>Starting From a Previous Reconstruction<a class="headerlink" href="#starting-from-a-previous-reconstruction" title="Permalink to this headline">#</a></h1>
+<p><strong>Learning how to start refinement from an existing reconstruction and use this strategy to reconstruct a large electron ptychography datasets.</strong></p>
 <p>In this example, we are going to reconstruct the full graphene data set from ePSIC a subsection of which was already used in <a class="reference internal" href="../06_09_From_Data_to_Reconstruction/7_working_with_electron_data.html"><span class="doc std std-doc">Working With Electron Data</span></a>. The goal is to do a few iterations of ePIE to find a reasonable probe/object
 followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, there are a few incompatibilies between these two engines in PtyPy namely that ePIE requires data to be loaded in a single block whereas ML is fine with smaller block sizes. So, instead of simply <a class="reference internal" href="../06_09_From_Data_to_Reconstruction/8_chaining_multiple_engines.html"><span class="doc std std-doc">chaining the engines</span></a> we can first run ePIE, save the results to a .ptyr file and then load the initial ePIE reconstruction into a separate ML script. This way, we can use different data loading parameters for the two parts of the reconstructions and also make use of the multi-GPU capabilities of the ML engine (ePIE by design needs to run in a single GPU instance).</p>
 <section id="the-data">
-<h2><span class="section-number">12.1. </span>The data<a class="headerlink" href="#the-data" title="Permalink to this headline">#</a></h2>
+<h2>The data<a class="headerlink" href="#the-data" title="Permalink to this headline">#</a></h2>
 <p>At the ePSIC instrument at the Diamond Light Source, raw data is written into HDF5 files. In this example, we are looking at the graphene data stored in <code class="docutils literal notranslate"><span class="pre">&quot;dls_epsic_80kV_graphene/20200130_163208.h5&quot;</span></code> and inspect the relevant entry</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span><span class="o">,</span> <span class="nn">os</span>
 <span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>
@@ -563,7 +556,7 @@ followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, 
 <span class="w">	</span>*<span class="w"> </span>data/frames<span class="w">                    </span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">65025</span>,<span class="w"> </span><span class="m">128</span>,<span class="w"> </span><span class="m">128</span><span class="o">)</span>
 </pre></div>
 </div>
-<p>In addition, we have been provided some meta information (which is also stored in an HDF5 files for more recent data collections at ePSIC), namely</p>
+<p>In addition, we have been provided with some meta information (which is also stored in an HDF5 files for more recent data collections at ePSIC), namely</p>
 <ul class="simple">
 <li><p>scan roration: 60 degrees</p></li>
 <li><p>scan step size: 3.71875e-11 m</p></li>
@@ -589,7 +582,7 @@ followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, 
 </div>
 </section>
 <section id="loading-the-data">
-<h2><span class="section-number">12.2. </span>Loading the data<a class="headerlink" href="#loading-the-data" title="Permalink to this headline">#</a></h2>
+<h2>Loading the data<a class="headerlink" href="#loading-the-data" title="Permalink to this headline">#</a></h2>
 <p>Since we have only been provided with diffraction intensities and meta information, but no explicit scan positions, we need to use a custom <code class="docutils literal notranslate"><span class="pre">EpsicHdf5Loader</span></code> that has been created specifically for the ePSIC instrument by subclassing the <code class="docutils literal notranslate"><span class="pre">Hdf5Loader</span></code> to make the relevant calculation of e.g. the scan positons based on the given meta information. We first need to import this new PtyScan module</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ptypy</span><span class="o">.</span><span class="n">load_ptyscan_module</span><span class="p">(</span><span class="s2">&quot;epsic_loader&quot;</span><span class="p">)</span>
 </pre></div>
@@ -621,7 +614,7 @@ followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, 
 </div>
 </section>
 <section id="the-scan-model">
-<h2><span class="section-number">12.3. </span>The scan model<a class="headerlink" href="#the-scan-model" title="Permalink to this headline">#</a></h2>
+<h2>The scan model<a class="headerlink" href="#the-scan-model" title="Permalink to this headline">#</a></h2>
 <p>As the scan model, we should in principle use the <code class="docutils literal notranslate"><span class="pre">GradFull</span></code> model which is preferable for ePIE reconstruction since it does not create the exit wave buffers. However, even though we want to read all the data in a single block of frames, we should still use the <code class="docutils literal notranslate"><span class="pre">BlockGradFull</span></code> model but with <code class="docutils literal notranslate"><span class="pre">frames_per_block</span></code> larger than the total nr. of frames. That is because in their current implementation, the block scan models are more efficient when loading data into PtyPy compare to the regular <code class="docutils literal notranslate"><span class="pre">Full</span></code> models.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make sure bigger than nr. of frames </span>
 <span class="c1"># because of ePIE</span>
@@ -634,7 +627,7 @@ followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, 
 </div>
 </section>
 <section id="initial-epie-reconstruction">
-<h2><span class="section-number">12.4. </span>Initial ePIE reconstruction<a class="headerlink" href="#initial-epie-reconstruction" title="Permalink to this headline">#</a></h2>
+<h2>Initial ePIE reconstruction<a class="headerlink" href="#initial-epie-reconstruction" title="Permalink to this headline">#</a></h2>
 <p>For ePIE, we use the same set of parameters as before with <code class="docutils literal notranslate"><span class="pre">alpha=0.9</span></code>, <code class="docutils literal notranslate"><span class="pre">beta=0.1</span></code> and <code class="docutils literal notranslate"><span class="pre">object_norm_is_global=True</span></code></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
@@ -727,7 +720,7 @@ followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, 
 
 <span class="c1"># Coherence parameters (modes)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">coherence</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">coherence</span><span class="o">.</span><span class="n">num_probe_modes</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">coherence</span><span class="o">.</span><span class="n">num_probe_modes</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">coherence</span><span class="o">.</span><span class="n">num_object_modes</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="c1"># Data loader</span>
@@ -788,12 +781,12 @@ followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, 
 </div>
 </section>
 <section id="refinement-using-maximum-likelihood-ml-engine">
-<h2><span class="section-number">12.5. </span>Refinement using maximum likelihood (ML) engine<a class="headerlink" href="#refinement-using-maximum-likelihood-ml-engine" title="Permalink to this headline">#</a></h2>
+<h2>Refinement using maximum likelihood (ML) engine<a class="headerlink" href="#refinement-using-maximum-likelihood-ml-engine" title="Permalink to this headline">#</a></h2>
 <p>For the second part of the reconstruction, we use the same block scan model (<code class="docutils literal notranslate"><span class="pre">BlockGradFull</span></code>) since ML also does not require any exit wave buffers, but with a smaller block size</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">frames_per_block</span> <span class="o">=</span> <span class="mi">4000</span>
 </pre></div>
 </div>
-<p>We also need to load the previous results of the ePIE reconstruction as a starting guess for probe</p>
+<p>to actually load the data in blocks. We also need to load the previous results of the ePIE reconstruction as a starting guess for probe</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">photons</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;recon&quot;</span>
@@ -821,9 +814,8 @@ followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, 
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">ML_type</span> <span class="o">=</span> <span class="s2">&quot;Gaussian&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">reg_del2</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">reg_del2_amplitude</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">reg_del2_amplitude</span> <span class="o">=</span> <span class="mf">0.001</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">scale_precond</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">scale_probe_object</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">floating_intensities</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
 </pre></div>
@@ -866,10 +858,23 @@ srun<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><s
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy.utils.plot_client</span> <span class="k">as</span> <span class="nn">pc</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">figure_from_ptyr</span><span class="p">(</span><span class="s2">&quot;./recons/dls_i08_nanogold_DM_pycuda_0200.ptyr&quot;</span><span class="p">)</span>
+<span class="n">fig1</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">figure_from_ptycho</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+<span class="n">fig1</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;./recons_after_epie.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig2</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">figure_from_ptyr</span><span class="p">(</span><span class="s2">&quot;./recons/dls_epsic_graphene_ML_pycuda_0100.ptyr&quot;</span><span class="p">)</span>
+<span class="n">fig2</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;./recons_after_epie_ml.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Tip</p>
+<p>Save the figures in a PNG file with high resolution (dpi) and open via file browser to inspect features in different reconstructions.</p>
 </div>
 </section>
 </section>
@@ -901,20 +906,6 @@ srun<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><s
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="11_multi_gpu.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">11. </span>Using multiple GPUs</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="13_nearfield_ptychography.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">13. </span>Nearfield Ptychography</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>
