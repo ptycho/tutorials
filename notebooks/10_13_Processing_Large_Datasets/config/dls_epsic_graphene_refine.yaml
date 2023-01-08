@@ -28,7 +28,7 @@ scans:
       diversity: null
       process: null
     coherence:
-      num_probe_modes: 1
+      num_probe_modes: 3
       num_object_modes: 1
     data:
       name: EpsicHdf5Loader
@@ -47,12 +47,11 @@ scans:
 engines:
   engine:
     name: ML_pycuda
-    numiter: 195
+    numiter: 100
     numiter_contiguous: 10
     ML_type: Gaussian
     reg_del2: true
-    reg_del2_amplitude: 0.01
+    reg_del2_amplitude: 0.001
     scale_precond: true
-    scale_probe_object: 1
     floating_intensities: false
     probe_update_start: 0
