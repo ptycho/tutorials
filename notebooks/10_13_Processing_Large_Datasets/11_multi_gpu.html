@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>20. Implementing Your Own Engine &#8212; Tutorials</title>
+    <title>11. Using multiple GPUs &#8212; Tutorials</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="21. A multislice implementation" href="23_implementing_multislice.html" />
-    <link rel="prev" title="19. Object regularisation" href="21_object_regularisation.html" />
+    <link rel="next" title="12. Switching between Scan Models" href="12_switching_between_scan_models.html" />
+    <link rel="prev" title="10. Working With Large Data" href="10_working_with_large_data.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -177,24 +177,24 @@ const thebe_selector_output = ".output, .cell_output"
   Processing Large Datasets
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../10_13_Processing_Large_Datasets/10_working_with_large_data.html">
+  <a class="reference internal" href="10_working_with_large_data.html">
    10. Working With Large Data
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../10_13_Processing_Large_Datasets/11_multi_gpu.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    11. Using multiple GPUs
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../10_13_Processing_Large_Datasets/12_switching_between_scan_models.html">
+  <a class="reference internal" href="12_switching_between_scan_models.html">
    12. Switching between Scan Models
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../10_13_Processing_Large_Datasets/13_nearfield_ptychography.html">
+  <a class="reference internal" href="13_nearfield_ptychography.html">
    13. Nearfield Ptychography
   </a>
  </li>
@@ -236,19 +236,19 @@ const thebe_selector_output = ".output, .cell_output"
   Modifying Algorithms
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="21_object_regularisation.html">
+  <a class="reference internal" href="../21_23_Modifying_Algorithms/21_object_regularisation.html">
    19. Object regularisation
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../21_23_Modifying_Algorithms/22_implementing_your_own_engine.html">
    20. Implementing Your Own Engine
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="23_implementing_multislice.html">
+  <a class="reference internal" href="../21_23_Modifying_Algorithms/23_implementing_multislice.html">
    21. A multislice implementation
   </a>
  </li>
@@ -311,7 +311,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=tree/docs/notebooks/21_23_Modifying_Algorithms/22_implementing_your_own_engine.ipynb"
+        <a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=tree/docs/notebooks/10_13_Processing_Large_Datasets/11_multi_gpu.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -371,7 +371,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/21_23_Modifying_Algorithms/22_implementing_your_own_engine.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/10_13_Processing_Large_Datasets/11_multi_gpu.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -399,7 +399,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../_sources/notebooks/21_23_Modifying_Algorithms/22_implementing_your_own_engine.ipynb"
+        <a href="../../_sources/notebooks/10_13_Processing_Large_Datasets/11_multi_gpu.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -436,23 +436,80 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#making-a-python-run-script-for-ptypy">
+   11.1. Making a Python run script for PtyPy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#executing-script-in-terminal-on-jupyterhub">
+   11.2. Executing script in terminal on JupyterHub
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#display-reconstruction-from-ptyr-file">
+   11.3. Display reconstruction from ptyr file
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Implementing Your Own Engine</h1>
+                <h1>Using multiple GPUs</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#making-a-python-run-script-for-ptypy">
+   11.1. Making a Python run script for PtyPy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#executing-script-in-terminal-on-jupyterhub">
+   11.2. Executing script in terminal on JupyterHub
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#display-reconstruction-from-ptyr-file">
+   11.3. Display reconstruction from ptyr file
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -460,9 +517,81 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="implementing-your-own-engine">
-<h1><span class="section-number">20. </span>Implementing Your Own Engine<a class="headerlink" href="#implementing-your-own-engine" title="Permalink to this headline">#</a></h1>
-<p>rPIE</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="using-multiple-gpus">
+<h1><span class="section-number">11. </span>Using multiple GPUs<a class="headerlink" href="#using-multiple-gpus" title="Permalink to this headline">#</a></h1>
+<p><strong>Learning how to make use of the multi-GPU capabilities in PtyPy.</strong>
+All GPU-accelerated examples so far were using only a single GPU working on the reconstructions, but PtyPy supports multi-GPU execution for all its engines via MPI. Unforuntately, this is not compatible with Jupyter notebooks, but we can instead use the shell terminal provided within JupytHub.</p>
+<div class="tip admonition">
+<p class="admonition-title">Tip</p>
+<p>When running PtyPy with a Python script in a compute environment that uses OpenMPI, e.g. as part of a cluster job, the same multi-GPU capabilites of engines such as DM, RAAR or ML can be achieved with <code>mpirun -n 4 python ptypy_example.py</code></p>
+</div>
+<section id="making-a-python-run-script-for-ptypy">
+<h2><span class="section-number">11.1. </span>Making a Python run script for PtyPy<a class="headerlink" href="#making-a-python-run-script-for-ptypy" title="Permalink to this headline">#</a></h2>
+<p>Revisiting the earlier example on using <span class="xref myst">JSON/YAML Config Files</span> we have saved the parameter tree from the previous example on <a class="reference internal" href="10_working_with_large_data.html"><span class="doc std std-doc">Working With Large Data</span></a> into a config file named <span class="xref myst">./config/dls_i08_nanogold_spiral.yml</span> making a few changes, i.e. switching to <code class="docutils literal notranslate"><span class="pre">verbose_level=info</span></code> and providing <code class="docutils literal notranslate"><span class="pre">p.io.rfile</span></code> for saving the output of the reconstruction. We can then generate a simple Python script</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./ptypy_run_dls_i08_nanogold.py&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">import ptypy</span>
+<span class="s2">ptypy.load_ptyscan_module(&quot;hdf5_loader&quot;)</span>
+<span class="s2">ptypy.load_gpu_engines(&quot;cuda&quot;)  </span>
+<span class="s2">p = ptypy.utils.param_from_yaml(&quot;config/dls_i08_nanogold_spiral.yaml&quot;)</span>
+<span class="s2">P = ptypy.core.Ptycho(p,level=5)</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which imports the relevant PtyScan and GPU acceleration modules, loads the parameter tree and runs the reconstruction.</p>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./ptypy_run_dls_i08_nanogold.py&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">import ptypy</span>
+<span class="s2">ptypy.load_ptyscan_module(&quot;hdf5_loader&quot;)</span>
+<span class="s2">ptypy.load_gpu_engines(&quot;cuda&quot;)  </span>
+<span class="s2">p = ptypy.utils.param_from_yaml(&quot;config/dls_i08_nanogold_spiral.yaml&quot;)</span>
+<span class="s2">P = ptypy.core.Ptycho(p,level=5)</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="executing-script-in-terminal-on-jupyterhub">
+<h2><span class="section-number">11.2. </span>Executing script in terminal on JupyterHub<a class="headerlink" href="#executing-script-in-terminal-on-jupyterhub" title="Permalink to this headline">#</a></h2>
+<p>Now, we need to open a new terminal (click blue “+” in top left corner of JupyterHub and then “Terminal”) which should look something like this</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">PtyPy</span><span class="p">)</span> <span class="n">benedikt</span><span class="nd">@nid001848</span><span class="p">:</span><span class="o">/</span><span class="k">global</span><span class="o">/</span><span class="n">u2</span><span class="o">/</span><span class="n">b</span><span class="o">/</span><span class="n">benedikt</span><span class="o">&gt;</span> 
+</pre></div>
+</div>
+<p>with the (PtyPy) environment already loaded. We can then navigate to the folder for this example</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="nv">$HOME</span>/tutorials/notebooks/10_13_Processing_Large_Datasets
+</pre></div>
+</div>
+<p>and execute a multi-GPU reconstruction via <code class="docutils literal notranslate"><span class="pre">srun</span></code> using all 4 GPUs that is available on a Perlmutter node.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>srun<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w"> </span>-c<span class="w"> </span><span class="m">2</span><span class="w"> </span>--gpus-per-task<span class="o">=</span><span class="m">1</span><span class="w"> </span>--gpu-bin<span class="o">=</span>None<span class="w"> </span>python<span class="w"> </span>ptypy_run_dls_i08_nanogold.py
+</pre></div>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">Exercise</p>
+<p>Run the I08 nanogold example in a terminal using 4 GPUs and compare the speed against the previous example from the Jupyter notebook which was using just a single GPU.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="display-reconstruction-from-ptyr-file">
+<h2><span class="section-number">11.3. </span>Display reconstruction from ptyr file<a class="headerlink" href="#display-reconstruction-from-ptyr-file" title="Permalink to this headline">#</a></h2>
+<p>Once the multi-GPU reconstruction has finished, we can switch back to this notebook and display the final output using</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy.utils.plot_client</span> <span class="k">as</span> <span class="nn">pc</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">figure_from_ptyr</span><span class="p">(</span><span class="s2">&quot;./recons/dls_i08_nanogold_DM_pycuda_0200.ptyr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy.utils.plot_client</span> <span class="k">as</span> <span class="nn">pc</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">figure_from_ptyr</span><span class="p">(</span><span class="s2">&quot;./recons/dls_i08_nanogold_DM_pycuda_0200.ptyr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -474,16 +603,16 @@ title="Print to PDF"
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "ptypy_pycuda"
         },
         kernelOptions: {
-            kernelName: "conda-env-DLS_Conda-python3.10-kernel.json",
-            path: "./notebooks/21_23_Modifying_Algorithms"
+            kernelName: "ptypy_pycuda",
+            path: "./notebooks/10_13_Processing_Large_Datasets"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'conda-env-DLS_Conda-python3.10-kernel.json'</script>
+    <script>kernelName = 'ptypy_pycuda'</script>
 
               </div>
               
@@ -492,17 +621,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="21_object_regularisation.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="10_working_with_large_data.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">19. </span>Object regularisation</p>
+            <p class="prev-next-title"><span class="section-number">10. </span>Working With Large Data</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="23_implementing_multislice.html" title="next page">
+    <a class='right-next' id="next-link" href="12_switching_between_scan_models.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">21. </span>A multislice implementation</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Switching between Scan Models</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
