@@ -1,0 +1,58 @@
+verbose_level: info
+run: dls_epsic_graphene
+frames_per_block: 4000
+io:
+  home: ./
+  rfile: recons/%(run)s_%(engine)s_%(iterations)04d.ptyr
+  autosave:
+    active: false
+  interaction:
+    active: false
+  autoplot:
+    active: false
+scans:
+  scan_00:
+    name: BlockGradFull
+    illumination:
+      photons: null
+      model: recon
+      recon:
+        rfile: ./recons/dls_epsic_graphene_EPIE_pycuda_0005.ptyr
+      aperture:
+        form: null
+      diversity: null
+    sample:
+      model: recon
+      recon:
+        rfile: ./recons/dls_epsic_graphene_EPIE_pycuda_0005.ptyr
+      diversity: null
+      process: null
+    coherence:
+      num_probe_modes: 1
+      num_object_modes: 1
+    data:
+      name: EpsicHdf5Loader
+      orientation: 2
+      intensities:
+        file: ../../data/dls_epsic_80kV_graphene/20200130_163208.h5
+        key: data/frames
+      rotation: 60
+      stepsize: 3.71875e-11
+      numpos: 255
+      electron_data: true
+      psize: 0.00022
+      energy: 80
+      distance: 0.1732
+      auto_center: true
+engines:
+  engine:
+    name: ML_pycuda
+    numiter: 195
+    numiter_contiguous: 1
+    ML_type: Gaussian
+    reg_del2: true
+    reg_del2_amplitude: 0.01
+    scale_precond: true
+    scale_probe_object: 1
+    floating_intensities: false
+    probe_update_start: 0
