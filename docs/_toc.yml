@@ -23,7 +23,7 @@ parts:
   chapters:
   - file: notebooks/10_13_Processing_Large_Datasets/10_working_with_large_data
   - file: notebooks/10_13_Processing_Large_Datasets/11_multi_gpu
-  - file: notebooks/10_13_Processing_Large_Datasets/12_starting_from_previous_reconstruction
+  - file: notebooks/10_13_Processing_Large_Datasets/12_start_from_previous_reconstruction
   - file: notebooks/10_13_Processing_Large_Datasets/13_nearfield_ptychography
 - caption: Working with Messy Data
   numbered: true
