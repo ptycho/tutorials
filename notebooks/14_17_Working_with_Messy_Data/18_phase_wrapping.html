@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>21. A multislice implementation &#8212; Tutorials</title>
+    <title>Phase Wrapping &#8212; Tutorials</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,7 +52,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="20. Implementing Your Own Engine" href="22_implementing_your_own_engine.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -205,50 +204,35 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../14_18_Working_with_Messy_Data/14_partial_coherence.html">
+  <a class="reference internal" href="14_partial_coherence.html">
    14. Partial Coherence
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../14_18_Working_with_Messy_Data/15_position_refinement.html">
+  <a class="reference internal" href="15_position_refinement.html">
    15. Position Refinement
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../14_18_Working_with_Messy_Data/16_blank_and_bad_detector_pixels.html">
+  <a class="reference internal" href="16_blank_and_bad_detector_pixels.html">
    16. Blank and Bad Detector Pixels
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../14_18_Working_with_Messy_Data/17_missing_detector_frames.html">
+  <a class="reference internal" href="17_missing_detector_frames.html">
    17. Missing Detector Frames
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../14_18_Working_with_Messy_Data/18_phase_wrapping.html">
-   18. Phase Wrapping
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Modifying Algorithms
+  Advanced Topcs
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="21_object_regularisation.html">
-   19. Object regularisation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="22_implementing_your_own_engine.html">
-   20. Implementing Your Own Engine
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   21. A multislice implementation
+  <a class="reference internal" href="../18_20_Advanced_Topics/18_object_regularisation.html">
+   18. Object regularisation
   </a>
  </li>
 </ul>
@@ -310,7 +294,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=tree/docs/notebooks/21_23_Modifying_Algorithms/23_implementing_multislice.ipynb"
+        <a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=tree/docs/notebooks/14_17_Working_with_Messy_Data/18_phase_wrapping.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -370,7 +354,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/21_23_Modifying_Algorithms/23_implementing_multislice.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/14_17_Working_with_Messy_Data/18_phase_wrapping.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -398,7 +382,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../_sources/notebooks/21_23_Modifying_Algorithms/23_implementing_multislice.ipynb"
+        <a href="../../_sources/notebooks/14_17_Working_with_Messy_Data/18_phase_wrapping.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -447,7 +431,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>A multislice implementation</h1>
+                <h1>Phase Wrapping</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -459,8 +443,17 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="a-multislice-implementation">
-<h1><span class="section-number">21. </span>A multislice implementation<a class="headerlink" href="#a-multislice-implementation" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="phase-wrapping">
+<h1>Phase Wrapping<a class="headerlink" href="#phase-wrapping" title="Permalink to this headline">#</a></h1>
+<p><strong>Learning about phase wrapping, why it occurs and how to correct for it.</strong></p>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use nearfield? or butterfly?</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -476,7 +469,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./notebooks/21_23_Modifying_Algorithms"
+            path: "./notebooks/14_17_Working_with_Messy_Data"
         },
         predefinedOutput: true
     }
@@ -490,13 +483,6 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="22_implementing_your_own_engine.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">20. </span>Implementing Your Own Engine</p>
-        </div>
-    </a>
 </div>
             </footer>
         </div>
