@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="14. Partial Coherence" href="../14_18_Working_with_Messy_Data/14_partial_coherence.html" />
@@ -436,12 +438,56 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-data">
+   13.1. The data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-the-data">
+   13.2. Loading the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-scan-model">
+   13.3. The scan model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initial-probe">
+   13.4. Initial probe
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reconstruction-engine">
+   13.5. Reconstruction engine
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -453,6 +499,39 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-data">
+   13.1. The data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-the-data">
+   13.2. Loading the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-scan-model">
+   13.3. The scan model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initial-probe">
+   13.4. Initial probe
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reconstruction-engine">
+   13.5. Reconstruction engine
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -463,6 +542,99 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="nearfield-ptychography">
 <h1><span class="section-number">13. </span>Nearfield Ptychography<a class="headerlink" href="#nearfield-ptychography" title="Permalink to this headline">#</a></h1>
 <p><strong>Learning how to reconstruct a nearfield ptychography dataset with PtyPy.</strong></p>
+<p>All examples so far were based on farfield ptychography, but some users might be interested to reconstruct data from a nearfield ptychography experiment. In this example, we are going to use data that was published in this article about <a class="reference external" href="http://dx.doi.org/10.1103/PhysRevApplied.14.064078">Phase-Vortex Removal for Quantitative X-Ray Nanotomography with Near-Field Ptychography</a> and has kindly been provided by the authors to be used in this tutorial.</p>
+<section id="the-data">
+<h2><span class="section-number">13.1. </span>The data<a class="headerlink" href="#the-data" title="Permalink to this headline">#</a></h2>
+<p>The sample used for this nearfield ptychography experiment is made of Al and Ni particles inside a glass capillary and the data was collected at the ID16 instrument at the ESRF. The raw data is saved in an HDF5 file with the following entries</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">	</span>*<span class="w"> </span>data<span class="w">                           </span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">17</span>,<span class="w"> </span><span class="m">2048</span>,<span class="w"> </span><span class="m">2048</span><span class="o">)</span>
+<span class="w">	</span>*<span class="w"> </span>posx<span class="w">                           </span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">17</span>,<span class="o">)</span>
+<span class="w">	</span>*<span class="w"> </span>posy<span class="w">                           </span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">17</span>,<span class="o">)</span>
+</pre></div>
+</div>
+<p>showing that we have <span class="math notranslate nohighlight">\(17\)</span> nearfield diffraction images of size <span class="math notranslate nohighlight">\(2048x2048\)</span>.</p>
+</section>
+<section id="loading-the-data">
+<h2><span class="section-number">13.2. </span>Loading the data<a class="headerlink" href="#loading-the-data" title="Permalink to this headline">#</a></h2>
+<p>We can use the <code class="docutils literal notranslate"><span class="pre">Hdf5Loader</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Hdf5Loader&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p>to load the intensities</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;data&#39;</span>
+</pre></div>
+</div>
+<p>and scan positions</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_key</span> <span class="o">=</span> <span class="s1">&#39;posy&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_multiplier</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_key</span> <span class="o">=</span> <span class="s1">&#39;posx&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_multiplier</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>We also need to specify some meta information</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">auto_center</span> <span class="o">=</span> <span class="kc">False</span>  
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">psize</span> <span class="o">=</span> <span class="mf">50.705e-9</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">distance</span> <span class="o">=</span> <span class="mf">0.019</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="mf">17.05</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>Nearfield ptychography experiments are usually performed in cone-beam geomtery and therefore the estimate the detector distance needs to be adjusted such that it can be used within parallel geometry models, see this <a href url="https://doi.org/10.1038/srep01927">article</a> for more information.</p>
+</div>
+</section>
+<section id="the-scan-model">
+<h2><span class="section-number">13.3. </span>The scan model<a class="headerlink" href="#the-scan-model" title="Permalink to this headline">#</a></h2>
+<p>Since we are only a few frames, it is reasonable to use the <code class="docutils literal notranslate"><span class="pre">&quot;Full&quot;</span></code> scan model, but we need to switch <code class="docutils literal notranslate"><span class="pre">propagation</span></code> to <code class="docutils literal notranslate"><span class="pre">nearfield</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Full&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">propagation</span> <span class="o">=</span> <span class="s2">&quot;nearfield&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="initial-probe">
+<h2><span class="section-number">13.4. </span>Initial probe<a class="headerlink" href="#initial-probe" title="Permalink to this headline">#</a></h2>
+<p>For a nearfield ptychography reconstruction, the best starting guess for the illumination would be a flatfield (beam on but without sample) back-propagated into the sample plane. If there is no flatfield available, it is also reasonable to simply average over all raw data frames and back-propagate the result into the sample plane. This can be achieved by choosing the <code class="docutils literal notranslate"><span class="pre">&quot;stxm&quot;</span></code> option the <code class="docutils literal notranslate"><span class="pre">illumination.model</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;stxm&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</section>
+<section id="reconstruction-engine">
+<h2><span class="section-number">13.5. </span>Reconstruction engine<a class="headerlink" href="#reconstruction-engine" title="Permalink to this headline">#</a></h2>
+<p>For the reconstruction, we have chosen a combination of DM followed by ML refinement with the following set of parameters</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">DM</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">DM</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;DM_pycuda&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">DM</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">DM</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">DM</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">DM</span><span class="o">.</span><span class="n">clip_object</span> <span class="o">=</span> <span class="p">(</span><span class="mf">.2</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">DM</span><span class="o">.</span><span class="n">fourier_power_bound</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">DM</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;ML_pycuda&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">ML_type</span> <span class="o">=</span> <span class="s1">&#39;Gaussian&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">floating_intensities</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">reg_del2</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">reg_del2_amplitude</span> <span class="o">=</span> <span class="mf">0.005</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">scale_precond</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>resulting in the following reconstruction of the AlNi sample</p>
+<p><img alt="" src="../../_images/nearfield_recons_dm_ml.png" /></p>
 <hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -546,10 +718,8 @@ title="Print to PDF"
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_key</span> <span class="o">=</span> <span class="s1">&#39;posx&#39;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_multiplier</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">save</span> <span class="o">=</span> <span class="kc">None</span>   
+<span class="c1"># Read meta information</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">auto_center</span> <span class="o">=</span> <span class="kc">False</span>  
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">load_parallel</span> <span class="o">=</span> <span class="s1">&#39;data&#39;</span> 
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="s1">&#39;fftshift&#39;</span> 
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">psize</span> <span class="o">=</span> <span class="mf">50.705e-9</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">distance</span> <span class="o">=</span> <span class="mf">0.019</span> 
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="mf">17.05</span>
@@ -558,7 +728,7 @@ title="Print to PDF"
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">DM</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">DM</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;DM_pycuda&#39;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">DM</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">DM</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">500</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">DM</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">DM</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">DM</span><span class="o">.</span><span class="n">clip_object</span> <span class="o">=</span> <span class="p">(</span><span class="mf">.2</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)</span>
@@ -567,11 +737,11 @@ title="Print to PDF"
 
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;ML_pycuda&#39;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">500</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">ML_type</span> <span class="o">=</span> <span class="s1">&#39;Gaussian&#39;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">floating_intensities</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">reg_del2</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">reg_del2_amplitude</span> <span class="o">=</span> <span class="mf">0.005</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">ML</span><span class="o">.</span><span class="n">scale_precond</span> <span class="o">=</span> <span class="kc">False</span>
@@ -583,6 +753,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
