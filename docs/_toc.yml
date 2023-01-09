@@ -28,21 +28,20 @@ parts:
 - caption: Working with Messy Data
   numbered: true
   chapters:
-  - file: notebooks/14_18_Working_with_Messy_Data/14_partial_coherence
-  - file: notebooks/14_18_Working_with_Messy_Data/15_position_refinement
-  - file: notebooks/14_18_Working_with_Messy_Data/16_blank_and_bad_detector_pixels
-  - file: notebooks/14_18_Working_with_Messy_Data/17_missing_detector_frames
-  - file: notebooks/14_18_Working_with_Messy_Data/18_phase_wrapping
-# - caption: Advanced Topcs
-#   numbered: true
-#   chapters:
-#   - file: notebooks/Advanced_Topics/19_live_visualisation
-#   - file: notebooks/Advanced_Topics/20_simulating_data
-- caption: Modifying Algorithms
+  - file: notebooks/14_17_Working_with_Messy_Data/14_partial_coherence
+  - file: notebooks/14_17_Working_with_Messy_Data/15_position_refinement
+  - file: notebooks/14_17_Working_with_Messy_Data/16_blank_and_bad_detector_pixels
+  - file: notebooks/14_17_Working_with_Messy_Data/17_missing_detector_frames
+- caption: Advanced Topcs
   numbered: true
   chapters:
-  - file: notebooks/21_23_Modifying_Algorithms/21_object_regularisation
-  - file: notebooks/21_23_Modifying_Algorithms/22_implementing_your_own_engine
-  - file: notebooks/21_23_Modifying_Algorithms/23_implementing_multislice
+  - file: notebooks/18_20_Advanced_Topics/18_object_regularisation
+  - file: notebooks/18_20_Advanced_Topics/19_live_visualisation
+  - file: notebooks/18_20_Advanced_Topics/20_simulating_data
+# - caption: Modifying Algorithms
+#   numbered: true
+#   chapters:
+#   - file: notebooks/21_23_Modifying_Algorithms/22_implementing_your_own_engine
+#   - file: notebooks/21_23_Modifying_Algorithms/23_implementing_multislice
 
 
