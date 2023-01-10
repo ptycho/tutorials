@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3. Input/Output Parameters &#8212; Tutorials</title>
+    <title>19. Live visualisation &#8212; Tutorials</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4. Scan Models" href="4_scan_models.html" />
-    <link rel="prev" title="2. JSON/YAML Config Files" href="2_yaml_json_config.html" />
+    <link rel="next" title="20. Simulating Data" href="20_simulating_data.html" />
+    <link rel="prev" title="18. Object regularisation" href="18_object_regularisation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -118,29 +118,29 @@ const thebe_selector_output = ".output, .cell_output"
   Getting Started with PtyPy
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="1_the_parameter_tree.html">
+  <a class="reference internal" href="../01_05_Getting_Started_with_PtyPy/1_the_parameter_tree.html">
    1. The Parameter Tree
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="2_yaml_json_config.html">
+  <a class="reference internal" href="../01_05_Getting_Started_with_PtyPy/2_yaml_json_config.html">
    2. JSON/YAML Config Files
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01_05_Getting_Started_with_PtyPy/3_input_output.html">
    3. Input/Output Parameters
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="4_scan_models.html">
+  <a class="reference internal" href="../01_05_Getting_Started_with_PtyPy/4_scan_models.html">
    4. Scan Models
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="5_reconstruction_engines.html">
+  <a class="reference internal" href="../01_05_Getting_Started_with_PtyPy/5_reconstruction_engines.html">
    5. Reconstruction Engines
   </a>
  </li>
@@ -231,19 +231,19 @@ const thebe_selector_output = ".output, .cell_output"
   Advanced Topcs
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../18_20_Advanced_Topics/18_object_regularisation.html">
+  <a class="reference internal" href="18_object_regularisation.html">
    18. Object regularisation
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../18_20_Advanced_Topics/19_live_visualisation.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    19. Live visualisation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../18_20_Advanced_Topics/20_simulating_data.html">
+  <a class="reference internal" href="20_simulating_data.html">
    20. Simulating Data
   </a>
  </li>
@@ -306,7 +306,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=tree/docs/notebooks/01_05_Getting_Started_with_PtyPy/3_input_output.ipynb"
+        <a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=tree/docs/notebooks/18_20_Advanced_Topics/19_live_visualisation.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -366,7 +366,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/01_05_Getting_Started_with_PtyPy/3_input_output.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/18_20_Advanced_Topics/19_live_visualisation.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -394,7 +394,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../_sources/notebooks/01_05_Getting_Started_with_PtyPy/3_input_output.ipynb"
+        <a href="../../_sources/notebooks/18_20_Advanced_Topics/19_live_visualisation.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -431,70 +431,23 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#live-plotting">
-   3.1. Live-plotting
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#saving-intermediates-to-file">
-   3.2. Saving intermediates to file
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Input/Output Parameters</h1>
+                <h1>Live visualisation</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#live-plotting">
-   3.1. Live-plotting
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#saving-intermediates-to-file">
-   3.2. Saving intermediates to file
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -502,95 +455,36 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="input-output-parameters">
-<h1><span class="section-number">3. </span>Input/Output Parameters<a class="headerlink" href="#input-output-parameters" title="Permalink to this headline">#</a></h1>
-<p><strong>Learning more about the <code class="docutils literal notranslate"><span class="pre">io</span></code> section of the parameter tree - how to save the final result and intermediates into <code class="docutils literal notranslate"><span class="pre">.ptyr</span></code> files, and how to use live plotting with Jupyter notebooks.</strong></p>
-<p>In the <code class="docutils literal notranslate"><span class="pre">p.io</span></code> section of the parameter tree we can specify where we would like our output to be written to. First, we can set a root directory for all further input/output operations, e.g. “/tmp”</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">home</span> <span class="o">=</span> <span class="s2">&quot;/tmp&quot;</span>
-</pre></div>
-</div>
-<p>PtyPy saves its results into <code class="docutils literal notranslate"><span class="pre">.ptyr</span></code> files which are basically <a class="reference external" href="https://docs.hdfgroup.org/hdf5/develop/">HDF5</a> files and can therefore be inspected by any software/library that supports the HDF5 format, e.g. <a class="reference external" href="https://docs.h5py.org/en/stable/">h5py</a>. We can now specify that the main output file should be placed in a subfolder <code class="docutils literal notranslate"><span class="pre">recon</span></code>  relative to the root directory</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span>  <span class="s2">&quot;recons/</span><span class="si">%(run)s</span><span class="s2">_</span><span class="si">%(engine)s</span><span class="s2">_</span><span class="si">%(iterations)04d</span><span class="s2">.ptyr&quot;</span>
-</pre></div>
-</div>
-<p>where <code class="docutils literal notranslate"><span class="pre">%(run)s</span></code> is dynamically replaced by the string defined in <code class="docutils literal notranslate"><span class="pre">p.run</span></code>, <code class="docutils literal notranslate"><span class="pre">%(engine)s</span></code> by the name of the engine used for the reconstructions and <code class="docutils literal notranslate"><span class="pre">%(iterations)04d</span></code> by the total number of iterations at the end formatted as a 4-digit integer.</p>
-<section id="live-plotting">
-<h2><span class="section-number">3.1. </span>Live-plotting<a class="headerlink" href="#live-plotting" title="Permalink to this headline">#</a></h2>
-<p>And finally, PtyPy has live-viewing capabilities that are controlled with <code class="docutils literal notranslate"><span class="pre">p.io.interaction</span></code> and <code class="docutils literal notranslate"><span class="pre">p.io.autoplot</span></code>. This feature has mostly been designed to run in a threaded mode where the plotting process is separate from the main processing thread. This server-client setup can also be used in situations where the plotting client is running on a different machine than the reconstruction (server), see <span class="xref myst">Advanced live visualisation</span> for more details. However, since we are working with Jupyter notebooks we won’t need any threading and can do all the plotting inside the notebook using matlotlib’s inline functionality by setting the following parameters</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">active</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">threaded</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="s2">&quot;jupyter&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mi">10</span>
-</pre></div>
-</div>
-<p>which will display the current status of the reconstruction after every block of iterations specified by <code class="docutils literal notranslate"><span class="pre">p.io.autoplot.interval</span></code>.</p>
-<div class="note admonition">
-<p class="admonition-title">Note</p>
-<p>Live-plotting in Jupyter notebooks using <code>p.io.autoplot</code> works best in conjunction with <code>p.verbose_level = “interactive”</code>.</p>
-</div>
-</section>
-<section id="saving-intermediates-to-file">
-<h2><span class="section-number">3.2. </span>Saving intermediates to file<a class="headerlink" href="#saving-intermediates-to-file" title="Permalink to this headline">#</a></h2>
-<p>There is also the option to auto-save intermediate states of the reconstruction at a given <code class="docutils literal notranslate"><span class="pre">interval</span></code> into a subfolder <code class="docutils literal notranslate"><span class="pre">dumps</span></code> relative to the root directory</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span><span class="o">.</span><span class="n">active</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="s1">&#39;dumps/</span><span class="si">%(run)s</span><span class="s1">_</span><span class="si">%(engine)s</span><span class="s1">_</span><span class="si">%(iterations)04d</span><span class="s1">.ptyr&#39;</span>
-</pre></div>
-</div>
-<p>where <code class="docutils literal notranslate"><span class="pre">%(run)s</span></code>, <code class="docutils literal notranslate"><span class="pre">%(engine)s</span></code> and <code class="docutils literal notranslate"><span class="pre">%(iterations)04d</span></code> are again dynamic labels.</p>
-<div class="attention admonition">
-<p class="admonition-title">Exercise</p>
-<p>Modify the <code>p.io.home</code> path in the example below to wherever you would like the PtyPy output to be, run the reconstruction and observe all the new files saved to <code>p.io.home</code>. Use <code>ptypy.utils.plot_recon_from_ptyr</code> to look at the MoonFlower reconstruction at different iterations.</p>
-</div>
-<div class="tip admonition">
-<p class="admonition-title">Tip</p>
-<p>You can use shell commands within Jupyter Notebooks to explore the filesystem, i.e. <code>ls /tmp</code> to list all files in /tmp.</p>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="live-visualisation">
+<h1><span class="section-number">19. </span>Live visualisation<a class="headerlink" href="#live-visualisation" title="Permalink to this headline">#</a></h1>
+<p><strong>Learning how to use the <code class="docutils literal notranslate"><span class="pre">PlotClient</span></code> to look at the reconstructions while it is still running.</strong></p>
 <hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy</span>
 <span class="kn">import</span> <span class="nn">ptypy.utils</span> <span class="k">as</span> <span class="nn">u</span>
 
+<span class="c1"># Create parameter tree</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+
+<span class="c1"># Set verbose level, can be &quot;interactive&quot;, &quot;info&quot; or &quot;debug&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">verbose_level</span> <span class="o">=</span> <span class="s2">&quot;interactive&quot;</span>
 
-<span class="c1"># Run label (ID)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">run</span> <span class="o">=</span> <span class="s2">&quot;moonflower&quot;</span>
-
-<span class="c1"># I/O settings</span>
+<span class="c1"># Basic I/O settings (no files saved in this case)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">io</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="mi">8890</span><span class="p">)</span>
 
-<span class="c1"># Set the root path for all input/output operations</span>
-<span class="c1"># Change this to wherever you would like </span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">home</span> <span class="o">=</span> <span class="s2">&quot;/tmp&quot;</span>
-
-<span class="c1"># Path to final .ptyr output file </span>
-<span class="c1"># using variables p.run, engine name and total nr. of iterations</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span>  <span class="s2">&quot;recons/</span><span class="si">%(run)s</span><span class="s2">_</span><span class="si">%(engine)s</span><span class="s2">_</span><span class="si">%(iterations)04d</span><span class="s2">.ptyr&quot;</span>
-
-<span class="c1"># Turn off interaction server</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="c1"># Use non-threaded live plotting</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">active</span><span class="o">=</span><span class="kc">True</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">threaded</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="s2">&quot;jupyter&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mi">10</span>
-
-<span class="c1"># Save intermediate .ptyr files (dumps) every 10 iterations</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span><span class="o">.</span><span class="n">active</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="s1">&#39;dumps/</span><span class="si">%(run)s</span><span class="s1">_</span><span class="si">%(engine)s</span><span class="s1">_</span><span class="si">%(iterations)04d</span><span class="s1">.ptyr&#39;</span>
-
+<span class="c1"># Define the scan model</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Full&quot;</span>
+
+<span class="c1"># Data loader / simulator </span>
+<span class="c1"># Generate 200 frames (128x128px) of diffraction data</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;MoonFlowerScan&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="mi">128</span>
@@ -598,30 +492,45 @@ title="Print to PDF"
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">save</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">0.2</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">photons</span> <span class="o">=</span> <span class="mf">1e8</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">psf</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">psf</span> <span class="o">=</span> <span class="mf">0.</span>
 
+<span class="c1"># Define reconstruction engine</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">80</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">5</span>
 
+<span class="c1"># Prepare and run</span>
 <span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Display the results</span>
+<span class="n">u</span><span class="o">.</span><span class="n">plot_recon_from_ptycho</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>in a separate notebook</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">ptypy.utils.plot_client</span> <span class="k">as</span> <span class="nn">pc</span>
-<span class="n">ptyr_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">home</span><span class="p">,</span> <span class="s2">&quot;dumps/moonflower_DM_0010.ptyr&quot;</span><span class="p">)</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">figure_from_ptyr</span><span class="p">(</span><span class="n">ptyr_filename</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy</span>
+<span class="kn">import</span> <span class="nn">ptypy.utils</span> <span class="k">as</span> <span class="nn">u</span>
+
+<span class="c1"># Client parameters</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">client</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="mi">8890</span>
+
+<span class="c1"># Create instance of plotclient</span>
+<span class="n">pc</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">PlotClient</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+
+<span class="c1"># start listening</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1"># Fetch data</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -633,16 +542,16 @@ title="Print to PDF"
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ptypy_pycuda"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "ptypy_pycuda",
-            path: "./notebooks/01_05_Getting_Started_with_PtyPy"
+            kernelName: "python3",
+            path: "./notebooks/18_20_Advanced_Topics"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ptypy_pycuda'</script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               
@@ -651,17 +560,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="2_yaml_json_config.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="18_object_regularisation.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">2. </span>JSON/YAML Config Files</p>
+            <p class="prev-next-title"><span class="section-number">18. </span>Object regularisation</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="4_scan_models.html" title="next page">
+    <a class='right-next' id="next-link" href="20_simulating_data.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Scan Models</p>
+        <p class="prev-next-title"><span class="section-number">20. </span>Simulating Data</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
