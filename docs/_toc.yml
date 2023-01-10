@@ -30,7 +30,7 @@ parts:
   chapters:
   - file: notebooks/14_17_Working_with_Messy_Data/14_partial_coherence
   - file: notebooks/14_17_Working_with_Messy_Data/15_position_refinement
-  - file: notebooks/14_17_Working_with_Messy_Data/16_blank_and_bad_detector_pixels
+  - file: notebooks/14_17_Working_with_Messy_Data/16_testing_different_algorithms
   - file: notebooks/14_17_Working_with_Messy_Data/17_missing_detector_frames
 - caption: Advanced Topcs
   numbered: true
