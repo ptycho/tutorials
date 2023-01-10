@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="16. Blank and Bad Detector Pixels" href="16_blank_and_bad_detector_pixels.html" />
@@ -421,12 +423,56 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-data">
+   15.1. The data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-the-data">
+   15.2. Loading the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initial-probe">
+   15.3. Initial probe
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reconstruction-engine">
+   15.4. Reconstruction engine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-position-refinement">
+   15.5. Adding position refinement
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -438,6 +484,39 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-data">
+   15.1. The data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-the-data">
+   15.2. Loading the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initial-probe">
+   15.3. Initial probe
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reconstruction-engine">
+   15.4. Reconstruction engine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-position-refinement">
+   15.5. Adding position refinement
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -447,7 +526,130 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="position-refinement">
 <h1><span class="section-number">15. </span>Position Refinement<a class="headerlink" href="#position-refinement" title="Permalink to this headline">#</a></h1>
-<p><strong>Learning how to relax the exact location of the scan positions to correct for instabilities and drift.</strong></p>
+<p><strong>Learning how to relax the exact location of the scan positions to correct for instabilities.</strong></p>
+<p>Instabilities in the provided scan positions such as vibrations or drift are quite common in ptychographic experiment and ideally theses sorts of issues are taken care of experimentally by improving the stability of the scanning stage. However, this might not always be possible and very often we have to deal with data that is already compromised with position instabilities. A very common approach in those scenarios is to try and fix the issue computationally as described in this article on <a class="reference external" href="https://doi.org/10.1016/j.ultramic.2012.06.001">An annealing algorithm to correct positioning errors in ptychography</a>. The idea basically is to check for better scan positions by minimising some error metric between the forward ptychography model and the measured intensities.</p>
+<section id="the-data">
+<h2><span class="section-number">15.1. </span>The data<a class="headerlink" href="#the-data" title="Permalink to this headline">#</a></h2>
+<p>In this example, we are using a test dataset that has been collected at the I14 instrument at the Diamond Light Source. The raw data has been collected with a MediPix3 detector and was stored in an HDF5/Nexus file with the following relevant entries for the intensities and scan positions</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">	</span>*<span class="w"> </span>entry/merlin_addetector/data<span class="w">   </span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">400</span>,<span class="w"> </span><span class="m">500</span>,<span class="w"> </span><span class="m">512</span>,<span class="w"> </span><span class="m">512</span><span class="o">)</span>
+<span class="w">	</span>*<span class="w"> </span>entry/xsp3_addetector_sum/SampleX_value_set<span class="w"> </span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">500</span>,<span class="o">)</span>
+<span class="w">	</span>*<span class="w"> </span>entry/xsp3_addetector_sum/SampleY_value_set<span class="w"> </span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">400</span>,<span class="o">)</span>
+</pre></div>
+</div>
+<p>showing that we have total of <span class="math notranslate nohighlight">\(200 000\)</span> diffraction frames collected in a <span class="math notranslate nohighlight">\(400 x 500\)</span> raster scan.</p>
+</section>
+<section id="loading-the-data">
+<h2><span class="section-number">15.2. </span>Loading the data<a class="headerlink" href="#loading-the-data" title="Permalink to this headline">#</a></h2>
+<p>To maximum reading speeds for this very large dataset, we use the <code class="docutils literal notranslate"><span class="pre">&quot;Hdf5LoaderFast&quot;</span></code> which is a modified version of the <code class="docutils literal notranslate"><span class="pre">&quot;Hdf5Loader&quot;</span></code> using multiprocessing to utilise as many CPUs as possible while reading the data</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Hdf5LoaderFast&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>and load the intensities as usual</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;entry/merlin_addetector/data&quot;</span>
+</pre></div>
+</div>
+<p>together with the scan positions</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_key</span> <span class="o">=</span> <span class="s2">&quot;entry/xsp3_addetector_sum/SampleY_value_set&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_key</span> <span class="o">=</span> <span class="s2">&quot;entry/xsp3_addetector_sum/SampleX_value_set&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">bounding_box</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">bounding_box</span><span class="o">.</span><span class="n">slow_axis_bounds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">]</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">bounding_box</span><span class="o">.</span><span class="n">fast_axis_bounds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">250</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>using the <code class="docutils literal notranslate"><span class="pre">bounding_box</span></code> to select a smaller sub-region of the scan. We can load the photon energy</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;/entry/instrument/dcm_enrg/value&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>and the detector distance</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;/entry/instrument/detectors/excalibur_z&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mf">0.001</span>
+</pre></div>
+</div>
+<p>directly from the file. We also specify the pixel size of the Medipix to <span class="math notranslate nohighlight">\(55 \mathrm{\mu m}\)</span> and tell the loader to crop a region of <span class="math notranslate nohighlight">\(128 x 128\)</span> pixels around a center located at <code class="docutils literal notranslate"><span class="pre">(115,333)</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">psize</span> <span class="o">=</span> <span class="mf">55e-6</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">auto_center</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="mi">115</span><span class="p">,</span> <span class="mi">333</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">128</span><span class="p">,</span><span class="mi">128</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="initial-probe">
+<h2><span class="section-number">15.3. </span>Initial probe<a class="headerlink" href="#initial-probe" title="Permalink to this headline">#</a></h2>
+<p>Unless the optics of an instrument are constantly changing, it often makes sense to use a probe from a previous reconstruction as the initial probe guess. Here, we are loading the probe from a previous I14 test scan saved in <code class="docutils literal notranslate"><span class="pre">dls_i14_test_structure/scan_103937.ptyr</span></code> and use it for the illumination model</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;recon&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">recon</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">recon</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="n">path_to_probe</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">photons</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">form</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">diversity</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">diversity</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">diversity</span><span class="o">.</span><span class="n">noise</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.2</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="reconstruction-engine">
+<h2><span class="section-number">15.4. </span>Reconstruction engine<a class="headerlink" href="#reconstruction-engine" title="Permalink to this headline">#</a></h2>
+<p>For reconstructing the I14 test sample, we have chosen to use the DM engine with <span class="math notranslate nohighlight">\(\alpha=0.99\)</span> and the following set of parameters</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.99</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_fourier_support</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">overlap_converge_factor</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">update_object_first</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">obj_smooth_std</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_inertia</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">object_inertia</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">fourier_power_bound</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">record_local_error</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>which gives the following reconstruction after <span class="math notranslate nohighlight">\(300\)</span> iterations, showing some artefacts around the horizontal line features</p>
+<p><img alt="" src="../../_images/i14_test_without_posref.png" /></p>
+</section>
+<section id="adding-position-refinement">
+<h2><span class="section-number">15.5. </span>Adding position refinement<a class="headerlink" href="#adding-position-refinement" title="Permalink to this headline">#</a></h2>
+<p>Trying to resolve some of these artefacts, we can add position refinement to the reconstruction engine, which will update the positions at an <code class="docutils literal notranslate"><span class="pre">interval=10</span></code> and between the iterations <code class="docutils literal notranslate"><span class="pre">start=100</span></code> and <code class="docutils literal notranslate"><span class="pre">stop=200</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">position_refinement</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">position_refinement</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;Annealing&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">position_refinement</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">position_refinement</span><span class="o">.</span><span class="n">stop</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">position_refinement</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">position_refinement</span><span class="o">.</span><span class="n">nshifts</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">position_refinement</span><span class="o">.</span><span class="n">amplitude</span> <span class="o">=</span> <span class="mf">50.0e-9</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">position_refinement</span><span class="o">.</span><span class="n">max_shift</span> <span class="o">=</span> <span class="mf">100.0e-9</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">position_refinement</span><span class="o">.</span><span class="n">record</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>using the position refinement method <code class="docutils literal notranslate"><span class="pre">&quot;Annealing&quot;</span></code> which randomly checks <code class="docutils literal notranslate"><span class="pre">nshifts=8</span></code> positions around the current position with a radius of <code class="docutils literal notranslate"><span class="pre">amplitude=50e-9</span></code> meters. The final reconstruction after <span class="math notranslate nohighlight">\(300\)</span> iterations shows that the artefacts on the horizontal line features are reduced</p>
+<p><img alt="" src="../../_images/i14_test_with_posref.png" /></p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>The <code>amplitude</code> of the position refinement search needs to be provided in units of meters and carefully chosen with respect to the reconstructed pixelsize, which can be determined from <code>P.pods[“P0000”].ob_view.psize</code> or by checking the full logging output using <code>verbose_level=”info”</code>.</p>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">Exercise</p>
+<p>Run the reconstruction with position refinement and observe the improvement on the features in the object reconstruction. Modify the position refinement parameters how it effects the outcome and performance of the reconstruction, e.g. increase/decrease the <code>amplitude</code> or switch to <code>method=GridSearch</code> which does a brute-force optimisation of all possible positions instead of the random annealing.</p>
+</div>
 <hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -547,8 +749,8 @@ title="Print to PDF"
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_key</span> <span class="o">=</span> <span class="s2">&quot;entry/xsp3_addetector_sum/SampleX_value_set&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">bounding_box</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">bounding_box</span><span class="o">.</span><span class="n">slow_axis_bounds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span><span class="mi">400</span><span class="p">]</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">bounding_box</span><span class="o">.</span><span class="n">fast_axis_bounds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span><span class="mi">500</span><span class="p">]</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">bounding_box</span><span class="o">.</span><span class="n">slow_axis_bounds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">]</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">bounding_box</span><span class="o">.</span><span class="n">fast_axis_bounds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">250</span><span class="p">]</span>
 
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;/entry/instrument/dcm_enrg/value&quot;</span>
@@ -568,7 +770,6 @@ title="Print to PDF"
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">auto_center</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="mi">115</span><span class="p">,</span> <span class="mi">333</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">128</span><span class="p">,</span><span class="mi">128</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">save</span> <span class="o">=</span> <span class="kc">None</span>
 
 <span class="c1"># Reconstruct using GPU-accelerated DM</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
@@ -604,6 +805,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
