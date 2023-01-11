@@ -575,7 +575,7 @@ title="Print to PDF"
 </div>
 <section id="the-fourier-update">
 <h3><span class="section-number">5.1.1. </span>The Fourier update<a class="headerlink" href="#the-fourier-update" title="Permalink to this headline">#</a></h3>
-<p>During the Fourier update <span class="math notranslate nohighlight">\(\mathcal{F}[\Psi]\)</span>, the model <span class="math notranslate nohighlight">\(\Psi\)</span> - transformed into the Fourier domain - is being updated such that its intensity is replaced by the measured data <span class="math notranslate nohighlight">\(I\)</span> while its phase remains unchanged</p>
+<p>During the Fourier update <span class="math notranslate nohighlight">\(\mathcal{F}[\Psi]\)</span>, the model <span class="math notranslate nohighlight">\(\Psi\)</span> (transformed into the Fourier domain) is being updated such that its intensity is replaced by the measured data <span class="math notranslate nohighlight">\(I\)</span> while its phase remains unchanged</p>
 <div class="math notranslate nohighlight">
 \[
 \mathcal{F}[\Psi] = \Psi \cdot \frac{\sqrt{|I|} + \rho \cdot (|\Psi| - \sqrt{|I|})}{|\Psi|}
@@ -589,14 +589,15 @@ title="Print to PDF"
          0  &amp; \text{if } b = \text{None}
          \end{cases}
 \end{split}\]</div>
-<p>with <span class="math notranslate nohighlight">\(b\)</span> being the so called power bound, which can be modified using the <code class="docutils literal notranslate"><span class="pre">fourier_power_bound</span></code> engine parameter. For Poisson-sampled data, the theoretical value for this power bound parameter is <span class="math notranslate nohighlight">\(0.25\)</span>.</p>
+<p>with <span class="math notranslate nohighlight">\(b\)</span> being the so called power bound, which can be modified using the <code class="docutils literal notranslate"><span class="pre">fourier_power_bound</span></code> engine parameter. For Poisson-sampled data, the theoretical value for this power bound parameter is <span class="math notranslate nohighlight">\(0.25\)</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">fourier_power_bound</span> <span class="o">=</span> <span class="mf">0.25</span>
 </pre></div>
 </div>
+<p>but it often makes sense to lower or higher this power bound parameter based on the experimental conditions. If the power bound is too low, it might lead to over-fitting. If the power bound is too high, the Fourier update would no longer be enforced.</p>
 </section>
 <section id="the-overlap-update">
 <h3><span class="section-number">5.1.2. </span>The overlap update<a class="headerlink" href="#the-overlap-update" title="Permalink to this headline">#</a></h3>
-<p>During the Overlap update <span class="math notranslate nohighlight">\(\mathcal{O}[\psi]\)</span>, the exit wave model <span class="math notranslate nohighlight">\(\psi\)</span> - back-transformed into the real domain - is being used to update object <span class="math notranslate nohighlight">\(O\)</span> and probe <span class="math notranslate nohighlight">\(P\)</span></p>
+<p>During the Overlap update <span class="math notranslate nohighlight">\(\mathcal{O}[\psi]\)</span>, the exit wave model <span class="math notranslate nohighlight">\(\psi\)</span> (back-transformed into the real domain) is being used to update object <span class="math notranslate nohighlight">\(O\)</span> and probe <span class="math notranslate nohighlight">\(P\)</span></p>
 <div class="math notranslate nohighlight">
 \[
 O = \frac{\sum_k P^* \cdot \psi_k}{\sum_k|P|^2}
