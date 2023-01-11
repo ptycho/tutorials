@@ -530,6 +530,7 @@ title="Print to PDF"
 <p>All tutorials so far have been using either simulated data (MoonFlower) or experimental data specifically prepared and reduced in memory for the purpose of those tutorials. From now, we are going to look at full-sized data in exactely the format that it has been collected at the various instruments and microscopes. This means we should certainly use GPU-accelerated reconstruction engines and also adopt using the block scan models which are more efficient in dealing with large data.</p>
 <section id="the-data">
 <h2><span class="section-number">10.1. </span>The data<a class="headerlink" href="#the-data" title="Permalink to this headline">#</a></h2>
+<p><strong>Thanks to Majid Kazemian (DLS) for collecting the data at the I08-1 instrument and the I08 team for sharing this data set for the purpose of this workshop.</strong></p>
 <p>At the I08-1 instrument at the Diamond Light Source, raw data is written into HDF5/Nexus files. As an example, we can look at the original raw data from the nanogold test sample which is stored in <code class="docutils literal notranslate"><span class="pre">&quot;dls_i08_nanogold_spiral/i08-1-5776.nxs&quot;</span></code> and inspect the relevant entries</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span><span class="o">,</span> <span class="nn">os</span>
 <span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>

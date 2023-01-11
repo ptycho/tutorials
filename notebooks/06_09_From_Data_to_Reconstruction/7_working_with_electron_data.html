@@ -530,6 +530,7 @@ title="Print to PDF"
 <p>Working with electron ptychography data is very similar to working with X-ray data, the only critical part to consider is that the internal calculation of the electron wavelength is different from calculating the X-ray wavelength based on given photon/electron energies. The Hdf5Loader has a parameter <code class="docutils literal notranslate"><span class="pre">electron_data</span></code> that will take care of this difference if set to <code class="docutils literal notranslate"><span class="pre">True</span></code> when loading electron ptychography data.</p>
 <section id="the-data">
 <h2><span class="section-number">7.1. </span>The data<a class="headerlink" href="#the-data" title="Permalink to this headline">#</a></h2>
+<p><strong>Thanks to Chris Allen (ePSIC,DLS) for sharing this data set for the purpose of this workshop.</strong></p>
 <p>In this example, we use an experimental data set collected at the ePSIC instrument at the Diamond Light Source on a thin layer of graphene. A subset of the experimental data including some meta information has been saved in an HDF5 file named “dls_epsic_graphene_small.h5” that was specifically created for the purpose of this tutorial. We can use the following code</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span><span class="o">,</span> <span class="nn">os</span>
 <span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>
