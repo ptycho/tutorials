@@ -431,12 +431,41 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-the-reconstruction-in-python-script">
+   19.1. Running the reconstruction in Python script
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-the-plot-client-in-this-notebook">
+   19.2. Running the plot client in this notebook
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -448,6 +477,24 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-the-reconstruction-in-python-script">
+   19.1. Running the reconstruction in Python script
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-the-plot-client-in-this-notebook">
+   19.2. Running the plot client in this notebook
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -457,80 +504,128 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="live-visualisation">
 <h1><span class="section-number">19. </span>Live visualisation<a class="headerlink" href="#live-visualisation" title="Permalink to this headline">#</a></h1>
-<p><strong>Learning how to use the <code class="docutils literal notranslate"><span class="pre">PlotClient</span></code> to look at the reconstructions while it is still running.</strong></p>
+<p><strong>Learning how to use the <code class="docutils literal notranslate"><span class="pre">PlotClient</span></code> to look at the reconstruction while it is still running.</strong></p>
+<p>There many use cases where it can be useful to communicate between a remote process running the reconstruction and a local client process that wants to receive live information about the status of the reconstruction. In PtyPy, this is possible via ZMQ socket communication.</p>
+<section id="running-the-reconstruction-in-python-script">
+<h2><span class="section-number">19.1. </span>Running the reconstruction in Python script<a class="headerlink" href="#running-the-reconstruction-in-python-script" title="Permalink to this headline">#</a></h2>
+<p>First, we copy a YAML config file <span class="xref myst">config/dls_nanogold_spiral.yaml</span> from one of the previous examples making sure that we turn on the interaction server <code class="docutils literal notranslate"><span class="pre">p.io.interaction.server</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">io</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">home</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="s2">&quot;recons/</span><span class="si">%(run)s</span><span class="s2">_</span><span class="si">%(engine)s</span><span class="s2">_</span><span class="si">%(iterations)04d</span><span class="s2">.ptyr&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="mi">5580</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="s2">&quot;tcp://127.0.0.1&quot;</span>
+</pre></div>
+</div>
+<p>sending updates on localhost (127.0.0.1) at port 9001. We then create a Python run script reading from this config file</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./ptypy_run_dls_i08_nanogold.py&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">import ptypy</span>
+<span class="s2">ptypy.load_ptyscan_module(&quot;hdf5_loader&quot;)</span>
+<span class="s2">ptypy.load_gpu_engines(&quot;cuda&quot;)  </span>
+<span class="s2">p = ptypy.utils.param_from_yaml(&quot;config/dls_i08_nanogold_spiral.yaml&quot;)</span>
+<span class="s2">P = ptypy.core.Ptycho(p,level=5)</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and execute the run script in a terminal</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>srun<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w"> </span>-c<span class="w"> </span><span class="m">2</span><span class="w"> </span>--gpus-per-task<span class="o">=</span><span class="m">1</span><span class="w"> </span>--gpu-bin<span class="o">=</span>None<span class="w"> </span>python<span class="w"> </span>ptypy_run_dls_i08_nanogold.py
+</pre></div>
+</div>
 <hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy</span>
-<span class="kn">import</span> <span class="nn">ptypy.utils</span> <span class="k">as</span> <span class="nn">u</span>
-
-<span class="c1"># Create parameter tree</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-
-<span class="c1"># Set verbose level, can be &quot;interactive&quot;, &quot;info&quot; or &quot;debug&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">verbose_level</span> <span class="o">=</span> <span class="s2">&quot;interactive&quot;</span>
-
-<span class="c1"># Basic I/O settings (no files saved in this case)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="mi">8890</span><span class="p">)</span>
-
-<span class="c1"># Define the scan model</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Full&quot;</span>
-
-<span class="c1"># Data loader / simulator </span>
-<span class="c1"># Generate 200 frames (128x128px) of diffraction data</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;MoonFlowerScan&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="mi">128</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">num_frames</span> <span class="o">=</span> <span class="mi">200</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">save</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">0.2</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">photons</span> <span class="o">=</span> <span class="mf">1e8</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">MF</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">psf</span> <span class="o">=</span> <span class="mf">0.</span>
-
-<span class="c1"># Define reconstruction engine</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM&quot;</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">80</span>
-
-<span class="c1"># Prepare and run</span>
-<span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-
-<span class="c1"># Display the results</span>
-<span class="n">u</span><span class="o">.</span><span class="n">plot_recon_from_ptycho</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./ptypy_run_dls_i08_nanogold.py&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">import ptypy</span>
+<span class="s2">ptypy.load_ptyscan_module(&quot;hdf5_loader&quot;)</span>
+<span class="s2">ptypy.load_gpu_engines(&quot;cuda&quot;)  </span>
+<span class="s2">p = ptypy.utils.param_from_yaml(&quot;config/dls_i08_nanogold_spiral.yaml&quot;)</span>
+<span class="s2">P = ptypy.core.Ptycho(p,level=5)</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>in a separate notebook</p>
+</section>
+<section id="running-the-plot-client-in-this-notebook">
+<h2><span class="section-number">19.2. </span>Running the plot client in this notebook<a class="headerlink" href="#running-the-plot-client-in-this-notebook" title="Permalink to this headline">#</a></h2>
+<p>While the processing script is running in a separate process, we just need to connect our client to the same address and port</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">client</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="mi">5580</span>
+<span class="n">client</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="s2">&quot;tcp://127.0.0.1&quot;</span>
+</pre></div>
+</div>
+<p>and start an instance of the <code class="docutils literal notranslate"><span class="pre">PlotClient</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pc</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">PlotClient</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>and use its <code class="docutils literal notranslate"><span class="pre">get_data()</span></code> function to get updates</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plotter</span><span class="o">.</span><span class="n">pr</span><span class="p">,</span> <span class="n">plotter</span><span class="o">.</span><span class="n">ob</span><span class="p">,</span> <span class="n">runtime</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>on probe, object and runtime information. We can also use the <code class="docutils literal notranslate"><span class="pre">MPLplotter</span></code> create
+a plot that is updated by repeatedly executing a cell with this code</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="n">plotter</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">MPLplotter</span><span class="p">()</span>
+<span class="n">initialised</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">pc</span><span class="o">.</span><span class="n">DATA</span><span class="p">):</span>
+    <span class="n">plotter</span><span class="o">.</span><span class="n">pr</span><span class="p">,</span> <span class="n">plotter</span><span class="o">.</span><span class="n">ob</span><span class="p">,</span> <span class="n">runtime</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+    <span class="n">plotter</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">runtime</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">initialised</span><span class="p">:</span>
+        <span class="n">plotter</span><span class="o">.</span><span class="n">update_plot_layout</span><span class="p">()</span>
+    <span class="n">plotter</span><span class="o">.</span><span class="n">plot_all</span><span class="p">()</span>
+    <span class="n">plotter</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">display</span><span class="o">.</span><span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">plotter</span><span class="o">.</span><span class="n">plot_fig</span><span class="p">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy</span>
-<span class="kn">import</span> <span class="nn">ptypy.utils</span> <span class="k">as</span> <span class="nn">u</span>
 
 <span class="c1"># Client parameters</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">client</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="mi">8890</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">client</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="mi">5580</span>
+<span class="n">client</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="s2">&quot;tcp://127.0.0.1&quot;</span>
 
 <span class="c1"># Create instance of plotclient</span>
 <span class="n">pc</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">PlotClient</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 
 <span class="c1"># start listening</span>
 <span class="n">pc</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-
-<span class="c1"># Fetch data</span>
-<span class="n">pc</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Refresh this cell multiple time </span>
+<span class="c1"># to see updates on the reconstruction</span>
+<span class="c1"># while the script is running in a separate process</span>
+<span class="n">layout</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">plot_client</span><span class="o">.</span><span class="n">TEMPLATES</span><span class="p">[</span><span class="s2">&quot;jupyter&quot;</span><span class="p">]</span>
+<span class="n">plotter</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">MPLplotter</span><span class="p">(</span><span class="n">pars</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+<span class="n">initialised</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">pc</span><span class="o">.</span><span class="n">DATA</span><span class="p">):</span>
+    <span class="n">plotter</span><span class="o">.</span><span class="n">pr</span><span class="p">,</span> <span class="n">plotter</span><span class="o">.</span><span class="n">ob</span><span class="p">,</span> <span class="n">runtime</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+    <span class="n">plotter</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">runtime</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">initialised</span><span class="p">:</span>
+        <span class="n">plotter</span><span class="o">.</span><span class="n">update_plot_layout</span><span class="p">()</span>
+    <span class="n">plotter</span><span class="o">.</span><span class="n">plot_all</span><span class="p">()</span>
+    <span class="n">plotter</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">plotter</span><span class="o">.</span><span class="n">plot_fig</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -542,16 +637,16 @@ title="Print to PDF"
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "ptypy_pycuda"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: "ptypy_pycuda",
             path: "./notebooks/18_20_Advanced_Topics"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'ptypy_pycuda'</script>
 
               </div>
               
