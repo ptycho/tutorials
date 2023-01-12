@@ -515,10 +515,10 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="using-multiple-gpus">
 <h1><span class="section-number">11. </span>Using multiple GPUs<a class="headerlink" href="#using-multiple-gpus" title="Permalink to this headline">#</a></h1>
 <p><strong>Learning how to make use of the multi-GPU capabilities in PtyPy.</strong></p>
-<p>All GPU-accelerated examples so far were using only a single GPU working on the reconstructions, but PtyPy supports multi-GPU execution for all its engines via MPI. Unforuntately, this is not compatible with Jupyter notebooks, but we can instead use the shell terminal provided within JupytHub.</p>
+<p>All GPU-accelerated examples so far were using only a single GPU working on the reconstructions, but PtyPy supports multi-GPU execution for all its engines via MPI. Unfortunately, this is not compatible with Jupyter notebooks, but we can instead use the shell terminal provided within JupyterHub.</p>
 <div class="tip admonition">
 <p class="admonition-title">Tip</p>
-<p>When running PtyPy with a Python script in a compute environment that uses OpenMPI, e.g. as part of a cluster job, the same multi-GPU capabilites of engines such as DM, RAAR or ML can be achieved with <code>mpirun -n 4 python ptypy_example.py</code></p>
+<p>When running PtyPy with a Python script in a compute environment that uses OpenMPI, e.g. as part of a cluster job, the same multi-GPU capabilities of engines such as DM, RAAR or ML can be achieved with <code>mpirun -n 4 python ptypy_example.py</code></p>
 </div>
 <section id="making-a-python-run-script-for-ptypy">
 <h2><span class="section-number">11.1. </span>Making a Python run script for PtyPy<a class="headerlink" href="#making-a-python-run-script-for-ptypy" title="Permalink to this headline">#</a></h2>

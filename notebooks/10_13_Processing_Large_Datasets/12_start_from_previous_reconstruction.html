@@ -538,7 +538,7 @@ title="Print to PDF"
 <h1><span class="section-number">12. </span>Starting From a Previous Reconstruction<a class="headerlink" href="#starting-from-a-previous-reconstruction" title="Permalink to this headline">#</a></h1>
 <p><strong>Learning how to start refinement from an existing reconstruction and use this strategy to reconstruct a large electron ptychography datasets.</strong></p>
 <p>In this example, we are going to reconstruct the full graphene data set from ePSIC a subsection of which was already used in <a class="reference internal" href="../06_09_From_Data_to_Reconstruction/7_working_with_electron_data.html"><span class="doc std std-doc">Working With Electron Data</span></a>. The goal is to do a few iterations of ePIE to find a reasonable probe/object
-followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, there are a few incompatibilies between these two engines in PtyPy namely that ePIE requires data to be loaded in a single block whereas ML is fine with smaller block sizes. So, instead of simply <a class="reference internal" href="../06_09_From_Data_to_Reconstruction/8_chaining_multiple_engines.html"><span class="doc std std-doc">chaining the engines</span></a> we can first run ePIE, save the results to a .ptyr file and then load the initial ePIE reconstruction into a separate ML script. This way, we can use different data loading parameters for the two parts of the reconstructions and also make use of the multi-GPU capabilities of the ML engine (ePIE by design needs to run in a single GPU instance).</p>
+followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, there are a few incompatibilities between these two engines in PtyPy namely that ePIE requires data to be loaded in a single block whereas ML is fine with smaller block sizes. So, instead of simply <a class="reference internal" href="../06_09_From_Data_to_Reconstruction/8_chaining_multiple_engines.html"><span class="doc std std-doc">chaining the engines</span></a> we can first run ePIE, save the results to a .ptyr file and then load the initial ePIE reconstruction into a separate ML script. This way, we can use different data loading parameters for the two parts of the reconstructions and also make use of the multi-GPU capabilities of the ML engine (ePIE by design needs to run in a single GPU instance).</p>
 <section id="the-data">
 <h2><span class="section-number">12.1. </span>The data<a class="headerlink" href="#the-data" title="Permalink to this headline">#</a></h2>
 <p><strong>Thanks to Chris Allen (ePSIC,DLS) for sharing this data set for the purpose of this workshop.</strong></p>
@@ -561,7 +561,7 @@ followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, 
 </div>
 <p>In addition, we have been provided with some meta information (which is also stored in an HDF5 files for more recent data collections at ePSIC), namely</p>
 <ul class="simple">
-<li><p>scan roration: 60 degrees</p></li>
+<li><p>scan rotation: 60 degrees</p></li>
 <li><p>scan step size: 3.71875e-11 m</p></li>
 <li><p>nr. of scan positions: 255 x 255</p></li>
 <li><p>electron energy: 80 kV</p></li>
@@ -586,7 +586,7 @@ followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, 
 </section>
 <section id="loading-the-data">
 <h2><span class="section-number">12.2. </span>Loading the data<a class="headerlink" href="#loading-the-data" title="Permalink to this headline">#</a></h2>
-<p>Since we have only been provided with diffraction intensities and meta information, but no explicit scan positions, we need to use a custom <code class="docutils literal notranslate"><span class="pre">EpsicHdf5Loader</span></code> that has been created specifically for the ePSIC instrument by subclassing the <code class="docutils literal notranslate"><span class="pre">Hdf5Loader</span></code> to make the relevant calculation of e.g. the scan positons based on the given meta information. We first need to import this new PtyScan module</p>
+<p>Since we have only been provided with diffraction intensities and meta information, but no explicit scan positions, we need to use a custom <code class="docutils literal notranslate"><span class="pre">EpsicHdf5Loader</span></code> that has been created specifically for the ePSIC instrument by sub-classing the <code class="docutils literal notranslate"><span class="pre">Hdf5Loader</span></code> to make the relevant calculation of e.g. the scan positions based on the given meta information. We first need to import this new PtyScan module</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ptypy</span><span class="o">.</span><span class="n">load_ptyscan_module</span><span class="p">(</span><span class="s2">&quot;epsic_loader&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
