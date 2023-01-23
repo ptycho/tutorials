@@ -233,18 +233,23 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../18_20_Advanced_Topics/18_object_regularisation.html">
+  <a class="reference internal" href="../18_21_Advanced_Topics/18_object_regularisation.html">
    18. Modifying an Engine
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../18_20_Advanced_Topics/19_live_visualisation.html">
+  <a class="reference internal" href="../18_21_Advanced_Topics/19_live_visualisation.html">
    19. Live visualisation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../18_20_Advanced_Topics/20_simulating_data.html">
+  <a class="reference internal" href="../18_21_Advanced_Topics/20_simulating_data.html">
    20. Simulating Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../18_21_Advanced_Topics/21_simulated_initial_probe.html">
+   21. Simulated Initial Probe
   </a>
  </li>
 </ul>
@@ -516,7 +521,7 @@ title="Print to PDF"
 <p>where <code class="docutils literal notranslate"><span class="pre">%(run)s</span></code> is dynamically replaced by the string defined in <code class="docutils literal notranslate"><span class="pre">p.run</span></code>, <code class="docutils literal notranslate"><span class="pre">%(engine)s</span></code> by the name of the engine used for the reconstructions and <code class="docutils literal notranslate"><span class="pre">%(iterations)04d</span></code> by the total number of iterations at the end formatted as a 4-digit integer.</p>
 <section id="live-plotting">
 <h2><span class="section-number">3.1. </span>Live-plotting<a class="headerlink" href="#live-plotting" title="Permalink to this headline">#</a></h2>
-<p>And finally, PtyPy has live-viewing capabilities that are controlled with <code class="docutils literal notranslate"><span class="pre">p.io.interaction</span></code> and <code class="docutils literal notranslate"><span class="pre">p.io.autoplot</span></code>. This feature has mostly been designed to run in a threaded mode where the plotting process is separate from the main processing thread. This server-client setup can also be used in situations where the plotting client is running on a different machine than the reconstruction (server), see <a class="reference internal" href="../18_20_Advanced_Topics/19_live_visualisation.html"><span class="doc std std-doc">Advanced live visualisation</span></a> for more details. However, since we are working with Jupyter notebooks we won’t need any threading and can do all the plotting inside the notebook using matlotlib’s inline functionality by setting the following parameters</p>
+<p>And finally, PtyPy has live-viewing capabilities that are controlled with <code class="docutils literal notranslate"><span class="pre">p.io.interaction</span></code> and <code class="docutils literal notranslate"><span class="pre">p.io.autoplot</span></code>. This feature has mostly been designed to run in a threaded mode where the plotting process is separate from the main processing thread. This server-client setup can also be used in situations where the plotting client is running on a different machine than the reconstruction (server), see <a class="reference internal" href="../18_21_Advanced_Topics/19_live_visualisation.html"><span class="doc std std-doc">Advanced live visualisation</span></a> for more details. However, since we are working with Jupyter notebooks we won’t need any threading and can do all the plotting inside the notebook using matlotlib’s inline functionality by setting the following parameters</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">active</span> <span class="o">=</span> <span class="kc">True</span>
