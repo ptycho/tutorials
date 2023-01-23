@@ -35,9 +35,10 @@ parts:
 - caption: Advanced Topcs
   numbered: true
   chapters:
-  - file: notebooks/18_20_Advanced_Topics/18_object_regularisation
-  - file: notebooks/18_20_Advanced_Topics/19_live_visualisation
-  - file: notebooks/18_20_Advanced_Topics/20_simulating_data
+  - file: notebooks/18_21_Advanced_Topics/18_object_regularisation
+  - file: notebooks/18_21_Advanced_Topics/19_live_visualisation
+  - file: notebooks/18_21_Advanced_Topics/20_simulating_data
+  - file: notebooks/18_21_Advanced_Topics/21_simulated_initial_probe
 # - caption: Modifying Algorithms
 #   numbered: true
 #   chapters:
