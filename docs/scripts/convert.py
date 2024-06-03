@@ -12,8 +12,9 @@ args = parser.parse_args()
 if args.actions:
     notebook_dir = os.path.dirname(__file__) + "/../notebooks/"
 else:
-    notebook_dir = os.path.dirname(__file__) + "/../converted/"
+    notebook_dir = os.path.dirname(__file__) + "/../../converted/"
 notebooks = glob.glob(notebook_dir + "*/*.ipynb")
+print(notebooks, notebook_dir)
 
 def replace_div_with_admonition(cell, label="Note", type="note"):
     text = cell["source"][1:-1]
@@ -27,7 +28,8 @@ def replace_div_with_admonition(cell, label="Note", type="note"):
     new[2:2] = text
     cell["source"] = new
 
-for name in notebooks:    
+for name in notebooks:
+    print(f"Converting {name}")
     nb = json.load(open(name))
     for cell in nb["cells"]:
         if cell["cell_type"] == "markdown":

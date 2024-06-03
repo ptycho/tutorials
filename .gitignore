@@ -132,6 +132,8 @@ dmypy.json
 docs/_build
 
 # Specific folders
+docs/notebooks
 admin
 converted
 data
+tmp

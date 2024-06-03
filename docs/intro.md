@@ -29,20 +29,20 @@ followed by running this set up command
 /global/common/software/ntrain3/ptypy_workshop_setup.sh
 ```
 
-Now that we have cloned the tutorials and set up the correct environment, we can simply navigate to ```tutorials``` in the file panel on the left and open the [first tutorial](./notebooks/Getting_Started_with_PtyPy/1_the_parameter_tree) from within the ```notebooks``` folder.
+Now that we have cloned the tutorials and set up the correct environment, we can simply navigate to ```tutorials``` in the file panel on the left and open the [first tutorial](./notebooks/01_05_Getting_Started_with_PtyPy/1_the_parameter_tree) from within the ```notebooks``` folder.
 
 
 ## How to use a Jupyter Notebook
 Before we get started with PtyPy, a few words about Jupyter Notebooks, which offer a convenient way to provide executable code (e.g. Python) alongside formatted text (using markdown). All notebooks used here are structured in the same way, with some informative content at the top and a full code example at the bottom, separated by a horizontal line:
 
 ```{figure} ./jupyter_notebook_1.PNG
-:name: jupyterlab
+:name: jupyterlab1
 ```
 
 In order to execute the code cell (or any other cell), simply select the cell and type **SHIFT+ENTER** or **ALT+ENTER**
 
 ```{figure} ./jupyter_notebook_2.PNG
-:name: jupyterlab
+:name: jupyterlab2
 ```
 
 ## Table of Contents
