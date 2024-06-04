@@ -1,0 +1,4 @@
+set -ex
+
+# Install PtyPy from test.pypi.org
+pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple PtyPyTest
