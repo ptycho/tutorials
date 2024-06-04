@@ -6,6 +6,7 @@ on:
     branches:
     - main
     paths:
+    - docs/intro.md
     - notebooks/**
 
 # This job installs dependencies, builds the book, and pushes it to `gh-pages`

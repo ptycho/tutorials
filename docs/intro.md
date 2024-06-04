@@ -1,7 +1,6 @@
 # Introduction
 
-Welcome to the hands-on tutorial session of the [1{sup}`st` PtyPy workshop](https://www.diamond.ac.uk/Home/Events/2023/Ptychography--PtyPy--Software-Workshop-2023.html), 
-held on January 12th and 13th 2023 at the [Diamond Light Source](https://www.diamond.ac.uk). The purpose of these tutorials is to provide a comprehensive collection of examples targeting a wide range of scientists and engineers interested in ptychography, from experimental users to algorithm and code developers. 
+The purpose of these tutorials is to provide a comprehensive collection of examples targeting a wide range of scientists and engineers interested in ptychography, from experimental users to algorithm and code developers.
 
 ```{note}
 Most of the content of this tutorial has been created in the form of Jupyter Notebooks and throughout this workshop, we are going to use JupyterLab to execute and interact with the content prepared for this workshop. The JupyterLab interface is very easy to use, but should you wish to learn more about the Jupyter project and the tools it provides, visit: [https://jupyter.org](https://jupyter.org).
