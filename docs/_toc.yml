@@ -3,46 +3,43 @@
 format: jb-book
 root: intro
 parts:
-- caption: Getting Started with PtyPy
-  numbered: true
+- caption: The Basics
+  numbered: false
   chapters:
-  - file: notebooks/01_05_Getting_Started_with_PtyPy/1_the_parameter_tree
-  - file: notebooks/01_05_Getting_Started_with_PtyPy/2_yaml_json_config
-  - file: notebooks/01_05_Getting_Started_with_PtyPy/3_input_output
-  - file: notebooks/01_05_Getting_Started_with_PtyPy/4_scan_models
-  - file: notebooks/01_05_Getting_Started_with_PtyPy/5_reconstruction_engines
-- caption: From Data to Reconstruction
-  numbered: true
+  - file: notebooks/basic_examples/00_the_parameter_tree
+  - file: notebooks/basic_examples/01_using_yaml_or_json_config
+  - file: notebooks/basic_examples/02_input_output_parameters
+  - file: notebooks/basic_examples/03_scan_models
+  - file: notebooks/basic_examples/04_choosing_engines
+    sections:
+    - file: notebooks/basic_examples/05_projectional_engines
+    - file: notebooks/basic_examples/06_stochastic_engines
+    - file: notebooks/basic_examples/07_gradient_based_engines
+- caption: Experimental X-ray Data
+  numbered: false
   chapters:
-  - file: notebooks/06_09_From_Data_to_Reconstruction/6_the_hdf5_loader
-  - file: notebooks/06_09_From_Data_to_Reconstruction/7_working_with_electron_data
-  - file: notebooks/06_09_From_Data_to_Reconstruction/8_chaining_multiple_engines
-  - file: notebooks/06_09_From_Data_to_Reconstruction/9_fixing_data_issues
-- caption: Processing Large Datasets
-  numbered: true
+  - file: notebooks/experimental_xray_data/00_data_loading
+  - file: notebooks/experimental_xray_data/01_fixing_data_issues
+  - file: notebooks/experimental_xray_data/02_partial_coherence
+  - file: notebooks/experimental_xray_data/03_position_refinement
+  - file: notebooks/experimental_xray_data/04_testing_different_algorithms
+  - file: notebooks/experimental_xray_data/05_missing_detector_frames
+- caption: GPU acceleration and Large Data
+  numbered: false
   chapters:
-  - file: notebooks/10_13_Processing_Large_Datasets/10_working_with_large_data
-  - file: notebooks/10_13_Processing_Large_Datasets/11_multi_gpu
-  - file: notebooks/10_13_Processing_Large_Datasets/12_start_from_previous_reconstruction
-  - file: notebooks/10_13_Processing_Large_Datasets/13_nearfield_ptychography
-- caption: Working with Messy Data
-  numbered: true
+  - file: notebooks/gpu_acceleration_and_large_data/00_working_with_large_data
+  - file: notebooks/gpu_acceleration_and_large_data/01_multi_gpu
+  - file: notebooks/gpu_acceleration_and_large_data/02_start_from_previous_reconstruction
+- caption: Electron Ptychography Data
+  numbered: false
   chapters:
-  - file: notebooks/14_17_Working_with_Messy_Data/14_partial_coherence
-  - file: notebooks/14_17_Working_with_Messy_Data/15_position_refinement
-  - file: notebooks/14_17_Working_with_Messy_Data/16_testing_different_algorithms
-  - file: notebooks/14_17_Working_with_Messy_Data/17_missing_detector_frames
-- caption: Advanced Topcs
-  numbered: true
+  - file: notebooks/ptychography_with_electrons/00_electron_data
+  - file: notebooks/ptychography_with_electrons/01_chaining_multiple_engines
+- caption: Advanced Examples
+  numbered: false
   chapters:
-  - file: notebooks/18_21_Advanced_Topics/18_object_regularisation
-  - file: notebooks/18_21_Advanced_Topics/19_live_visualisation
-  - file: notebooks/18_21_Advanced_Topics/20_simulating_data
-  - file: notebooks/18_21_Advanced_Topics/21_simulated_initial_probe
-# - caption: Modifying Algorithms
-#   numbered: true
-#   chapters:
-#   - file: notebooks/21_23_Modifying_Algorithms/22_implementing_your_own_engine
-#   - file: notebooks/21_23_Modifying_Algorithms/23_implementing_multislice
-
-
+  - file: notebooks/other_examples/00_nearfield_ptychography
+  - file: notebooks/other_examples/01_object_regularisation
+  - file: notebooks/other_examples/02_live_visualisation
+  - file: notebooks/other_examples/03_simulating_data
+  - file: notebooks/other_examples/04_simulated_initial_probe
