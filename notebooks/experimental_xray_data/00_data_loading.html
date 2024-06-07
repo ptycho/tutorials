@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>The HDF5 Loader &#8212; Tutorials</title>
+    <title>Loading HDF5 data &#8212; Tutorials</title>
   
   
   
@@ -194,7 +194,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Experimental X-ray Data</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">The HDF5 Loader</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Loading HDF5 data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="01_fixing_data_issues.html">Fixing Issues Related to Data (Loading)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_partial_coherence.html">Partial Coherence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_position_refinement.html">Position Refinement</a></li>
@@ -435,7 +435,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>The HDF5 Loader</h1>
+    <h1>Loading HDF5 data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -460,13 +460,12 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="the-hdf5-loader">
-<h1>The HDF5 Loader<a class="headerlink" href="#the-hdf5-loader" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="loading-hdf5-data">
+<h1>Loading HDF5 data<a class="headerlink" href="#loading-hdf5-data" title="Link to this heading">#</a></h1>
 <p><strong>Loading ptychographic X-ray data into PtyPy from an HDF5 file, running a phase retrieval engine and inspecting the output.</strong></p>
 <p>PtyPy uses the <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.data.PtyScan">PtyScan</a> class to interact with experimental data and traditionally it was recommended that users write their own PtyScan subclass for each experiment or beamline, as documented in this tutorial on <a class="reference external" href="https://ptycho.github.io/ptypy/rst/data_management.html">Data Management</a>. This approach is extremely flexible since it allows users full control on defining how their data should be loaded based on whatever file format their data is stored with, but it requires some programming efforts and can therefore be a barrier for new ptychography users. However, if your exprimental data is stored in an HDF5 file - a file format adopted by most instruments and facilities - it is much simpler to just use the <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.experiment.html#ptypy.experiment.hdf5_loader.Hdf5Loader">Hdf5Loader</a> PtyScan subclass which already provides a generic interface to load ptychographic data of a single or multiple HDF5 files into Ptypy.</p>
 <section id="the-data">
 <h2>The data<a class="headerlink" href="#the-data" title="Link to this heading">#</a></h2>
-<p><strong>Thanks to Majid Kazemian (DLS) for collecting the data at the I08-1 instrument and the I08 team for sharing this data set for the purpose of this workshop.</strong></p>
 <p>In this example, we use an experimental data set collected at the I08-1 instrument at the Diamond Light Source on a test sample (gold nanostructures deposited on a carbon film). A subset of the experimental data including some meta information has been saved in an HDF5 file named “dls_i08_nanogold_small.h5” that was specifically created for the purpose of this tutorial. We can use the following code</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span><span class="o">,</span> <span class="nn">os</span>
 <span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>
@@ -576,7 +575,7 @@ document.write(`
 <p>For many X-ray data sets, difference map (DM) can be a good starting point for simultaneous object and probe retrieval because of the explorative nature of the algorithm. Here, we use DM with <span class="math notranslate nohighlight">\(\alpha=0.9\)</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM_cupy&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.9</span>
@@ -600,7 +599,7 @@ document.write(`
 <span class="n">ptypy</span><span class="o">.</span><span class="n">load_ptyscan_module</span><span class="p">(</span><span class="s2">&quot;hdf5_loader&quot;</span><span class="p">)</span>
 
 <span class="c1"># This will import the GPU engines</span>
-<span class="n">ptypy</span><span class="o">.</span><span class="n">load_gpu_engines</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="n">ptypy</span><span class="o">.</span><span class="n">load_gpu_engines</span><span class="p">(</span><span class="s2">&quot;cupy&quot;</span><span class="p">)</span>
 
 <span class="c1"># Root directory of tutorial data</span>
 <span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>
@@ -684,7 +683,7 @@ document.write(`
 <span class="c1"># Define reconstruction engine (using DM)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM_cupy&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.9</span>
@@ -693,6 +692,20 @@ document.write(`
 
 <span class="c1"># Run reconstruction</span>
 <span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/272fba3ee3dfcacc86a45581ee5449dbac17c40ba4e78f489b8d2c61d9ff0fff.png" src="../../_images/272fba3ee3dfcacc86a45581ee5449dbac17c40ba4e78f489b8d2c61d9ff0fff.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== This reconstruction relied on the following work ==========================
+The Ptypy framework:
+    Enders B. and Thibault P., &quot;A computational framework for ptychographic reconstructions&quot; Proc. Royal Soc. A 472 (2016) 20160640, doi: 10.1098/rspa.2016.0640.
+The difference map reconstruction algorithm:
+    Thibault et al., &quot;Probe retrieval in ptychographic coherent diffractive imaging&quot; Ultramicroscopy 109 (2009) 338, doi: 10.1016/j.ultramic.2008.12.011.
+================================================================================
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
 </pre></div>
 </div>
 </div>
@@ -709,16 +722,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ptypy_pycuda"
+            mode: "python"
         },
         kernelOptions: {
-            name: "ptypy_pycuda",
+            name: "conda-env-User_Conda_-_cuda12.2-python3",
             path: "./notebooks/experimental_xray_data"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ptypy_pycuda'</script>
+    <script>kernelName = 'conda-env-User_Conda_-_cuda12.2-python3'</script>
 
                 </article>
               

@@ -194,7 +194,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Experimental X-ray Data</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="00_data_loading.html">The HDF5 Loader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_data_loading.html">Loading HDF5 data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="01_fixing_data_issues.html">Fixing Issues Related to Data (Loading)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_partial_coherence.html">Partial Coherence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_position_refinement.html">Position Refinement</a></li>
@@ -466,7 +466,6 @@ document.write(`
 <p>Every experimental dataset is different and sometimes the common choice of DM or ePIE as an engine for the initial reconstruction might not be the best solution. Ptychography is a very popular technique with lots of new algorithms and modifications to existing algorithms published every year. It might be worth exploring some of these new methods when working with a challenging experimental data set. In this example, we are looking at an algorithm called the <a class="reference external" href="https://doi.org/10.1364/OE.27.031246">semi-implicit relaxed Douglas-Rachford</a> (SDR) algorithm, which is essentialy a variation of ePIE with a DM-like Fourier update.</p>
 <section id="the-data">
 <h2>The data<a class="headerlink" href="#the-data" title="Link to this heading">#</a></h2>
-<p><strong>Thanks to Benedikt Daurer (DLS) for sharing this data set for the purpose of this workshop.</strong></p>
 <p>The data used for this example is from a butterfly scale and has been collected at the I13 instrument at the Diamond Light Source. The raw data has been taken with an array of MediPix3 detectors and their intensities stored in an HDF5 file <code class="docutils literal notranslate"><span class="pre">&quot;dls_i13_butterfly/raw/excalibur_306517_vds.h5&quot;</span></code> with the following entry</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">	</span>*<span class="w"> </span>data<span class="w">                           </span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">1260</span>,<span class="w"> </span><span class="m">1793</span>,<span class="w"> </span><span class="m">2069</span><span class="o">)</span>
 </pre></div>
@@ -531,7 +530,7 @@ document.write(`
 <p>As mentioned above, it was found that the SDR algorithm is quite well-suited for this data set, minimising the artefacts that can arise from missing data in the detector and the raster grid pathology. For the engine parameters, we can follow the suggestions from the <a class="reference external" href="https://doi.org/10.1364/OE.27.031246">SDR paper</a> which suggests <span class="math notranslate nohighlight">\(\sigma=0.5\)</span> and <span class="math notranslate nohighlight">\(\tau=0.1\)</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;SDR_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;SDR_cupy&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.5</span>
@@ -544,7 +543,7 @@ document.write(`
 <p><img alt="" src="../../_images/i13_recons_sdr.png" /></p>
 <div class="attention admonition">
 <p class="admonition-title">Exercise</p>
-<p>Explore different algorithms such as ePIE, DM, ML, etc. by using code from previous examples and compare against this SDR reconstruction. Which algorithm do you believe worked best for this particular dataset?</p>
+<p>Explore different algorithms such as ePIE, DM, ML, etc. for example by using parameters from other examples and compare against this SDR reconstruction. Which algorithm do you believe worked best for this particular dataset?</p>
 </div>
 <hr class="docutils" />
 <div class="cell docutils container">
@@ -556,7 +555,7 @@ document.write(`
 <span class="n">ptypy</span><span class="o">.</span><span class="n">load_ptyscan_module</span><span class="p">(</span><span class="s2">&quot;hdf5_loader&quot;</span><span class="p">)</span>
 
 <span class="c1"># This will import the GPU engines</span>
-<span class="n">ptypy</span><span class="o">.</span><span class="n">load_gpu_engines</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>  
+<span class="n">ptypy</span><span class="o">.</span><span class="n">load_gpu_engines</span><span class="p">(</span><span class="s2">&quot;cupy&quot;</span><span class="p">)</span>  
 
 <span class="c1"># Root directory of tutorial data</span>
 <span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>
@@ -661,7 +660,7 @@ document.write(`
 <span class="c1"># Reconstruct using GPU-accelerated SDR</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;SDR_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;SDR_cupy&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine_dr</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.5</span>
@@ -671,6 +670,20 @@ document.write(`
 
 <span class="c1"># Run reconstruction</span>
 <span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4a2a06cae204c2306cb4ad1d066cfa59b1d8611a32eeddd18bdeda06cf4ebc76.png" src="../../_images/4a2a06cae204c2306cb4ad1d066cfa59b1d8611a32eeddd18bdeda06cf4ebc76.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== This reconstruction relied on the following work ==========================
+The Ptypy framework:
+    Enders B. and Thibault P., &quot;A computational framework for ptychographic reconstructions&quot; Proc. Royal Soc. A 472 (2016) 20160640, doi: 10.1098/rspa.2016.0640.
+The semi-implicit relaxed Douglas-Rachford reconstruction algorithm:
+    Pham et al., &quot;Semi-implicit relaxed Douglas-Rachford algorithm (sDR) for ptychography&quot; Opt. Express 27 (2019) 31246, doi: 10.1364/OE.27.031246.
+================================================================================
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
 </pre></div>
 </div>
 </div>
@@ -687,16 +700,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ptypy_pycuda"
+            mode: "python"
         },
         kernelOptions: {
-            name: "ptypy_pycuda",
+            name: "conda-env-User_Conda_-_cuda12.2-python3",
             path: "./notebooks/experimental_xray_data"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ptypy_pycuda'</script>
+    <script>kernelName = 'conda-env-User_Conda_-_cuda12.2-python3'</script>
 
                 </article>
               
