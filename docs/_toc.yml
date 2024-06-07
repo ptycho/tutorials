@@ -29,12 +29,12 @@ parts:
   chapters:
   - file: notebooks/gpu_acceleration_and_large_data/00_working_with_large_data
   - file: notebooks/gpu_acceleration_and_large_data/01_multi_gpu
-  - file: notebooks/gpu_acceleration_and_large_data/02_start_from_previous_reconstruction
 - caption: Electron Ptychography Data
   numbered: false
   chapters:
   - file: notebooks/ptychography_with_electrons/00_electron_data
   - file: notebooks/ptychography_with_electrons/01_chaining_multiple_engines
+  - file: notebooks/ptychography_with_electrons/02_start_from_previous_reconstruction
 - caption: Advanced Examples
   numbered: false
   chapters:
