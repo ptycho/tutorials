@@ -23,8 +23,8 @@ parts:
   - file: notebooks/experimental_xray_data/02_fixing_data_issues
   - file: notebooks/experimental_xray_data/03_partial_coherence
   - file: notebooks/experimental_xray_data/04_position_refinement
-  - file: notebooks/experimental_xray_data/05_testing_different_algorithms
-  - file: notebooks/experimental_xray_data/06_missing_detector_frames
+  - file: notebooks/experimental_xray_data/05_missing_detector_frames
+  - file: notebooks/experimental_xray_data/06_testing_different_algorithms
   - file: notebooks/experimental_xray_data/07_multi_gpu
 - caption: Electron Ptychography Data
   numbered: false
