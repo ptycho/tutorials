@@ -7,7 +7,7 @@ rm ./notebooks
 ln -s ../converted ./notebooks 
 
 # Convert notebooks
-#module load ptypy
+module load ptypy
 python ./scripts/convert.py
 
 # Build Jupyter book

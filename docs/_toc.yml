@@ -19,16 +19,13 @@ parts:
   numbered: false
   chapters:
   - file: notebooks/experimental_xray_data/00_data_loading
-  - file: notebooks/experimental_xray_data/01_fixing_data_issues
-  - file: notebooks/experimental_xray_data/02_partial_coherence
-  - file: notebooks/experimental_xray_data/03_position_refinement
-  - file: notebooks/experimental_xray_data/04_testing_different_algorithms
-  - file: notebooks/experimental_xray_data/05_missing_detector_frames
-- caption: GPU acceleration and Large Data
-  numbered: false
-  chapters:
-  - file: notebooks/gpu_acceleration_and_large_data/00_working_with_large_data
-  - file: notebooks/gpu_acceleration_and_large_data/01_multi_gpu
+  - file: notebooks/experimental_xray_data/01_working_with_large_data
+  - file: notebooks/experimental_xray_data/02_fixing_data_issues
+  - file: notebooks/experimental_xray_data/03_partial_coherence
+  - file: notebooks/experimental_xray_data/04_position_refinement
+  - file: notebooks/experimental_xray_data/05_testing_different_algorithms
+  - file: notebooks/experimental_xray_data/06_missing_detector_frames
+  - file: notebooks/experimental_xray_data/07_multi_gpu
 - caption: Electron Ptychography Data
   numbered: false
   chapters:
