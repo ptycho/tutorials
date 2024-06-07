@@ -35,8 +35,8 @@ parts:
 - caption: Advanced Examples
   numbered: false
   chapters:
-  - file: notebooks/other_examples/00_nearfield_ptychography
-  - file: notebooks/other_examples/01_object_regularisation
-  - file: notebooks/other_examples/02_live_visualisation
-  - file: notebooks/other_examples/03_simulating_data
-  - file: notebooks/other_examples/04_simulated_initial_probe
+  - file: notebooks/supplementary_examples/00_nearfield_ptychography
+  - file: notebooks/supplementary_examples/01_object_regularisation
+  - file: notebooks/supplementary_examples/02_live_visualisation
+  - file: notebooks/supplementary_examples/03_simulating_data
+  - file: notebooks/supplementary_examples/04_modified_initial_probe

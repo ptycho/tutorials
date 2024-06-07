@@ -42,21 +42,21 @@ scans:
       name: Hdf5Loader
       orientation: 2
       intensities:
-        file: ../../data/dls_i08_nanogold_spiral/i08-1-5776.nxs
-        key: entry/axis/data
+        file: ../../data/dls_i08_nanogold_spiral/i08-1-5776_cropped.h5
+        key: data
       positions:
-        file: ../../data/dls_i08_nanogold_spiral/i08-1-5776.nxs
-        slow_key: entry/axis/SampleY_value
+        file: ../../data/dls_i08_nanogold_spiral/i08-1-5776_cropped.h5
+        slow_key: posy
         slow_multiplier: 0.001
-        fast_key: entry/axis/SampleX_value
+        fast_key: posx
         fast_multiplier: 0.001
         bounding_box:
           fast_axis_bounds:
           - 0
-          - 1000
+          - 900
       darkfield:
-        file: ../../data/dls_i08_nanogold_spiral/i08-1-5776.nxs
-        key: entry/instrument/darkFieldCollector/darkField
+        file: ../../data/dls_i08_nanogold_spiral/i08-1-5776_cropped.h5
+        key: dark
       energy: 0.71
       distance: 0.072
       psize: 1.1e-05
@@ -64,13 +64,10 @@ scans:
       - 1024
       - 1024
       rebin: 2
-      auto_center: false
-      center:
-      - 1038
-      - 1018
+      auto_center: true
 engines:
   engine:
-    name: DM_pycuda
+    name: DM_cupy
     numiter: 2000
     numiter_contiguous: 10
     probe_support: null
