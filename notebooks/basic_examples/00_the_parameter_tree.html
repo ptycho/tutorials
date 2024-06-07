@@ -543,15 +543,15 @@ The<span class="w"> </span>difference<span class="w"> </span>map<span class="w">
 <p>To visualise the results of the reconstruction, we can use <code class="docutils literal notranslate"><span class="pre">ptypy.utils.plot_client.figure_from_ptycho(P)</span></code> to produce an image like this</p>
 <p><img alt="" src="../../_images/moonflower_recons_plot.png" /></p>
 <div class="attention admonition">
-<p class="admonition-title">Exercise</p>
+<p class="admonition-title">Challenge</p>
 <p>Run the MoonFlower example below and inspect some of the attributes of the <code>Ptycho</code> instance <code>P</code>, like <code>P.obj</code>, <code>P.probe</code> and <code>P.diff</code>. These are all containers which are connected to <code>.storages</code> and have a list of <code>.views</code>. From a single object view, we can find out information about for example the reconstructed pixelsize: <code>P.obj.views[“V0000”].psize</code>.</p>
 </div>
 <div class="attention admonition">
-<p class="admonition-title">Exercise</p>
+<p class="admonition-title">Challenge</p>
 <p>Change the <code>verbose_level</code> to <code>info</code> or <code>debug</code> and observe the change in output. In the section just above the summary of the engine parameters, you should find a list of storages which also contains information about the reconstructed pixel size in the object.</p>
 </div>
 <div class="attention admonition">
-<p class="admonition-title">Exercise</p>
+<p class="admonition-title">Challenge</p>
 <p>Where the <code>Ptycho</code> instance is being created, change the <code>level</code> from 5 to 4 and observe the output. At level 4, PtyPy does all the data loading but it stops before invoking the engine. This can be useful if you would like to modify the <code>P</code> instance just before running the engine with <code>P.run()</code></p>
 </div>
 <hr class="docutils" />
