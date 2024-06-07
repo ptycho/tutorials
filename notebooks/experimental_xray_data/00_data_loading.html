@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/experimental_xray_data/00_data_loading';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Fixing Issues Related to Data (Loading)" href="01_fixing_data_issues.html" />
+    <link rel="next" title="Working With Large Data" href="01_working_with_large_data.html" />
     <link rel="prev" title="Gradient-based Engines" href="../basic_examples/07_gradient_based_engines.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -195,16 +195,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Experimental X-ray Data</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Loading HDF5 data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="01_fixing_data_issues.html">Fixing Issues Related to Data (Loading)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_partial_coherence.html">Partial Coherence</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_position_refinement.html">Position Refinement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_testing_different_algorithms.html">Testing different algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_working_with_large_data.html">Working With Large Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_fixing_data_issues.html">Fixing Issues Related to Data (Loading)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_partial_coherence.html">Partial Coherence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_position_refinement.html">Position Refinement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_missing_detector_frames.html">Missing Detector Frames</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">GPU acceleration and Large Data</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../gpu_acceleration_and_large_data/00_working_with_large_data.html">Working With Large Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gpu_acceleration_and_large_data/01_multi_gpu.html">Using multiple GPUs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_testing_different_algorithms.html">Testing different algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_multi_gpu.html">Using multiple GPUs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Electron Ptychography Data</span></p>
 <ul class="nav bd-sidenav">
@@ -214,11 +211,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Examples</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../other_examples/00_nearfield_ptychography.html">Nearfield Ptychography</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../other_examples/01_object_regularisation.html">Modifying an Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../other_examples/02_live_visualisation.html">Live visualisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../other_examples/03_simulating_data.html">Simulating Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../other_examples/04_simulated_initial_probe.html">Simulated Initial Probe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/00_nearfield_ptychography.html">Nearfield Ptychography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/01_object_regularisation.html">Modifying an Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/02_live_visualisation.html">Live visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/03_simulating_data.html">Simulating Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/04_modified_initial_probe.html">Modified Initial Probe</a></li>
 </ul>
 
     </div>
@@ -466,6 +463,25 @@ document.write(`
 <p>PtyPy uses the <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.core.html#ptypy.core.data.PtyScan">PtyScan</a> class to interact with experimental data and traditionally it was recommended that users write their own PtyScan subclass for each experiment or beamline, as documented in this tutorial on <a class="reference external" href="https://ptycho.github.io/ptypy/rst/data_management.html">Data Management</a>. This approach is extremely flexible since it allows users full control on defining how their data should be loaded based on whatever file format their data is stored with, but it requires some programming efforts and can therefore be a barrier for new ptychography users. However, if your exprimental data is stored in an HDF5 file - a file format adopted by most instruments and facilities - it is much simpler to just use the <a class="reference external" href="https://ptycho.github.io/ptypy/rst/ptypy.experiment.html#ptypy.experiment.hdf5_loader.Hdf5Loader">Hdf5Loader</a> PtyScan subclass which already provides a generic interface to load ptychographic data of a single or multiple HDF5 files into Ptypy.</p>
 <section id="the-data">
 <h2>The data<a class="headerlink" href="#the-data" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><strong>Data file</strong></p></th>
+<th class="head text-left"><p><strong>Type</strong></p></th>
+<th class="head text-left"><p><strong>Download</strong></p></th>
+<th class="head text-center"><p><strong>Courtesy of</strong></p></th>
+<th class="head text-center"><p><strong>Reference</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>dls_i08_nanogold_small.h5</p></td>
+<td class="text-left"><p>Raw</p></td>
+<td class="text-left"><p>small_data.zip</p></td>
+<td class="text-center"><p>Majid Kazemian</p></td>
+<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>In this example, we use an experimental data set collected at the I08-1 instrument at the Diamond Light Source on a test sample (gold nanostructures deposited on a carbon film). A subset of the experimental data including some meta information has been saved in an HDF5 file named “dls_i08_nanogold_small.h5” that was specifically created for the purpose of this tutorial. We can use the following code</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span><span class="o">,</span> <span class="nn">os</span>
 <span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>
@@ -739,11 +755,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="01_fixing_data_issues.html"
+       href="01_working_with_large_data.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Fixing Issues Related to Data (Loading)</p>
+        <p class="prev-next-title">Working With Large Data</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

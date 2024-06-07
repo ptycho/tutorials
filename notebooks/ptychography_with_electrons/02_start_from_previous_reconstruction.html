@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/ptychography_with_electrons/02_start_from_previous_reconstruction';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Nearfield Ptychography" href="../other_examples/00_nearfield_ptychography.html" />
+    <link rel="next" title="Nearfield Ptychography" href="../supplementary_examples/00_nearfield_ptychography.html" />
     <link rel="prev" title="Chaining Multiple Engines" href="01_chaining_multiple_engines.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -195,16 +195,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Experimental X-ray Data</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/00_data_loading.html">Loading HDF5 data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/01_fixing_data_issues.html">Fixing Issues Related to Data (Loading)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/02_partial_coherence.html">Partial Coherence</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/03_position_refinement.html">Position Refinement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/04_testing_different_algorithms.html">Testing different algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/01_working_with_large_data.html">Working With Large Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/02_fixing_data_issues.html">Fixing Issues Related to Data (Loading)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/03_partial_coherence.html">Partial Coherence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/04_position_refinement.html">Position Refinement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/05_missing_detector_frames.html">Missing Detector Frames</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">GPU acceleration and Large Data</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../gpu_acceleration_and_large_data/00_working_with_large_data.html">Working With Large Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gpu_acceleration_and_large_data/01_multi_gpu.html">Using multiple GPUs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/06_testing_different_algorithms.html">Testing different algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/07_multi_gpu.html">Using multiple GPUs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Electron Ptychography Data</span></p>
 <ul class="current nav bd-sidenav">
@@ -214,11 +211,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Examples</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../other_examples/00_nearfield_ptychography.html">Nearfield Ptychography</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../other_examples/01_object_regularisation.html">Modifying an Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../other_examples/02_live_visualisation.html">Live visualisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../other_examples/03_simulating_data.html">Simulating Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../other_examples/04_simulated_initial_probe.html">Simulated Initial Probe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/00_nearfield_ptychography.html">Nearfield Ptychography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/01_object_regularisation.html">Modifying an Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/02_live_visualisation.html">Live visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/03_simulating_data.html">Simulating Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/04_modified_initial_probe.html">Modified Initial Probe</a></li>
 </ul>
 
     </div>
@@ -464,8 +461,8 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="starting-from-a-previous-reconstruction">
 <h1>Starting From a Previous Reconstruction<a class="headerlink" href="#starting-from-a-previous-reconstruction" title="Link to this heading">#</a></h1>
 <p><strong>Learning how to start refinement from an existing reconstruction and use this strategy to reconstruct a large electron ptychography datasets.</strong></p>
-<p>In this example, we are going to reconstruct the full graphene data set from ePSIC a subsection of which was already used in <a class="reference internal" href="#../06_09_From_Data_to_Reconstruction/7_working_with_electron_data.ipynb"><span class="xref myst">Working With Electron Data</span></a>. The goal is to do a few iterations of ePIE to find a reasonable probe/object
-followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, there are a few incompatibilities between these two engines in PtyPy namely that ePIE requires data to be loaded in a single block whereas ML is fine with smaller block sizes. So, instead of simply <a class="reference internal" href="#../06_09_From_Data_to_Reconstruction/8_chaining_multiple_engines.ipynb"><span class="xref myst">chaining the engines</span></a> we can first run ePIE, save the results to a .ptyr file and then load the initial ePIE reconstruction into a separate ML script. This way, we can use different data loading parameters for the two parts of the reconstructions and also make use of the multi-GPU capabilities of the ML engine (ePIE by design needs to run in a single GPU instance).</p>
+<p>In this example, we are going to reconstruct the full graphene data set from ePSIC a subsection of which was already used in <a class="reference internal" href="00_electron_data.html"><span class="std std-doc">Working With Electron Data</span></a>. The goal is to do a few iterations of ePIE to find a reasonable probe/object
+followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, there are a few incompatibilities between these two engines in PtyPy namely that ePIE requires data to be loaded in a single block whereas ML is fine with smaller block sizes. So, instead of simply <a class="reference internal" href="01_chaining_multiple_engines.html"><span class="std std-doc">chaining the engines</span></a> we can first run ePIE, save the results to a .ptyr file and then load the initial ePIE reconstruction into a separate ML script. This way, we can use different data loading parameters for the two parts of the reconstructions and also make use of the multi-GPU capabilities of the ML engine (ePIE by design needs to run in a single GPU instance).</p>
 <section id="the-data">
 <h2>The data<a class="headerlink" href="#the-data" title="Link to this heading">#</a></h2>
 <p><strong>Thanks to Chris Allen (ePSIC,DLS) for sharing this data set for the purpose of this workshop.</strong></p>
@@ -754,7 +751,7 @@ followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, 
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
 </pre></div>
 </div>
-<p>Finally, we save the parameter into a config file: <a class="reference internal" href="#./config/dls_epsic_graphene_refine.yaml"><span class="xref myst">./config/dls_epsic_graphene_refine.yaml</span></a>, write a Python run script</p>
+<p>Finally, we save the parameter into a config file: <a class="reference download internal" download="" href="../../_downloads/60467aa02a24afb9e9ed1dfec7ad11ea/dls_epsic_graphene_refine.yaml"><span class="xref download myst">./config/dls_epsic_graphene_refine.yaml</span></a>, write a Python run script</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./ptypy_run_dls_epsic_graphene_refine.py&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">import ptypy</span>
@@ -853,7 +850,7 @@ srun<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><s
       </div>
     </a>
     <a class="right-next"
-       href="../other_examples/00_nearfield_ptychography.html"
+       href="../supplementary_examples/00_nearfield_ptychography.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>

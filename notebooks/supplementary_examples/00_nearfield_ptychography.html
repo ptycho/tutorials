@@ -59,7 +59,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/other_examples/00_nearfield_ptychography';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/supplementary_examples/00_nearfield_ptychography';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Modifying an Engine" href="01_object_regularisation.html" />
@@ -195,16 +195,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Experimental X-ray Data</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/00_data_loading.html">Loading HDF5 data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/01_fixing_data_issues.html">Fixing Issues Related to Data (Loading)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/02_partial_coherence.html">Partial Coherence</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/03_position_refinement.html">Position Refinement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/04_testing_different_algorithms.html">Testing different algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/01_working_with_large_data.html">Working With Large Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/02_fixing_data_issues.html">Fixing Issues Related to Data (Loading)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/03_partial_coherence.html">Partial Coherence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/04_position_refinement.html">Position Refinement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/05_missing_detector_frames.html">Missing Detector Frames</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">GPU acceleration and Large Data</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../gpu_acceleration_and_large_data/00_working_with_large_data.html">Working With Large Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gpu_acceleration_and_large_data/01_multi_gpu.html">Using multiple GPUs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/06_testing_different_algorithms.html">Testing different algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/07_multi_gpu.html">Using multiple GPUs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Electron Ptychography Data</span></p>
 <ul class="nav bd-sidenav">
@@ -218,7 +215,7 @@
 <li class="toctree-l1"><a class="reference internal" href="01_object_regularisation.html">Modifying an Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_live_visualisation.html">Live visualisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_simulating_data.html">Simulating Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_simulated_initial_probe.html">Simulated Initial Probe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_modified_initial_probe.html">Modified Initial Probe</a></li>
 </ul>
 
     </div>
@@ -273,7 +270,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=lab/tree/notebooks/other_examples/00_nearfield_ptychography.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=lab/tree/notebooks/supplementary_examples/00_nearfield_ptychography.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onBinder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -321,7 +318,7 @@
       
       
       
-      <li><a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/other_examples/00_nearfield_ptychography.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/supplementary_examples/00_nearfield_ptychography.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -351,7 +348,7 @@
       
       
       
-      <li><a href="../../_sources/notebooks/other_examples/00_nearfield_ptychography.ipynb" target="_blank"
+      <li><a href="../../_sources/notebooks/supplementary_examples/00_nearfield_ptychography.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -692,7 +689,7 @@ document.write(`
         },
         kernelOptions: {
             name: "ptypy_pycuda",
-            path: "./notebooks/other_examples"
+            path: "./notebooks/supplementary_examples"
         },
         predefinedOutput: true
     }

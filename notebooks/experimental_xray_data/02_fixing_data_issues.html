@@ -57,11 +57,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/experimental_xray_data/01_fixing_data_issues';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/experimental_xray_data/02_fixing_data_issues';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Partial Coherence" href="02_partial_coherence.html" />
-    <link rel="prev" title="Loading HDF5 data" href="00_data_loading.html" />
+    <link rel="next" title="Partial Coherence" href="03_partial_coherence.html" />
+    <link rel="prev" title="Working With Large Data" href="01_working_with_large_data.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -193,16 +193,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Experimental X-ray Data</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="00_data_loading.html">Loading HDF5 data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_working_with_large_data.html">Working With Large Data</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Fixing Issues Related to Data (Loading)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_partial_coherence.html">Partial Coherence</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_position_refinement.html">Position Refinement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_testing_different_algorithms.html">Testing different algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_partial_coherence.html">Partial Coherence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_position_refinement.html">Position Refinement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_missing_detector_frames.html">Missing Detector Frames</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">GPU acceleration and Large Data</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../gpu_acceleration_and_large_data/00_working_with_large_data.html">Working With Large Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gpu_acceleration_and_large_data/01_multi_gpu.html">Using multiple GPUs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_testing_different_algorithms.html">Testing different algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_multi_gpu.html">Using multiple GPUs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Electron Ptychography Data</span></p>
 <ul class="nav bd-sidenav">
@@ -212,11 +209,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Examples</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../other_examples/00_nearfield_ptychography.html">Nearfield Ptychography</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../other_examples/01_object_regularisation.html">Modifying an Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../other_examples/02_live_visualisation.html">Live visualisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../other_examples/03_simulating_data.html">Simulating Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../other_examples/04_simulated_initial_probe.html">Simulated Initial Probe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/00_nearfield_ptychography.html">Nearfield Ptychography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/01_object_regularisation.html">Modifying an Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/02_live_visualisation.html">Live visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/03_simulating_data.html">Simulating Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/04_modified_initial_probe.html">Modified Initial Probe</a></li>
 </ul>
 
     </div>
@@ -271,7 +268,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=lab/tree/notebooks/experimental_xray_data/01_fixing_data_issues.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=lab/tree/notebooks/experimental_xray_data/02_fixing_data_issues.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onBinder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -319,7 +316,7 @@
       
       
       
-      <li><a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/experimental_xray_data/01_fixing_data_issues.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/experimental_xray_data/02_fixing_data_issues.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -349,7 +346,7 @@
       
       
       
-      <li><a href="../../_sources/notebooks/experimental_xray_data/01_fixing_data_issues.ipynb" target="_blank"
+      <li><a href="../../_sources/notebooks/experimental_xray_data/02_fixing_data_issues.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -458,7 +455,26 @@ document.write(`
 <p>Since PtyPy 0.8.1 the megapixel limit has been increase to 100M therefore you might run out of memory before seeing this RuntimeError.</p>
 </div>
 <p>Another common issue is that we often don’t know exactly the coordinate system of the detector and the scanning stage that was used during data collection, and even if we know it might not match the default coordinate system used in PtyPy. Luckily, there are only a few (8 to be precise) possible configurations and the PtyScan base class has a parameter called <a class="reference external" href="https://ptycho.github.io/ptypy/rst/parameters.html#scandata.PtyScan.orientation">orientation</a> that makes it very simple to do a brute-force search for the correct setup.</p>
-<p>Based on the small I08-1 data set that was used in the tutorial on <a class="reference internal" href="#./6_the_hdf5_loader.ipynb"><span class="xref myst">The HDF5 Loader</span></a> we have a created a new file named “dls_i08_nanogold_issue.h5” for which the coordinate system has been modified sligthly. The task for this tutorial is to figure out the correct <code class="docutils literal notranslate"><span class="pre">orientation</span></code> based on the data that has been provided. As a starting point, we set it to zero.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><strong>Data file</strong></p></th>
+<th class="head text-left"><p><strong>Type</strong></p></th>
+<th class="head text-left"><p><strong>Download</strong></p></th>
+<th class="head text-center"><p><strong>Courtesy of</strong></p></th>
+<th class="head text-center"><p><strong>Reference</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>dls_i08_nanogold_issue.h5</p></td>
+<td class="text-left"><p>Raw data</p></td>
+<td class="text-left"><p>small_data.zip</p></td>
+<td class="text-center"><p>Majid Kazemian</p></td>
+<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Based on the small I08-1 data set that was used in the tutorial on <a class="reference internal" href="00_data_loading.html"><span class="std std-doc">Loading HDF5 Data</span></a> we have a created a new file named <code class="docutils literal notranslate"><span class="pre">&quot;dls_i08_nanogold_issue.h5&quot;</span></code> for which the coordinate system has been modified sligthly. The task for this tutorial is to figure out the correct <code class="docutils literal notranslate"><span class="pre">orientation</span></code> based on the data that has been provided. As a starting point, we set it to zero.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Hdf5Loader&#39;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mi">0</span>
@@ -604,16 +620,16 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="00_data_loading.html"
+       href="01_working_with_large_data.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Loading HDF5 data</p>
+        <p class="prev-next-title">Working With Large Data</p>
       </div>
     </a>
     <a class="right-next"
-       href="02_partial_coherence.html"
+       href="03_partial_coherence.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>

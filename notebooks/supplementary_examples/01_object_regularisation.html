@@ -57,7 +57,7 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/other_examples/01_object_regularisation';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/supplementary_examples/01_object_regularisation';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Live visualisation" href="02_live_visualisation.html" />
@@ -193,16 +193,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Experimental X-ray Data</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/00_data_loading.html">Loading HDF5 data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/01_fixing_data_issues.html">Fixing Issues Related to Data (Loading)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/02_partial_coherence.html">Partial Coherence</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/03_position_refinement.html">Position Refinement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/04_testing_different_algorithms.html">Testing different algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/01_working_with_large_data.html">Working With Large Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/02_fixing_data_issues.html">Fixing Issues Related to Data (Loading)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/03_partial_coherence.html">Partial Coherence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/04_position_refinement.html">Position Refinement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/05_missing_detector_frames.html">Missing Detector Frames</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">GPU acceleration and Large Data</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../gpu_acceleration_and_large_data/00_working_with_large_data.html">Working With Large Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gpu_acceleration_and_large_data/01_multi_gpu.html">Using multiple GPUs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/06_testing_different_algorithms.html">Testing different algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/07_multi_gpu.html">Using multiple GPUs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Electron Ptychography Data</span></p>
 <ul class="nav bd-sidenav">
@@ -216,7 +213,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Modifying an Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_live_visualisation.html">Live visualisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_simulating_data.html">Simulating Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_simulated_initial_probe.html">Simulated Initial Probe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_modified_initial_probe.html">Modified Initial Probe</a></li>
 </ul>
 
     </div>
@@ -271,7 +268,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=lab/tree/notebooks/other_examples/01_object_regularisation.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=lab/tree/notebooks/supplementary_examples/01_object_regularisation.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onBinder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -319,7 +316,7 @@
       
       
       
-      <li><a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/other_examples/01_object_regularisation.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/supplementary_examples/01_object_regularisation.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -349,7 +346,7 @@
       
       
       
-      <li><a href="../../_sources/notebooks/other_examples/01_object_regularisation.ipynb" target="_blank"
+      <li><a href="../../_sources/notebooks/supplementary_examples/01_object_regularisation.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -461,7 +458,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="modifying-an-engine">
 <h1>Modifying an Engine<a class="headerlink" href="#modifying-an-engine" title="Link to this heading">#</a></h1>
 <p><strong>This tutorial explains how to add new features to an existing engine</strong></p>
-<p>We are going to revisit the example on <a class="reference internal" href="#../10_13_Processing_Large_Datasets/13_nearfield_ptychography.ipynb"><span class="xref myst">Nearfield Ptychography</span></a> and use it to test an object regularisation feature that we are going to add to the existing DM engine in PtyPy. The idea with this object regularisation is to define a mask for the region outside of the capillary and then force the reconstructed in those masked regions to a certain value. This might help with low-frequency artefacts or large artificial phase jumps that can occur between the left and right side of the capillary.</p>
+<p>We are going to revisit the example on <a class="reference internal" href="00_nearfield_ptychography.html"><span class="std std-doc">Nearfield Ptychography</span></a> and use it to test an object regularisation feature that we are going to add to the existing DM engine in PtyPy. The idea with this object regularisation is to define a mask for the region outside of the capillary and then force the reconstructed in those masked regions to a certain value. This might help with low-frequency artefacts or large artificial phase jumps that can occur between the left and right side of the capillary.</p>
 <section id="defining-a-mask">
 <h2>Defining a mask<a class="headerlink" href="#defining-a-mask" title="Link to this heading">#</a></h2>
 <p>First, we load the reconstructed object from the previous reconstruction <code class="docutils literal notranslate"><span class="pre">&quot;esrf_id16_AlNi_nearfield_DM_pycuda_0500.ptyr&quot;</span></code></p>
@@ -787,7 +784,7 @@ copy the mask from host to device</p>
         },
         kernelOptions: {
             name: "ptypy_pycuda",
-            path: "./notebooks/other_examples"
+            path: "./notebooks/supplementary_examples"
         },
         predefinedOutput: true
     }

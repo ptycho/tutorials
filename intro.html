@@ -196,16 +196,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Experimental X-ray Data</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/00_data_loading.html">Loading HDF5 data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/01_fixing_data_issues.html">Fixing Issues Related to Data (Loading)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/02_partial_coherence.html">Partial Coherence</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/03_position_refinement.html">Position Refinement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/04_testing_different_algorithms.html">Testing different algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/01_working_with_large_data.html">Working With Large Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/02_fixing_data_issues.html">Fixing Issues Related to Data (Loading)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/03_partial_coherence.html">Partial Coherence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/04_position_refinement.html">Position Refinement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/05_missing_detector_frames.html">Missing Detector Frames</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">GPU acceleration and Large Data</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notebooks/gpu_acceleration_and_large_data/00_working_with_large_data.html">Working With Large Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/gpu_acceleration_and_large_data/01_multi_gpu.html">Using multiple GPUs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/06_testing_different_algorithms.html">Testing different algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/07_multi_gpu.html">Using multiple GPUs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Electron Ptychography Data</span></p>
 <ul class="nav bd-sidenav">
@@ -215,11 +212,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Examples</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notebooks/other_examples/00_nearfield_ptychography.html">Nearfield Ptychography</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/other_examples/01_object_regularisation.html">Modifying an Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/other_examples/02_live_visualisation.html">Live visualisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/other_examples/03_simulating_data.html">Simulating Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/other_examples/04_simulated_initial_probe.html">Simulated Initial Probe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/supplementary_examples/00_nearfield_ptychography.html">Nearfield Ptychography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/supplementary_examples/01_object_regularisation.html">Modifying an Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/supplementary_examples/02_live_visualisation.html">Live visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/supplementary_examples/03_simulating_data.html">Simulating Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/supplementary_examples/04_modified_initial_probe.html">Modified Initial Probe</a></li>
 </ul>
 
     </div>
@@ -415,10 +412,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-a-jupyter-notebook">How to use a Jupyter Notebook</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a><ul class="nav section-nav flex-column">
-</ul>
-</li>
 </ul>
             </nav>
         </div>
@@ -437,6 +432,162 @@ document.write(`
 <p class="admonition-title">Note</p>
 <p>Most of the content of this tutorial has been created in the form of Jupyter Notebooks and throughout this workshop, we are going to use JupyterLab to execute and interact with the content prepared for this workshop. The JupyterLab interface is very easy to use, but should you wish to learn more about the Jupyter project and the tools it provides, visit: <a class="reference external" href="https://jupyter.org">https://jupyter.org</a>.</p>
 </div>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>The table below gives an overview of all examples with associated data and a link for downloading the data.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><strong>Tutorial</strong></p></th>
+<th class="head text-left"><p><strong>Data</strong></p></th>
+<th class="head text-center"><p><strong>File Size</strong></p></th>
+<th class="head text-center"><p><strong>Reference</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>The Basics</strong></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="notebooks/basic_examples/00_the_parameter_tree.html"><span class="doc std std-doc">The Parameter Tree</span></a></p></td>
+<td class="text-left"><p>No Data Required</p></td>
+<td class="text-center"><p>-</p></td>
+<td class="text-center"><p>-</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="notebooks/basic_examples/01_using_yaml_or_json_config.html"><span class="doc std std-doc">JSON/YAML Config Files</span></a></p></td>
+<td class="text-left"><p>No Data Required</p></td>
+<td class="text-center"><p>-</p></td>
+<td class="text-center"><p>-</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="notebooks/basic_examples/02_input_output_parameters.html"><span class="doc std std-doc">Input/Output Parameters</span></a></p></td>
+<td class="text-left"><p>No Data Required</p></td>
+<td class="text-center"><p>-</p></td>
+<td class="text-center"><p>-</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="notebooks/basic_examples/03_scan_models.html"><span class="doc std std-doc">Scan Models</span></a></p></td>
+<td class="text-left"><p>No Data Required</p></td>
+<td class="text-center"><p>-</p></td>
+<td class="text-center"><p>-</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="notebooks/basic_examples/04_choosing_engines.html"><span class="doc std std-doc">Reconstruction Engines</span></a></p></td>
+<td class="text-left"><p>No Data Required</p></td>
+<td class="text-center"><p>-</p></td>
+<td class="text-center"><p>-</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="notebooks/basic_examples/05_projectional_engines.html"><span class="doc std std-doc">Projectional Engines</span></a></p></td>
+<td class="text-left"><p>No Data Required</p></td>
+<td class="text-center"><p>-</p></td>
+<td class="text-center"><p>-</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="notebooks/basic_examples/06_stochastic_engines.html"><span class="doc std std-doc">Stochastic Engines</span></a></p></td>
+<td class="text-left"><p>No Data Required</p></td>
+<td class="text-center"><p>-</p></td>
+<td class="text-center"><p>-</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="notebooks/basic_examples/07_gradient_based_engines.html"><span class="doc std std-doc">Gradient-based Engines</span></a></p></td>
+<td class="text-left"><p>No Data Required</p></td>
+<td class="text-center"><p>-</p></td>
+<td class="text-center"><p>-</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Experimental X-ray Data</strong></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="notebooks/experimental_xray_data/00_data_loading.html"><span class="doc std std-doc">Loading HDF5 data</span></a></p></td>
+<td class="text-left"><p>small_data.zip</p></td>
+<td class="text-center"><p>126 MB</p></td>
+<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="notebooks/experimental_xray_data/01_working_with_large_data.html"><span class="doc std std-doc">Working With Large Data</span></a></p></td>
+<td class="text-left"><p>dls_i08_nanogold_spiral.zip</p></td>
+<td class="text-center"><p>1.11 GB</p></td>
+<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="notebooks/experimental_xray_data/02_fixing_data_issues.html"><span class="doc std std-doc">Fixing Issues Related to Data (Loading)</span></a></p></td>
+<td class="text-left"><p>small_data.zip</p></td>
+<td class="text-center"><p>126 MB</p></td>
+<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="notebooks/experimental_xray_data/03_partial_coherence.html"><span class="doc std std-doc">Partial Coherence</span></a></p></td>
+<td class="text-left"><p>dls_i08_nanogold_spiral.zip</p></td>
+<td class="text-center"><p>1.11 GB</p></td>
+<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="notebooks/experimental_xray_data/04_position_refinement.html"><span class="doc std std-doc">Position Refinement</span></a></p></td>
+<td class="text-left"><p>dls_i14_test_structure.zip</p></td>
+<td class="text-center"><p>3.68 GB</p></td>
+<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="notebooks/experimental_xray_data/05_missing_detector_frames.html"><span class="doc std std-doc">Missing Detector Frames</span></a></p></td>
+<td class="text-left"><p>dls_i08_nanogold_raster.zip</p></td>
+<td class="text-center"><p>993 MB</p></td>
+<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="notebooks/experimental_xray_data/06_testing_different_algorithms.html"><span class="doc std std-doc">Testing different algorithms</span></a></p></td>
+<td class="text-left"><p>dls_i13_butterfly.zip</p></td>
+<td class="text-center"><p>286 MB</p></td>
+<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="notebooks/experimental_xray_data/07_multi_gpu.html"><span class="doc std std-doc">Using multiple GPUs</span></a></p></td>
+<td class="text-left"><p>dls_i08_nanogold_spiral.zip</p></td>
+<td class="text-center"><p>1.11 GB</p></td>
+<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Electron Ptychography Data</strong></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="notebooks/ptychography_with_electrons/00_electron_data.html"><span class="doc std std-doc">Working With Electron Data</span></a></p></td>
+<td class="text-left"><p>dls_epsic_80kV_graphene.zip</p></td>
+<td class="text-center"><p>270 MB</p></td>
+<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="notebooks/ptychography_with_electrons/01_chaining_multiple_engines.html"><span class="doc std std-doc">Chaining Multiple Engines</span></a></p></td>
+<td class="text-left"><p>dls_epsic_80kV_graphene.zip</p></td>
+<td class="text-center"><p>270 MB</p></td>
+<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="notebooks/ptychography_with_electrons/02_start_from_previous_reconstruction.html"><span class="doc std std-doc">Starting From a Previous Reconstruction</span></a></p></td>
+<td class="text-left"><p>dls_epsic_80kV_graphene.zip</p></td>
+<td class="text-center"><p>270 MB</p></td>
+<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Supplementary Examples</strong></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="notebooks/supplementary_examples/00_nearfield_ptychography.html"><span class="doc std std-doc">Nearfield Ptychography</span></a></p></td>
+<td class="text-left"><p>esrf_id16_AlNi_nearfield.zip</p></td>
+<td class="text-center"><p>532 MB</p></td>
+<td class="text-center"><p>TBA</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="notebooks/supplementary_examples/01_object_regularisation.html"><span class="doc std std-doc">Modifying an Engine</span></a></p></td>
+<td class="text-left"><p>esrf_id16_AlNi_nearfield.zip</p></td>
+<td class="text-center"><p>532 MB</p></td>
+<td class="text-center"><p>TBA</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="notebooks/supplementary_examples/02_live_visualisation.html"><span class="doc std std-doc">Live visualisation</span></a></p></td>
+<td class="text-left"><p>dls_i08_nanogold_spiral.zip</p></td>
+<td class="text-center"><p>1.11 GB</p></td>
+<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="notebooks/supplementary_examples/03_simulating_data.html"><span class="doc std std-doc">Simulating Data</span></a></p></td>
+<td class="text-left"><p>No Data Required</p></td>
+<td class="text-center"><p>-</p></td>
+<td class="text-center"><p>-</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="notebooks/supplementary_examples/04_modified_initial_probe.html"><span class="doc std std-doc">Modified Initial Probe</span></a></p></td>
+<td class="text-left"><p>small_data.zip</p></td>
+<td class="text-center"><p>126 MB</p></td>
+<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 <section id="how-to-use-a-jupyter-notebook">
 <h2>How to use a Jupyter Notebook<a class="headerlink" href="#how-to-use-a-jupyter-notebook" title="Link to this heading">#</a></h2>
 <p>Before we get started with PtyPy, a few words about Jupyter Notebooks, which offer a convenient way to provide executable code (e.g. Python) alongside formatted text (using markdown). All notebooks used here are structured in the same way, with some informative content at the top and a full code example at the bottom, separated by a horizontal line:</p>
@@ -448,56 +599,14 @@ document.write(`
 <img alt="_images/jupyter_notebook_2.PNG" src="_images/jupyter_notebook_2.PNG" />
 </figure>
 </section>
-<section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
-<p>The content of this tutorial is structured into 6 different topics from beginner level to advanced topics:</p>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Basics</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/basic_examples/00_the_parameter_tree.html">The Parameter Tree</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/basic_examples/01_using_yaml_or_json_config.html">JSON/YAML Config Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/basic_examples/02_input_output_parameters.html">Input/Output Parameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/basic_examples/03_scan_models.html">Scan Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/basic_examples/04_choosing_engines.html">Reconstruction Engines</a></li>
-</ul>
 </div>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Experimental X-ray Data</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/00_data_loading.html">Loading HDF5 data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/01_fixing_data_issues.html">Fixing Issues Related to Data (Loading)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/02_partial_coherence.html">Partial Coherence</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/03_position_refinement.html">Position Refinement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/04_testing_different_algorithms.html">Testing different algorithms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/experimental_xray_data/05_missing_detector_frames.html">Missing Detector Frames</a></li>
-</ul>
 </div>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">GPU acceleration and Large Data</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/gpu_acceleration_and_large_data/00_working_with_large_data.html">Working With Large Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/gpu_acceleration_and_large_data/01_multi_gpu.html">Using multiple GPUs</a></li>
-</ul>
 </div>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Electron Ptychography Data</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/ptychography_with_electrons/00_electron_data.html">Working With Electron Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/ptychography_with_electrons/01_chaining_multiple_engines.html">Chaining Multiple Engines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/ptychography_with_electrons/02_start_from_previous_reconstruction.html">Starting From a Previous Reconstruction</a></li>
-</ul>
 </div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/other_examples/00_nearfield_ptychography.html">Nearfield Ptychography</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/other_examples/01_object_regularisation.html">Modifying an Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/other_examples/02_live_visualisation.html">Live visualisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/other_examples/03_simulating_data.html">Simulating Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/other_examples/04_simulated_initial_probe.html">Simulated Initial Probe</a></li>
-</ul>
-</div>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -555,10 +664,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-a-jupyter-notebook">How to use a Jupyter Notebook</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a><ul class="nav section-nav flex-column">
-</ul>
-</li>
 </ul>
   </nav></div>
 
