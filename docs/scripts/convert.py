@@ -35,7 +35,7 @@ for name in notebooks:
         if cell["cell_type"] == "markdown":
             for s in cell["source"]:
                 if s.startswith("<div class=") and ("warning" in s):
-                    replace_div_with_admonition(cell, label="Exercise", type="attention")
+                    replace_div_with_admonition(cell, label="Challenge", type="attention")
                 if s.startswith("<div class=") and ("success" in s):
                     replace_div_with_admonition(cell, label="Tip", type="tip")
                 if s.startswith("<div class=") and ("info" in s):
