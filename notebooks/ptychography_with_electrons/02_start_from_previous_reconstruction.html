@@ -59,11 +59,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/gpu_acceleration_and_large_data/02_start_from_previous_reconstruction';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/ptychography_with_electrons/02_start_from_previous_reconstruction';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Working With Electron Data" href="../ptychography_with_electrons/00_electron_data.html" />
-    <link rel="prev" title="Using multiple GPUs" href="01_multi_gpu.html" />
+    <link rel="next" title="Nearfield Ptychography" href="../other_examples/00_nearfield_ptychography.html" />
+    <link rel="prev" title="Chaining Multiple Engines" href="01_chaining_multiple_engines.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -186,9 +186,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../basic_examples/02_input_output_parameters.html">Input/Output Parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../basic_examples/03_scan_models.html">Scan Models</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../basic_examples/04_choosing_engines.html">Reconstruction Engines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../basic_examples/05_projectional_engines.html">Projectional Reconstruction Engines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basic_examples/06_stochastic_engines.html">Stochastic Reconstruction Engines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basic_examples/07_gradient_based_engines.html">Gradient-based Reconstruction Engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basic_examples/05_projectional_engines.html">Projectional Engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basic_examples/06_stochastic_engines.html">Stochastic Engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basic_examples/07_gradient_based_engines.html">Gradient-based Engines</a></li>
 </ul>
 </details></li>
 </ul>
@@ -202,15 +202,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/05_missing_detector_frames.html">Missing Detector Frames</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">GPU acceleration and Large Data</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="00_working_with_large_data.html">Working With Large Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="01_multi_gpu.html">Using multiple GPUs</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Starting From a Previous Reconstruction</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../gpu_acceleration_and_large_data/00_working_with_large_data.html">Working With Large Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gpu_acceleration_and_large_data/01_multi_gpu.html">Using multiple GPUs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Electron Ptychography Data</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../ptychography_with_electrons/00_electron_data.html">Working With Electron Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ptychography_with_electrons/01_chaining_multiple_engines.html">Chaining Multiple Engines</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_electron_data.html">Working With Electron Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_chaining_multiple_engines.html">Chaining Multiple Engines</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Starting From a Previous Reconstruction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Examples</span></p>
 <ul class="nav bd-sidenav">
@@ -273,7 +273,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=lab/tree/notebooks/gpu_acceleration_and_large_data/02_start_from_previous_reconstruction.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=lab/tree/notebooks/ptychography_with_electrons/02_start_from_previous_reconstruction.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onBinder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -321,7 +321,7 @@
       
       
       
-      <li><a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/gpu_acceleration_and_large_data/02_start_from_previous_reconstruction.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/ptychography_with_electrons/02_start_from_previous_reconstruction.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -351,7 +351,7 @@
       
       
       
-      <li><a href="../../_sources/notebooks/gpu_acceleration_and_large_data/02_start_from_previous_reconstruction.ipynb" target="_blank"
+      <li><a href="../../_sources/notebooks/ptychography_with_electrons/02_start_from_previous_reconstruction.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -754,7 +754,7 @@ followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, 
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
 </pre></div>
 </div>
-<p>Finally, we save the parameter into a config file: <a class="reference download internal" download="" href="../../_downloads/062e7130aeacea9a3f37ad743815921e/dls_epsic_graphene_refine.yaml"><span class="xref download myst">./config/dls_epsic_graphene_refine.yaml</span></a>, write a Python run script</p>
+<p>Finally, we save the parameter into a config file: <a class="reference internal" href="#./config/dls_epsic_graphene_refine.yaml"><span class="xref myst">./config/dls_epsic_graphene_refine.yaml</span></a>, write a Python run script</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./ptypy_run_dls_epsic_graphene_refine.py&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">import ptypy</span>
@@ -822,16 +822,16 @@ srun<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><s
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ptypy_pycuda"
+            mode: "python"
         },
         kernelOptions: {
-            name: "ptypy_pycuda",
-            path: "./notebooks/gpu_acceleration_and_large_data"
+            name: "conda-env-User_Conda_-_cuda12.2-python3",
+            path: "./notebooks/ptychography_with_electrons"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ptypy_pycuda'</script>
+    <script>kernelName = 'conda-env-User_Conda_-_cuda12.2-python3'</script>
 
                 </article>
               
@@ -844,20 +844,20 @@ srun<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><s
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="01_multi_gpu.html"
+       href="01_chaining_multiple_engines.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Using multiple GPUs</p>
+        <p class="prev-next-title">Chaining Multiple Engines</p>
       </div>
     </a>
     <a class="right-next"
-       href="../ptychography_with_electrons/00_electron_data.html"
+       href="../other_examples/00_nearfield_ptychography.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Working With Electron Data</p>
+        <p class="prev-next-title">Nearfield Ptychography</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
