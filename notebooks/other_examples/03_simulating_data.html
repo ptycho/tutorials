@@ -465,10 +465,8 @@ document.write(`
 <section id="the-data">
 <h2>The data<a class="headerlink" href="#the-data" title="Link to this heading">#</a></h2>
 <p>For the simulation, we can use an image of a <a class="reference download internal" download="" href="../../_downloads/0784aff824f2011dc9e957a05b7721ca/painting.jpg"><span class="xref download myst">painting</span></a> for the object and a real probe from the I08-1 instrument</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">path_to_probe</span> <span class="o">=</span> <span class="s2">&quot;small_data/dls_i08_nanogold_recon.ptyr&quot;</span>
-<span class="n">path_to_image</span> <span class="o">=</span> <span class="s2">&quot;small_data/painting.jpg&quot;</span>
-<span class="n">sim_probe</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">path_to_probe</span><span class="p">)</span>
-<span class="n">sim_image</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">path_to_image</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim_probe</span> <span class="o">=</span> <span class="s2">&quot;./_assets/dls_i08_probe.ptyr&quot;</span>
+<span class="n">sim_image</span> <span class="o">=</span> <span class="s2">&quot;./_assets/painting.jpg&quot;</span>
 </pre></div>
 </div>
 </section>
@@ -562,14 +560,9 @@ document.write(`
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="c1"># Root directory of tutorial data</span>
-<span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>
-
 <span class="c1"># Probe/object to be used for simulation</span>
-<span class="n">path_to_probe</span> <span class="o">=</span> <span class="s2">&quot;small_data/dls_i08_nanogold_recon.ptyr&quot;</span>
-<span class="n">path_to_image</span> <span class="o">=</span> <span class="s2">&quot;small_data/painting.jpg&quot;</span>
-<span class="n">sim_probe</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">path_to_probe</span><span class="p">)</span>
-<span class="n">sim_image</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">path_to_image</span><span class="p">)</span>
+<span class="n">sim_probe</span> <span class="o">=</span> <span class="s2">&quot;./_assets/dls_i08_probe.ptyr&quot;</span>
+<span class="n">sim_image</span> <span class="o">=</span> <span class="s2">&quot;./_assets/painting.jpg&quot;</span>
 
 <span class="c1"># Create parameter tree</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
@@ -682,13 +675,13 @@ document.write(`
             mode: "python"
         },
         kernelOptions: {
-            name: "python3",
+            name: "conda-env-User_Conda_-_cuda12.2-python3",
             path: "./notebooks/other_examples"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'conda-env-User_Conda_-_cuda12.2-python3'</script>
 
                 </article>
               
