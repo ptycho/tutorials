@@ -37,7 +37,7 @@ The table below gives an overview of all examples with associated data and a lin
 |  [](notebooks/supplementary_examples/04_modified_initial_probe)  |  small_data.zip                        |  126 MB  |  [doi](https://10.5281/zenodo.11501765) |
  
 
-## How to use a Jupyter Notebook
+## Jupyter Lab/Notebooks
 
 ```{note}
 Most of the content of this tutorial has been created in the form of Jupyter Notebooks and the JupyterLab interface is the recommended way of working through these examples. JupyterLab is very easy to use, should you wish to learn more about the Jupyter project and the tools it provides, visit: [https://jupyter.org](https://jupyter.org).
