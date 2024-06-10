@@ -495,9 +495,9 @@ followed by refinement using the maximum-likelihood (ML) engine. Unfortunately, 
 <tbody>
 <tr class="row-even"><td class="text-left"><p>20200130_163208.h5</p></td>
 <td class="text-left"><p>Raw</p></td>
-<td class="text-left"><p>dls_epsic_80kV_graphene.zip</p></td>
+<td class="text-left"><p><a class="reference external" href="https://zenodo.org/records/11501765/files/dls_epsic_80kV_graphene.zip?download=1">dls_epsic_80kV_graphene.zip</a></p></td>
 <td class="text-center"><p>Chris Allen</p></td>
-<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://doi.org/10.5281/zenodo.11501765">DOI</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -814,7 +814,7 @@ srun<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><s
     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">import ptypy</span>
 <span class="s2">ptypy.load_ptyscan_module(&quot;epsic_loader&quot;)</span>
-<span class="s2">ptypy.load_gpu_engines(&quot;cuda&quot;)  </span>
+<span class="s2">ptypy.load_gpu_engines(&quot;cupy&quot;)  </span>
 <span class="s2">p = ptypy.utils.param_from_yaml(&quot;config/dls_epsic_graphene_refine.yaml&quot;)</span>
 <span class="s2">P = ptypy.core.Ptycho(p,level=5)</span>
 <span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
@@ -833,7 +833,7 @@ srun<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig2</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">figure_from_ptyr</span><span class="p">(</span><span class="s2">&quot;./recons/dls_epsic_graphene_ML_pycuda_0100.ptyr&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig2</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">figure_from_ptyr</span><span class="p">(</span><span class="s2">&quot;./recons/dls_epsic_graphene_ML_cupy_0100.ptyr&quot;</span><span class="p">)</span>
 <span class="n">fig2</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;./recons_after_epie_ml.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -855,16 +855,16 @@ srun<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><s
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "ptypy_cupy"
         },
         kernelOptions: {
-            name: "conda-env-User_Conda_-_cuda12.2-python3",
+            name: "ptypy_cupy",
             path: "./notebooks/ptychography_with_electrons"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'conda-env-User_Conda_-_cuda12.2-python3'</script>
+    <script>kernelName = 'ptypy_cupy'</script>
 
                 </article>
               
