@@ -493,9 +493,9 @@ document.write(`
 <tbody>
 <tr class="row-even"><td class="text-left"><p>i08-1-5778_cropped.h5</p></td>
 <td class="text-left"><p>Raw data</p></td>
-<td class="text-left"><p>dls_i08_nanogold_raster.zip</p></td>
+<td class="text-left"><p><a class="reference external" href="https://zenodo.org/records/11501765/files/dls_i08_nanogold_raster.zip?download=1">dls_i08_nanogold_raster.zip</a></p></td>
 <td class="text-center"><p>Majid Kazemian</p></td>
-<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://doi.org/10.5281/zenodo.11501765">DOI</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -584,6 +584,10 @@ document.write(`
 </div>
 <p>With this small change, the reconstruction after <span class="math notranslate nohighlight">\(500\)</span> iterations of DM now looks much better</p>
 <p><img alt="" src="../../_images/i08_nanogold_framefilter.png" /></p>
+<div class="attention admonition">
+<p class="admonition-title">Challenge</p>
+<p>Compare reconstructions without and with using the framefilter to exclude the missing detector frame.</p>
+</div>
 <hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -690,9 +694,9 @@ document.write(`
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">darkfield</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">darkfield</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;dark&quot;</span>
 
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">framefilter</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">framefilter</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
-<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">framefilter</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;datasum&quot;</span>
+<span class="c1"># p.scans.scan_00.data.framefilter = u.Param()</span>
+<span class="c1"># p.scans.scan_00.data.framefilter.file = path_to_data</span>
+<span class="c1"># p.scans.scan_00.data.framefilter.key = &quot;datasum&quot;</span>
 
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="mf">0.710</span>
 <span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">distance</span> <span class="o">=</span> <span class="mf">0.072</span>
@@ -738,16 +742,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "ptypy_cupy"
         },
         kernelOptions: {
-            name: "conda-env-User_Conda_-_cuda12.2-python3",
+            name: "ptypy_cupy",
             path: "./notebooks/experimental_xray_data"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'conda-env-User_Conda_-_cuda12.2-python3'</script>
+    <script>kernelName = 'ptypy_cupy'</script>
 
                 </article>
               

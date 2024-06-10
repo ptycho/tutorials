@@ -53,7 +53,7 @@ scans:
           - 900
       darkfield:
         file: ../../data/dls_i08_nanogold_spiral/i08-1-5776_cropped.h5
-        key: data
+        key: dark
       energy: 0.71
       distance: 0.072
       psize: 1.1e-05

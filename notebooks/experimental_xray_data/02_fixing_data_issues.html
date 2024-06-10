@@ -470,7 +470,7 @@ document.write(`
 <p>if they have not been provide correctly.</p>
 <div class="note admonition">
 <p class="admonition-title">Note</p>
-<p>Since PtyPy 0.8.1 the megapixel limit has been increase to 100M therefore you might run out of memory before seeing this RuntimeError.</p>
+<p>Since PtyPy 0.8.1 the megapixel limit has been increased to 100M therefore you might run out of memory before seeing this RuntimeError.</p>
 </div>
 <p>Another common issue is that we often don’t know exactly the coordinate system of the detector and the scanning stage that was used during data collection, and even if we know it might not match the default coordinate system used in PtyPy. Luckily, there are only a few (8 to be precise) possible configurations and the PtyScan base class has a parameter called <a class="reference external" href="https://ptycho.github.io/ptypy/rst/parameters.html#scandata.PtyScan.orientation">orientation</a> that makes it very simple to do a brute-force search for the correct setup.</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -485,9 +485,9 @@ document.write(`
 <tbody>
 <tr class="row-even"><td class="text-left"><p>dls_i08_nanogold_issue.h5</p></td>
 <td class="text-left"><p>Raw data</p></td>
-<td class="text-left"><p>small_data.zip</p></td>
+<td class="text-left"><p><a class="reference external" href="https://zenodo.org/records/11501765/files/small_data.zip?download=1">small_data.zip</a></p></td>
 <td class="text-center"><p>Majid Kazemian</p></td>
-<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://doi.org/10.5281/zenodo.11501765">DOI</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -616,16 +616,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "ptypy_cupy"
         },
         kernelOptions: {
-            name: "conda-env-User_Conda_-_cuda12.2-python3",
+            name: "ptypy_cupy",
             path: "./notebooks/experimental_xray_data"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'conda-env-User_Conda_-_cuda12.2-python3'</script>
+    <script>kernelName = 'ptypy_cupy'</script>
 
                 </article>
               

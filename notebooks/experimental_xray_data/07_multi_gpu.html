@@ -501,7 +501,7 @@ document.write(`
     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">import ptypy</span>
 <span class="s2">ptypy.load_ptyscan_module(&quot;hdf5_loader&quot;)</span>
-<span class="s2">ptypy.load_gpu_engines(&quot;cuda&quot;)  </span>
+<span class="s2">ptypy.load_gpu_engines(&quot;cupy&quot;)  </span>
 <span class="s2">p = ptypy.utils.param_from_yaml(&quot;config/dls_i08_nanogold_spiral.yaml&quot;)</span>
 <span class="s2">P = ptypy.core.Ptycho(p,level=5)</span>
 <span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
@@ -534,14 +534,14 @@ document.write(`
 <h2>Display reconstruction from ptyr file<a class="headerlink" href="#display-reconstruction-from-ptyr-file" title="Link to this heading">#</a></h2>
 <p>Once the multi-GPU reconstruction has finished, we can switch back to this notebook and display the final output using</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy.utils.plot_client</span> <span class="k">as</span> <span class="nn">pc</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">figure_from_ptyr</span><span class="p">(</span><span class="s2">&quot;./recons/dls_i08_nanogold_DM_pycuda_0200.ptyr&quot;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">figure_from_ptyr</span><span class="p">(</span><span class="s2">&quot;./recons/dls_i08_nanogold_DM_cupy_0200.ptyr&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ptypy.utils.plot_client</span> <span class="k">as</span> <span class="nn">pc</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">figure_from_ptyr</span><span class="p">(</span><span class="s2">&quot;./recons/dls_i08_nanogold_DM_pycuda_0200.ptyr&quot;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">figure_from_ptyr</span><span class="p">(</span><span class="s2">&quot;./recons/dls_i08_nanogold_DM_cupy_0200.ptyr&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -558,16 +558,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "ptypy_cupy"
         },
         kernelOptions: {
-            name: "conda-env-User_Conda_-_cuda12.2-python3",
+            name: "ptypy_cupy",
             path: "./notebooks/experimental_xray_data"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'conda-env-User_Conda_-_cuda12.2-python3'</script>
+    <script>kernelName = 'ptypy_cupy'</script>
 
                 </article>
               
