@@ -5,7 +5,7 @@ The purpose of these tutorials is to provide a comprehensive collection of examp
 ## Overview
 
 The table below gives an overview of all examples with associated data and a link for downloading the data.
-| **Tutorial** 	| **Data** 	| **File Size** | **Reference**  |
+| **Tutorial** | **Download Data** | **File Size** | **Reference** |
 | :-| :-| :-:|:-: |
 | **The Basics** |
 |  [](notebooks/basic_examples/00_the_parameter_tree)         |   No Data Required  | - | - |
