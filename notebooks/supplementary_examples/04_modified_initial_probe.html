@@ -462,7 +462,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="modified-initial-probe">
 <h1>Modified Initial Probe<a class="headerlink" href="#modified-initial-probe" title="Link to this heading">#</a></h1>
 <p><strong>Learning how to modify the simulated initial probe in the source plane.</strong></p>
-<p>This example builds on the data set used in <a class="reference internal" href="../experimental_xray_data/00_data_loading.html"><span class="std std-doc">The Hdf5Loader</span></a> and shows how it is possible in PtyPy to set up a reconstruction, execute with <code class="docutils literal notranslate"><span class="pre">level=4</span></code>, then modify the model of the initial probe and run the reconstruction via <code class="docutils literal notranslate"><span class="pre">P.run()</span></code> using the newly generated initial probe</p>
+<p>This example is using the same data and parameters as in <a class="reference internal" href="../experimental_xray_data/00_data_loading.html"><span class="std std-doc">Loading HDF5 Data</span></a> and shows how it is possible in PtyPy to set up a reconstruction, execute with <code class="docutils literal notranslate"><span class="pre">level=4</span></code>, then modify the model of the initial probe and run the reconstruction via <code class="docutils literal notranslate"><span class="pre">P.run()</span></code> using the newly generated initial probe</p>
 <p><img alt="" src="../../_images/modified_probe.png" /></p>
 <hr class="docutils" />
 <div class="cell docutils container">
@@ -639,16 +639,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "ptypy_cupy"
         },
         kernelOptions: {
-            name: "conda-env-DLS_Conda-python3.10-kernel.json",
+            name: "ptypy_cupy",
             path: "./notebooks/supplementary_examples"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'conda-env-DLS_Conda-python3.10-kernel.json'</script>
+    <script>kernelName = 'ptypy_cupy'</script>
 
                 </article>
               

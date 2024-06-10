@@ -681,7 +681,7 @@ copy the mask from host to device</p>
 <span class="n">ptypy</span><span class="o">.</span><span class="n">load_ptyscan_module</span><span class="p">(</span><span class="s2">&quot;hdf5_loader&quot;</span><span class="p">)</span>
 
 <span class="c1"># This will import the GPU engines</span>
-<span class="n">ptypy</span><span class="o">.</span><span class="n">load_gpu_engines</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="n">ptypy</span><span class="o">.</span><span class="n">load_gpu_engines</span><span class="p">(</span><span class="s2">&quot;pycuda&quot;</span><span class="p">)</span>
 
 <span class="c1"># Load custom engine</span>
 <span class="kn">from</span> <span class="nn">ptypy.custom.DM_pycuda_object_regul</span> <span class="kn">import</span> <span class="n">DM_pycuda_object_regul</span>
