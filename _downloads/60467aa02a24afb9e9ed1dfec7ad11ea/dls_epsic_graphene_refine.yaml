@@ -17,14 +17,14 @@ scans:
       photons: null
       model: recon
       recon:
-        rfile: ./recons/dls_epsic_graphene_EPIE_pycuda_0005.ptyr
+        rfile: ./recons/dls_epsic_graphene_EPIE_cupy_0005.ptyr
       aperture:
         form: null
       diversity: null
     sample:
       model: recon
       recon:
-        rfile: ./recons/dls_epsic_graphene_EPIE_pycuda_0005.ptyr
+        rfile: ./recons/dls_epsic_graphene_EPIE_cupy_0005.ptyr
       diversity: null
       process: null
     coherence:
@@ -46,7 +46,7 @@ scans:
       auto_center: true
 engines:
   engine:
-    name: ML_pycuda
+    name: ML_cupy
     numiter: 100
     numiter_contiguous: 10
     ML_type: Gaussian

@@ -450,7 +450,7 @@ document.write(`
 <p>A common approach in ptychography is to use one algorithm (e.g. DM or ePIE) as a starting point and another algorithm (e.g. ML) for refinement. In PtyPy, this can be achieved by simply specifying multiple engines in the parameter tree. Continuing with the same data set from the previous tutorial on <a class="reference internal" href="00_electron_data.html"><span class="std std-doc">Working With Electron Data</span></a> we can now add “ML_pycuda” as a second engine to run after “EPIE_pycuda”</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EPIE_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EPIE_cupy&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.9</span>
@@ -459,7 +459,7 @@ document.write(`
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">object_norm_is_global</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ML_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ML_cupy&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">190</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">reg_del2</span> <span class="o">=</span> <span class="kc">True</span> 
@@ -485,7 +485,7 @@ document.write(`
 <span class="n">ptypy</span><span class="o">.</span><span class="n">load_ptyscan_module</span><span class="p">(</span><span class="s2">&quot;hdf5_loader&quot;</span><span class="p">)</span>
 
 <span class="c1"># This will import the GPU engines</span>
-<span class="n">ptypy</span><span class="o">.</span><span class="n">load_gpu_engines</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="n">ptypy</span><span class="o">.</span><span class="n">load_gpu_engines</span><span class="p">(</span><span class="s2">&quot;cupy&quot;</span><span class="p">)</span>
 
 <span class="c1"># Root directory of tutorial data</span>
 <span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>
@@ -579,7 +579,7 @@ document.write(`
 <span class="c1"># Define reconstruction engine (using ePIE)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EPIE_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EPIE_cupy&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.9</span>
@@ -588,7 +588,7 @@ document.write(`
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine1</span><span class="o">.</span><span class="n">object_norm_is_global</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ML_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ML_cupy&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">40</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine2</span><span class="o">.</span><span class="n">reg_del2</span> <span class="o">=</span> <span class="kc">True</span> 
@@ -614,16 +614,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ptypy_pycuda"
+            mode: "python"
         },
         kernelOptions: {
-            name: "ptypy_pycuda",
+            name: "conda-env-User_Conda_-_cuda12.2-python3",
             path: "./notebooks/ptychography_with_electrons"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ptypy_pycuda'</script>
+    <script>kernelName = 'conda-env-User_Conda_-_cuda12.2-python3'</script>
 
                 </article>
               

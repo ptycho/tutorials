@@ -463,7 +463,25 @@ document.write(`
 <p>Working with electron ptychography data is very similar to working with X-ray data, the only critical part to consider is that the internal calculation of the electron wavelength is different from calculating the X-ray wavelength based on given photon/electron energies. The Hdf5Loader has a parameter <code class="docutils literal notranslate"><span class="pre">electron_data</span></code> that will take care of this difference if set to <code class="docutils literal notranslate"><span class="pre">True</span></code> when loading electron ptychography data.</p>
 <section id="the-data">
 <h2>The data<a class="headerlink" href="#the-data" title="Link to this heading">#</a></h2>
-<p><strong>Thanks to Chris Allen (ePSIC,DLS) for sharing this data set for the purpose of this workshop.</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><strong>Data file</strong></p></th>
+<th class="head text-left"><p><strong>Type</strong></p></th>
+<th class="head text-left"><p><strong>Download</strong></p></th>
+<th class="head text-center"><p><strong>Courtesy of</strong></p></th>
+<th class="head text-center"><p><strong>Reference</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>dls_epsic_graphene_small.h5</p></td>
+<td class="text-left"><p>Raw</p></td>
+<td class="text-left"><p>small_data.zip</p></td>
+<td class="text-center"><p>Chris Allen</p></td>
+<td class="text-center"><p><a class="reference external" href="https://10.5281/zenodo.11501765">doi</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>In this example, we use an experimental data set collected at the ePSIC instrument at the Diamond Light Source on a thin layer of graphene. A subset of the experimental data including some meta information has been saved in an HDF5 file named “dls_epsic_graphene_small.h5” that was specifically created for the purpose of this tutorial. We can use the following code</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span><span class="o">,</span> <span class="nn">os</span>
 <span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>
@@ -475,7 +493,7 @@ document.write(`
 </pre></div>
 </div>
 <p>to list all entires/keys saved at the root level</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">file</span> <span class="o">/</span><span class="k">global</span><span class="o">/</span><span class="n">homes</span><span class="o">/</span><span class="n">b</span><span class="o">/</span><span class="n">benedikt</span><span class="o">/</span><span class="n">workshop_data</span><span class="o">/</span><span class="n">small_data</span><span class="o">/</span><span class="n">dls_epsic_graphene_small</span><span class="o">.</span><span class="n">h5</span> <span class="n">has</span> <span class="n">the</span> <span class="n">following</span> <span class="n">entries</span><span class="p">:</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">file</span> <span class="o">../../</span><span class="n">small_data</span><span class="o">/</span><span class="n">dls_epsic_graphene_small</span><span class="o">.</span><span class="n">h5</span> <span class="n">has</span> <span class="n">the</span> <span class="n">following</span> <span class="n">entries</span><span class="p">:</span> 
 
 	<span class="o">*</span> <span class="n">data</span>          	<span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2893</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
 	<span class="o">*</span> <span class="n">det_distance_m</span> 	<span class="n">shape</span> <span class="o">=</span> <span class="p">()</span>
@@ -548,7 +566,7 @@ document.write(`
 <p>For many electron ptychography data sets, it makes sense to use the ePIE reconstruction engine as a first starting point. In this particular case, using <code class="docutils literal notranslate"><span class="pre">alpha=0.9</span></code>, <code class="docutils literal notranslate"><span class="pre">beta=0.1</span></code> and <code class="docutils literal notranslate"><span class="pre">object_norm_is_global=True</span></code> seems to be a reasonable of parameters</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EPIE_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EPIE_cupy&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.9</span>
@@ -558,7 +576,7 @@ document.write(`
 </pre></div>
 </div>
 <p>resulting in the following reconstruction after 20 iterations of ePIE showing a section of the graphene sample with a hole in the center</p>
-<p><img alt="" src="../../_images/epsic_recons_epie.png" /></p>
+<p><img alt="" src="../../_images/epsic_small_recons_epie.png" /></p>
 <div class="attention admonition">
 <p class="admonition-title">Challenge</p>
 <p>Modify the ePIE engine parameters and observe if/how it improves the quality or convergence of the reconstruction.</p>
@@ -573,7 +591,7 @@ document.write(`
 <span class="n">ptypy</span><span class="o">.</span><span class="n">load_ptyscan_module</span><span class="p">(</span><span class="s2">&quot;hdf5_loader&quot;</span><span class="p">)</span>
 
 <span class="c1"># This will import the GPU engines</span>
-<span class="n">ptypy</span><span class="o">.</span><span class="n">load_gpu_engines</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="n">ptypy</span><span class="o">.</span><span class="n">load_gpu_engines</span><span class="p">(</span><span class="s2">&quot;cupy&quot;</span><span class="p">)</span>
 
 <span class="c1"># Root directory of tutorial data</span>
 <span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>
@@ -667,7 +685,7 @@ document.write(`
 <span class="c1"># Define reconstruction engine (using ePIE)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EPIE_pycuda&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EPIE_cupy&quot;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.9</span>
@@ -693,16 +711,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ptypy_pycuda"
+            mode: "python"
         },
         kernelOptions: {
-            name: "ptypy_pycuda",
+            name: "conda-env-User_Conda_-_cuda12.2-python3",
             path: "./notebooks/ptychography_with_electrons"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ptypy_pycuda'</script>
+    <script>kernelName = 'conda-env-User_Conda_-_cuda12.2-python3'</script>
 
                 </article>
               
