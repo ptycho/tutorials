@@ -40,3 +40,7 @@ parts:
   - file: notebooks/supplementary_examples/02_live_visualisation
   - file: notebooks/supplementary_examples/03_simulating_data
   - file: notebooks/supplementary_examples/04_modified_initial_probe
+- caption: User Examples
+  numbered: false
+  chapters:
+  - file: notebooks/user_examples/00_template
