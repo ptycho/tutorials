@@ -3,6 +3,7 @@
 
 title: Tutorials
 author: Benedikt J.Daurer
+copyright: "2024"
 logo: logo.png
 
 # Force re-execution of notebooks on each build.
