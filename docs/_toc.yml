@@ -43,4 +43,5 @@ parts:
 - caption: User Examples
   numbered: false
   chapters:
+  - file: contribute
   - file: notebooks/user_examples/00_template
