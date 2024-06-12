@@ -3,7 +3,7 @@
 First, clone the nersc conda env
 
 ```
-conda create --prefix /global/common/software/ntrain7/ptypy_env --clone /global/common/software/nersc/pm-2022q3/sw/python/3.9-anaconda-2021.11
+conda create --prefix /global/common/software/ntrain7/ptypy_env --clone /global/common/software/nersc/pe/conda/24.1.0/Miniconda3-py311_23.11.0-2
 ```
 
 Activate the new conda env
