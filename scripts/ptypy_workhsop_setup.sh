@@ -1,8 +1,7 @@
 # Last time we used this script: /global/common/software/ntrain3/ptypy_workshop_setup.sh
 # This script should be copied into /global/common/software/ntrain7/
-module load conda
+module load python
 conda activate /global/common/software/ntrain7/ptypy_env
-#conda activate $HOME/ptypy_env
 python -m ipykernel install --user --name ptypy_env --display-name PtyPy
 
 # Clone tutorials and create link to data
