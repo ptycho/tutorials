@@ -6,4 +6,4 @@ python -m ipykernel install --user --name ptypy_env --display-name PtyPy
 
 # Clone tutorials and create link to data
 git clone https://github.com/ptycho/tutorials.git $HOME/tutorials
-ln -s /global/cfs/cdirs/ntrain7/ptypy_workshop $HOME/tutorials/data
+ln -s /global/cfs/cdirs/ntrain3/ptypy_workshop $HOME/tutorials/data
