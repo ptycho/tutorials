@@ -36,7 +36,8 @@ The table below gives an overview of all examples with associated data and a lin
 |  [](notebooks/supplementary_examples/03_simulating_data)         |  No Data Required                      |  -       | -                                       |
 |  [](notebooks/supplementary_examples/04_modified_initial_probe)  |  [small_data.zip](https://zenodo.org/records/11501765/files/small_data.zip?download=1)  |  126 MB  |  [DOI](https://doi.org/10.5281/zenodo.11501765) |
 | **User Examples** |
-|  [](notebooks/user_examples/00_template.ipynb)                   |  -                                     |  -       |       -            |
+|  [](notebooks/user_examples/00_template)                         |  -                                     |  -       |       -            |
+|  [](notebooks/user_examples/01_super_resolution)                 |  [SiemensStar_ID16A_ESRF_farfieldptycho.zip](https://zenodo.org/records/13694455)       |  67 MB   |  [DOI](https://doi.org/10.5281/zenodo.13694456) |
 
 ## Jupyter Lab/Notebooks
 
