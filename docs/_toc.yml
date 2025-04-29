@@ -45,3 +45,4 @@ parts:
   chapters:
   - file: contribute
   - file: notebooks/user_examples/00_template
+  - file: notebooks/user_examples/01_super_resolution
