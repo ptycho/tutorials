@@ -1,0 +1,1066 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Super resolution &#8212; Tutorials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/user_examples/01_super_resolution';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Template" href="00_template.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Tutorials - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Tutorials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../basic_examples/00_the_parameter_tree.html">The Parameter Tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_examples/01_using_yaml_or_json_config.html">JSON/YAML Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_examples/02_input_output_parameters.html">Input/Output Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_examples/03_scan_models.html">Scan Models</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basic_examples/04_choosing_engines.html">Reconstruction Engines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basic_examples/05_projectional_engines.html">Projectional Engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basic_examples/06_stochastic_engines.html">Stochastic Engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basic_examples/07_gradient_based_engines.html">Gradient-based Engines</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Experimental X-ray Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/00_data_loading.html">Loading HDF5 data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/01_working_with_large_data.html">Working With Large Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/02_fixing_data_issues.html">Fixing Issues Related to Data (Loading)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/03_partial_coherence.html">Partial Coherence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/04_position_refinement.html">Position Refinement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/05_missing_detector_frames.html">Missing Detector Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/06_testing_different_algorithms.html">Testing different algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental_xray_data/07_multi_gpu.html">Using multiple GPUs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Electron Ptychography Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ptychography_with_electrons/00_electron_data.html">Working With Electron Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ptychography_with_electrons/01_chaining_multiple_engines.html">Chaining Multiple Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ptychography_with_electrons/02_start_from_previous_reconstruction.html">Starting From a Previous Reconstruction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/00_nearfield_ptychography.html">Nearfield Ptychography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/01_object_regularisation.html">Modifying an Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/02_live_visualisation.html">Live visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/03_simulating_data.html">Simulating Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/04_modified_initial_probe.html">Modified Initial Probe</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Examples</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../contribute.html">How to contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_template.html">Template</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Super resolution</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=lab/tree/notebooks/user_examples/01_super_resolution.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ptycho/tutorials/blob/main/notebooks/user_examples/01_super_resolution.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ptycho/tutorials" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/user_examples/01_super_resolution.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/user_examples/01_super_resolution.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Super resolution</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data">The data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">Data preparation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-data">Loading the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mixed-states-parameters">Mixed states parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-scan-model">The scan model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reconstruction-engine">Reconstruction engine</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-the-results">Analyzing the results</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="super-resolution">
+<h1>Super resolution<a class="headerlink" href="#super-resolution" title="Link to this heading">#</a></h1>
+<p><strong>Implementing the super-resolution approach with structured beams: data preparation and phase retrieval with Ptypy</strong></p>
+<p>Ptychography introduces a high degree of redundancy into the recorded data. Specifically, when structured beams serve as probes, the convolution between the probe and object functions brings high frequencies into the low-frequency region of the diffraction pattern. As a result, the redundancy of the ptychographic dataset enables diffraction patterns to be extrapolated beyond the aperture of the recording device, resulting in super-resolved images and enhancing the limits on the finest feature separation. This approach was published in Maiden et al. JOSA A 28, 604-612(2011). <a class="reference external" href="https://doi.org/10.1364/JOSAA.28.000604">https://doi.org/10.1364/JOSAA.28.000604</a></p>
+<section id="the-data">
+<h2>The data<a class="headerlink" href="#the-data" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><strong>Data file</strong></p></th>
+<th class="head text-left"><p><strong>Type</strong></p></th>
+<th class="head text-left"><p><strong>Download</strong></p></th>
+<th class="head text-center"><p><strong>Courtesy of</strong></p></th>
+<th class="head text-center"><p><strong>Reference</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>SiemensStar.h5</p></td>
+<td class="text-left"><p>Raw/Reconstruction</p></td>
+<td class="text-left"><p><a class="reference external" href="https://zenodo.org/records/13694455">SiemensStar_ID16A_ESRF_farfieldptycho.zip</a></p></td>
+<td class="text-center"><p>Julio da Silva</p></td>
+<td class="text-center"><p><a class="reference external" href="https://zenodo.org/records/13694455">10.5281/zenodo.13694455</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The data was acquired at ID16A nanoimaging beamline at the ESRF. For more information about the data and results, please take a look at <a class="reference external" href="https://doi.org/10.1107/S1600577519006301">J. da Silva et al., J. Synchrotron Rad 26, 1751-1762 (2019)</a>.
+We can inspect how the file <code class="docutils literal notranslate"><span class="pre">SiemensStar_ID16A_ESRF_farfieldptycho.zip</span></code> looks like:</p>
+<p>The file ./SiemensStar.h5 has the following relevant entries:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>* data                           shape = (175, 256, 256)
+* det_distance_mm                shape = ()
+* det_pixelsize_um               shape = ()
+* energy_keV                     shape = ()
+* posx_um                        shape = (175,)
+* posy_um                        shape = (175,)
+</pre></div>
+</div>
+<p>which follows a ‘round_roi’ trajectory optimized by the traveling salesman algorithm:</p>
+<p><img alt="image.png" src="../../_images/id16a_esrf_siemens_star_ffp.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h5py</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="s2">&quot;SiemensStar_ID16A_ESRF_farfieldptycho/SiemensStar.h5&quot;</span>
+<span class="n">path_to_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][()]</span>
+    <span class="n">posx_um</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;posx_um&#39;</span><span class="p">][()]</span>
+    <span class="n">posy_um</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;posy_um&#39;</span><span class="p">][()]</span>
+    <span class="n">energy_keV</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;energy_eV&#39;</span><span class="p">][()]</span>
+    <span class="n">det_distance_m</span> <span class="o">=</span> <span class="mf">1.9364</span> 
+    <span class="n">det_pixelsize_um</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;det_pixelsize_um&#39;</span><span class="p">][()]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The file </span><span class="si">{}</span><span class="s2"> has the following relevant entries: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">* </span><span class="si">{0:&lt;30}</span><span class="s1"> shape = </span><span class="si">{1:}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-preparation">
+<h2>Data preparation<a class="headerlink" href="#data-preparation" title="Link to this heading">#</a></h2>
+<p>Before any calculation with Ptypy, we need to prepare the data. We will simulate the super-resolution data by cropping the original data and padding with zeros:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pad_width</span><span class="o">=</span><span class="mi">64</span>
+<span class="n">data_crop</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">pad_width</span><span class="p">:</span><span class="o">-</span><span class="n">pad_width</span><span class="p">,</span> <span class="n">pad_width</span><span class="p">:</span><span class="o">-</span><span class="n">pad_width</span><span class="p">]</span>
+<span class="n">data_pad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">data_crop</span><span class="p">,((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="n">pad_width</span><span class="p">,</span><span class="n">pad_width</span><span class="p">),(</span><span class="n">pad_width</span><span class="p">,</span><span class="n">pad_width</span><span class="p">)),</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">data_crop</span><span class="p">)</span>
+<span class="n">mask_pad</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">mask</span><span class="p">,((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="n">pad_width</span><span class="p">,</span><span class="n">pad_width</span><span class="p">),(</span><span class="n">pad_width</span><span class="p">,</span><span class="n">pad_width</span><span class="p">)),</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We need to add some zeros (8 pixels here) at the borders of the mask to constrain the values there:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mask_pad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">,:]</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">mask_pad</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">mask_pad</span><span class="p">[:,</span><span class="o">-</span><span class="mi">8</span><span class="p">:,:]</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">mask_pad</span><span class="p">[:,:,</span><span class="o">-</span><span class="mi">8</span><span class="p">:]</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>At this point, the data and mask should look like the example below:</p>
+<p><img alt="" src="../../_images/id16a_crop_pad_siemens_star_data.png" /></p>
+<p>We now save the data to be used in this example as <code class="docutils literal notranslate"><span class="pre">SiemensStar_croppadding.h5</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io</span><span class="o">.</span><span class="n">h5write</span><span class="p">(</span><span class="s1">&#39;SiemensStar_croppadding.h5&#39;</span><span class="p">,</span>
+           <span class="n">data_pad</span><span class="o">=</span><span class="n">data_pad</span><span class="p">,</span>
+           <span class="n">det_pixelsize_um</span><span class="o">=</span><span class="n">det_pixelsize_um</span><span class="p">,</span>
+           <span class="n">det_distance_m</span><span class="o">=</span><span class="n">det_distance_m</span><span class="p">,</span>
+           <span class="n">energy_keV</span><span class="o">=</span><span class="n">energy_keV</span><span class="p">,</span>
+           <span class="n">posx_um</span> <span class="o">=</span> <span class="n">posx_um</span><span class="p">,</span>
+           <span class="n">posy_um</span> <span class="o">=</span> <span class="n">posy_um</span><span class="p">,</span>
+           <span class="n">mask_pad</span> <span class="o">=</span> <span class="n">mask_pad</span><span class="p">,</span>
+          <span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ptypy</span><span class="w"> </span><span class="kn">import</span> <span class="n">io</span>
+<span class="n">pad_width</span><span class="o">=</span><span class="mi">64</span>
+<span class="n">data_crop</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">pad_width</span><span class="p">:</span><span class="o">-</span><span class="n">pad_width</span><span class="p">,</span> <span class="n">pad_width</span><span class="p">:</span><span class="o">-</span><span class="n">pad_width</span><span class="p">]</span>
+<span class="n">data_pad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">data_crop</span><span class="p">,((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="n">pad_width</span><span class="p">,</span><span class="n">pad_width</span><span class="p">),(</span><span class="n">pad_width</span><span class="p">,</span><span class="n">pad_width</span><span class="p">)),</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">data_crop</span><span class="p">)</span>
+<span class="n">mask_pad</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">mask</span><span class="p">,((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="n">pad_width</span><span class="p">,</span><span class="n">pad_width</span><span class="p">),(</span><span class="n">pad_width</span><span class="p">,</span><span class="n">pad_width</span><span class="p">)),</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
+
+<span class="n">mask_pad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">,:]</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">mask_pad</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">mask_pad</span><span class="p">[:,</span><span class="o">-</span><span class="mi">8</span><span class="p">:,:]</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">mask_pad</span><span class="p">[:,:,</span><span class="o">-</span><span class="mi">8</span><span class="p">:]</span><span class="o">=</span><span class="mi">1</span>
+
+<span class="c1"># It is better to remove the old hdf5 file, if present, before writing a new one</span>
+<span class="c1">#os.remove(&#39;SiemensStar_croppadding.h5&#39;)</span>
+<span class="c1"># Writing the file</span>
+<span class="n">io</span><span class="o">.</span><span class="n">h5write</span><span class="p">(</span><span class="s1">&#39;SiemensStar_croppadding.h5&#39;</span><span class="p">,</span>
+           <span class="n">data_pad</span><span class="o">=</span><span class="n">data_pad</span><span class="p">,</span>
+           <span class="n">det_pixelsize_um</span><span class="o">=</span><span class="n">det_pixelsize_um</span><span class="p">,</span>
+           <span class="n">det_distance_m</span><span class="o">=</span><span class="n">det_distance_m</span><span class="p">,</span>
+           <span class="n">energy_keV</span><span class="o">=</span><span class="n">energy_keV</span><span class="p">,</span>
+           <span class="n">posx_um</span> <span class="o">=</span> <span class="n">posx_um</span><span class="p">,</span>
+           <span class="n">posy_um</span> <span class="o">=</span> <span class="n">posy_um</span><span class="p">,</span>
+           <span class="n">mask_pad</span> <span class="o">=</span> <span class="n">mask_pad</span><span class="p">,</span>
+          <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="loading-the-data">
+<h2>Loading the data<a class="headerlink" href="#loading-the-data" title="Link to this heading">#</a></h2>
+<p>We use the Hdf5Loader for reading the data into Ptypy</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Hdf5Loader&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>We have to provide the key for the diffraction patterns</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;data_pad&#39;</span>
+</pre></div>
+</div>
+<p>and the key for the masks</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;mask_pad&#39;</span>
+</pre></div>
+</div>
+<p>We also need to provide keys for the scan positions</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_key</span> <span class="o">=</span> <span class="s2">&quot;posy_um&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_multiplier</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_key</span> <span class="o">=</span> <span class="s2">&quot;posx_um&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_multiplier</span> <span class="o">=</span> <span class="mf">1e-6</span>
+</pre></div>
+</div>
+<p>The photon energy</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;energy_keV&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>The sample-to-detector distance</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;det_distance_m&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>The detector pixel size</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;det_pixelsize_um&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mf">1e-6</span>
+</pre></div>
+</div>
+<p>The illumination parameters</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">photons</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">form</span> <span class="o">=</span> <span class="s2">&quot;rect&quot;</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mf">120e-6</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">parallel</span> <span class="o">=</span> <span class="mf">6.67e-04</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">focussed</span> <span class="o">=</span> <span class="mf">0.1</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">recon</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</section>
+<section id="mixed-states-parameters">
+<h2>Mixed states parameters<a class="headerlink" href="#mixed-states-parameters" title="Link to this heading">#</a></h2>
+<p>Since we will use the mixed states approach to decompose the probe, we need to set the parameters for <code class="docutils literal notranslate"><span class="pre">coherence</span></code> and <code class="docutils literal notranslate"><span class="pre">illumination.diversity</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">coherence</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">coherence</span><span class="o">.</span><span class="n">num_probe_modes</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1">## Number of probe modes</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">coherence</span><span class="o">.</span><span class="n">num_object_modes</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">## Number of object modes</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">diversity</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">diversity</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">diversity</span><span class="o">.</span><span class="n">noise</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="the-scan-model">
+<h2>The scan model<a class="headerlink" href="#the-scan-model" title="Link to this heading">#</a></h2>
+<p>For this example, we use the <code class="docutils literal notranslate"><span class="pre">&quot;Full&quot;</span></code> scan model</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">scans</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Full&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="reconstruction-engine">
+<h2>Reconstruction engine<a class="headerlink" href="#reconstruction-engine" title="Link to this heading">#</a></h2>
+<p>We use the difference map (DM) engine for the reconstruction, followed by maximum likelihood (ML). Here is the set of parameters that is the most commonly used for ID16A beamline:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM_cupy&quot;</span>   <span class="c1">## Engine name</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">100</span>         
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>       
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">probe_fourier_support</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span>                     
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">2</span>         
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">update_object_first</span> <span class="o">=</span> <span class="kc">True</span>     
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">overlap_converge_factor</span> <span class="o">=</span> <span class="mf">0.03</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">overlap_max_iterations</span> <span class="o">=</span> <span class="mi">100</span>  
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">probe_inertia</span> <span class="o">=</span> <span class="mf">0.01</span>           
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">object_inertia</span> <span class="o">=</span> <span class="mf">0.1</span>           
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">fourier_relax_factor</span> <span class="o">=</span> <span class="mf">0.03</span>   
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">obj_smooth_std</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">clip_object</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>  
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;ML_cupy&#39;</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">30</span>         
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>        
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">ML_type</span> <span class="o">=</span> <span class="s2">&quot;gaussian&quot;</span>             
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>          
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">floating_intensities</span> <span class="o">=</span> <span class="kc">True</span>   
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">intensity_renormalization</span> <span class="o">=</span> <span class="mi">1</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">smooth_gradient</span> <span class="o">=</span> <span class="mi">1</span>          
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">scale_precond</span> <span class="o">=</span> <span class="kc">True</span>          
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Resulting in a reconstruction of the Siemens star sample below:
+<img alt="" src="../../_images/id16a_siemens_star_results.png" /></p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>Please note that, in the Engine parameters, we are using a value for <code class="docutils literal notranslate"><span class="pre">probe_fourier_support</span></code> to constrain the information in the Fourier space. We chose the value of 0.2, which may depend on the sample’s scattering length and should be adjusted accordingly. Here is the parameter:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">probe_fourier_support</span> <span class="o">=</span> <span class="mf">0.2</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="analyzing-the-results">
+<h2>Analyzing the results<a class="headerlink" href="#analyzing-the-results" title="Link to this heading">#</a></h2>
+<p>Let us check the super-resolution diffraction pattern relative to the original dataset. For this, we need:</p>
+<ul class="simple">
+<li><p>the original data, which was loaded in <code class="docutils literal notranslate"><span class="pre">data</span></code></p></li>
+<li><p>the cropped and zero-padded data, which was loaded in <code class="docutils literal notranslate"><span class="pre">data_pad</span></code> or from the tree <code class="docutils literal notranslate"><span class="pre">P</span></code> from Ptypy by doing:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">diff</span><span class="o">.</span><span class="n">view</span><span class="p">[</span><span class="s1">&#39;V0000&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>the resulting diffraction pattern from the calculation, which can be obtained using the <code class="docutils literal notranslate"><span class="pre">pod</span></code>, as follows:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pod</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">pods</span><span class="p">[</span><span class="s1">&#39;P0000&#39;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pod</span><span class="o">.</span><span class="n">fw</span><span class="p">(</span><span class="n">pod</span><span class="o">.</span><span class="n">probe</span> <span class="o">*</span> <span class="n">pod</span><span class="o">.</span><span class="n">object</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Plotting</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">diff</span><span class="o">.</span><span class="n">views</span><span class="p">[</span><span class="s1">&#39;V0000&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<span class="n">pod</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">pods</span><span class="p">[</span><span class="s1">&#39;P0000&#39;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pod</span><span class="o">.</span><span class="n">fw</span><span class="p">(</span><span class="n">pod</span><span class="o">.</span><span class="n">probe</span> <span class="o">*</span> <span class="n">pod</span><span class="o">.</span><span class="n">object</span><span class="p">)</span>
+<span class="c1"># display the figures</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="mf">0.02</span><span class="p">),</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original data&#39;</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span><span class="o">+</span><span class="mf">0.02</span><span class="p">),</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original data with zero-padding&#39;</span><span class="p">)</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">+</span><span class="mf">0.05</span><span class="p">),</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Retrieved data&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The results should be something like:
+<img alt="" src="../../_images/id16a_superresolution_diff_patterns.png" /></p>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Full code of PtyPy run script</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ptypy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ptypy</span><span class="w"> </span><span class="kn">import</span> <span class="n">io</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ptypy</span><span class="w"> </span><span class="kn">import</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">u</span>
+
+<span class="c1"># This will import the HDF5Loader Class</span>
+<span class="n">ptypy</span><span class="o">.</span><span class="n">load_ptyscan_module</span><span class="p">(</span><span class="s1">&#39;hdf5_loader&#39;</span><span class="p">)</span>
+
+<span class="c1"># This will import the GPU engines</span>
+<span class="n">ptypy</span><span class="o">.</span><span class="n">load_gpu_engines</span><span class="p">(</span><span class="s2">&quot;cupy&quot;</span><span class="p">)</span>  
+
+<span class="c1"># Path to the modified dataset</span>
+<span class="n">path_to_data</span> <span class="o">=</span> <span class="s2">&quot;./SiemensStar_croppadding.h5&quot;</span>
+
+<span class="c1">## General parameter container</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">verbose_level</span> <span class="o">=</span> <span class="s2">&quot;interactive&quot;</span> 	
+<span class="n">p</span><span class="o">.</span><span class="n">run</span> <span class="o">=</span> <span class="s2">&quot;SiemensStar&quot;</span>
+
+<span class="c1">## Global parameters for I/O</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">home</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span> 						<span class="c1">## Base directory for all I/O</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="s2">&quot;reconsSR/</span><span class="si">%(run)s</span><span class="s2">/</span><span class="si">%(run)s</span><span class="s2">_</span><span class="si">%(engine)s</span><span class="s2">.ptyr&quot;</span> <span class="c1">## Reconstruction file name (or format string)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1">## Auto-save options</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Live-plotting during the reconstruction</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">active</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">threaded</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="s2">&quot;jupyter&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">## Scan parameters</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span> <span class="c1">## param container for instances of scan parameters</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Full&quot;</span> <span class="c1">#&quot;BlockFull&quot;  or &quot;Full&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">propagation</span> <span class="o">=</span> <span class="s2">&quot;farfield&quot;</span>  <span class="c1">## Propagation type: &quot;nearfield&quot; or &quot;farfield&quot;</span>
+
+<span class="c1"># Data parameters</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span> <span class="c1">## Data preparation parameters</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Hdf5Loader&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1"># Read diffraction data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;data_pad&#39;</span>
+
+<span class="c1"># Read mask</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;mask_pad&#39;</span>
+
+<span class="c1"># Read positions data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_key</span> <span class="o">=</span> <span class="s2">&quot;posy_um&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_multiplier</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_key</span> <span class="o">=</span> <span class="s2">&quot;posx_um&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_multiplier</span> <span class="o">=</span> <span class="mf">1e-6</span>
+
+<span class="c1"># Read meta data: photon energy</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;energy_keV&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Read metadata: detector distance</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;det_distance_m&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Read metadata: detector pixelsize</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;det_pixelsize_um&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mf">1e-6</span>
+
+<span class="c1"># Illumination parameters</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">photons</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">form</span> <span class="o">=</span> <span class="s2">&quot;rect&quot;</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mf">120e-6</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">parallel</span> <span class="o">=</span> <span class="mf">6.67e-04</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">focussed</span> <span class="o">=</span> <span class="mf">0.1</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">recon</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1">## Partial coherence effects</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">diversity</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">diversity</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">diversity</span><span class="o">.</span><span class="n">noise</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">## coherence parameters</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">coherence</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">coherence</span><span class="o">.</span><span class="n">num_probe_modes</span> <span class="o">=</span> <span class="mi">3</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">coherence</span><span class="o">.</span><span class="n">num_object_modes</span> <span class="o">=</span> <span class="mi">1</span> 
+
+<span class="c1">## Object initiation parameters</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">sample</span><span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">recon</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">fill</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="mf">0.0</span> 
+
+<span class="c1">## Engines</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+
+<span class="c1">## First engine = DM</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM_cupy&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">100</span>         
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>       
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">probe_fourier_support</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="c1"># probe support Fourier space</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span>                     
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">2</span>         
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">update_object_first</span> <span class="o">=</span> <span class="kc">True</span>     
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">overlap_converge_factor</span> <span class="o">=</span> <span class="mf">0.03</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">overlap_max_iterations</span> <span class="o">=</span> <span class="mi">100</span>  
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">probe_inertia</span> <span class="o">=</span> <span class="mf">0.01</span>           
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">object_inertia</span> <span class="o">=</span> <span class="mf">0.1</span>           
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">fourier_relax_factor</span> <span class="o">=</span> <span class="mf">0.03</span>   
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">obj_smooth_std</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine00</span><span class="o">.</span><span class="n">clip_object</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.2</span><span class="p">)</span>
+
+<span class="c1">## Second engine = ML</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>  
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;ML_cupy&#39;</span>  <span class="c1">## Engine name</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">30</span>         
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">1</span>        
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">ML_type</span> <span class="o">=</span> <span class="s2">&quot;gaussian&quot;</span>             
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>          
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">floating_intensities</span> <span class="o">=</span> <span class="kc">True</span>   
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">intensity_renormalization</span> <span class="o">=</span> <span class="mi">1</span> 
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">smooth_gradient</span> <span class="o">=</span> <span class="mi">1</span>          
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">scale_precond</span> <span class="o">=</span> <span class="kc">True</span>          
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine01</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">diff</span><span class="o">.</span><span class="n">views</span><span class="p">[</span><span class="s1">&#39;V0000&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<span class="n">pod</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">pods</span><span class="p">[</span><span class="s1">&#39;P0000&#39;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pod</span><span class="o">.</span><span class="n">fw</span><span class="p">(</span><span class="n">pod</span><span class="o">.</span><span class="n">probe</span> <span class="o">*</span> <span class="n">pod</span><span class="o">.</span><span class="n">object</span><span class="p">)</span>
+<span class="c1"># display the figures</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="mf">0.02</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original data&#39;</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span><span class="o">+</span><span class="mf">0.02</span><span class="p">),</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original data with zero-padding&#39;</span><span class="p">)</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">+</span><span class="mf">0.05</span><span class="p">),</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Retrieved data&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/user_examples"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="00_template.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Template</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data">The data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">Data preparation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-data">Loading the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mixed-states-parameters">Mixed states parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-scan-model">The scan model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reconstruction-engine">Reconstruction engine</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-the-results">Analyzing the results</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Benedikt J.Daurer
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
