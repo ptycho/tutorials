@@ -505,7 +505,7 @@ document.write(`
 <p>which will display the current status of the reconstruction after every block of iterations as specified by <code class="docutils literal notranslate"><span class="pre">p.io.autoplot.interval</span></code>.</p>
 <div class="note admonition">
 <p class="admonition-title">Note</p>
-<p>Live-plotting in Jupyter notebooks using <code>p.io.autoplot</code> works best in conjunction with <code>p.verbose_level = “interactive”</code>.</p>
+<p>Live-plotting in Jupyter notebooks using <code>p.io.autoplot</code> works best together with <code>p.verbose_level = “interactive”</code>.</p>
 </div>
 </section>
 <section id="saving-intermediates-to-file">
@@ -520,11 +520,7 @@ document.write(`
 <p>where <code class="docutils literal notranslate"><span class="pre">%(run)s</span></code>, <code class="docutils literal notranslate"><span class="pre">%(engine)s</span></code> and <code class="docutils literal notranslate"><span class="pre">%(iterations)04d</span></code> are again dynamic labels.</p>
 <div class="attention admonition">
 <p class="admonition-title">Challenge</p>
-<p>Modify the <code>p.io.home</code> path in the example below to wherever you would like the PtyPy output to be, run the reconstruction and observe all the new files saved to the path specified as <code>p.io.home</code>. You can use <code>ptypy.utils.plot_recon_from_ptyr</code> to look at the MoonFlower reconstruction at different iterations.</p>
-</div>
-<div class="tip admonition">
-<p class="admonition-title">Tip</p>
-<p>You can use shell commands within Jupyter Notebooks to explore the filesystem, i.e. <code>ls /tmp</code> to list all files in /tmp.</p>
+<p>Modify the <code>p.io.home</code> path in the example below to wherever you would like the PtyPy output to be, run the reconstruction and observe all the new files saved to the path specified as <code>p.io.home</code>. You can use <code>ptypy.utils.plot_recon_from_ptyr</code> to look at the MoonFlower reconstruction at different iterations based on <code>.ptyr</code> snapshots.</p>
 </div>
 <hr class="docutils" />
 <div class="cell docutils container">
