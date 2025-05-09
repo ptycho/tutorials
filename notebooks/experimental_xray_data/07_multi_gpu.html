@@ -467,7 +467,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-python-run-script-for-ptypy">Making a Python run script for PtyPy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executing-script-in-terminal-on-jupyterhub">Executing script in terminal on JupyterHub</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executing-script-in-terminal-on-jupyterhub-nersc">Executing script in terminal on JupyterHub @ NERSC</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-reconstruction-from-ptyr-file">Display reconstruction from ptyr file</a></li>
 </ul>
             </nav>
@@ -518,23 +518,32 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="executing-script-in-terminal-on-jupyterhub">
-<h2>Executing script in terminal on JupyterHub<a class="headerlink" href="#executing-script-in-terminal-on-jupyterhub" title="Link to this heading">#</a></h2>
+<section id="executing-script-in-terminal-on-jupyterhub-nersc">
+<h2>Executing script in terminal on JupyterHub &#64; NERSC<a class="headerlink" href="#executing-script-in-terminal-on-jupyterhub-nersc" title="Link to this heading">#</a></h2>
 <p>Now, we need to open a new terminal (click blue “+” in top left corner of JupyterHub and then “Terminal”) which should look something like this</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">PtyPy</span><span class="p">)</span> <span class="n">benedikt</span><span class="nd">@nid001848</span><span class="p">:</span><span class="o">/</span><span class="k">global</span><span class="o">/</span><span class="n">u2</span><span class="o">/</span><span class="n">b</span><span class="o">/</span><span class="n">benedikt</span><span class="o">&gt;</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">benedikt</span><span class="nd">@login01</span><span class="p">:</span><span class="o">/</span><span class="k">global</span><span class="o">/</span><span class="n">u2</span><span class="o">/</span><span class="n">b</span><span class="o">/</span><span class="n">benedikt</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="n">experimental_xray_data</span><span class="o">&gt;</span> 
 </pre></div>
 </div>
-<p>with the (PtyPy) environment already loaded. We can then navigate to the folder for this example</p>
+<p>We then need to load the PtyPy conda environment</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">python</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="o">/</span><span class="k">global</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">software</span><span class="o">/</span><span class="n">trn005</span><span class="o">/</span><span class="n">ptypy_env</span>
+</pre></div>
+</div>
+<p>which should make your terminal look like this</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">ptypy_env</span><span class="p">)</span> <span class="n">benedikt</span><span class="nd">@login01</span><span class="p">:</span><span class="o">/</span><span class="k">global</span><span class="o">/</span><span class="n">u2</span><span class="o">/</span><span class="n">b</span><span class="o">/</span><span class="n">benedikt</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="n">experimental_xray_data</span><span class="o">&gt;</span> 
+</pre></div>
+</div>
+<p>with the (PtyPy) environment loaded. If not already in the correct folder, we can navigate to the folder for this example</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="nv">$HOME</span>/tutorials/notebooks/experimental_xray_data
 </pre></div>
 </div>
 <p>and execute a multi-GPU reconstruction via <code class="docutils literal notranslate"><span class="pre">srun</span></code> using all 4 GPUs that is available on a Perlmutter node.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>srun<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w"> </span>-c<span class="w"> </span><span class="m">2</span><span class="w"> </span>--gpus-per-task<span class="o">=</span><span class="m">1</span><span class="w"> </span>--gpu-bin<span class="o">=</span>None<span class="w"> </span>python<span class="w"> </span>ptypy_run_dls_i08_nanogold.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>srun<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w"> </span>-c<span class="w"> </span><span class="m">2</span><span class="w"> </span>--gpus-per-task<span class="o">=</span><span class="m">1</span><span class="w"> </span>--gpu-bind<span class="o">=</span>None<span class="w"> </span>python<span class="w"> </span>ptypy_run_dls_i08_nanogold.py
 </pre></div>
 </div>
 <div class="attention admonition">
 <p class="admonition-title">Challenge</p>
-<p>Run the I08 nanogold example in a terminal using 4 GPUs and compare the speed against the previous example from the Jupyter notebook which was using just a single GPU.</p>
+<p>Run the I08 nanogold example in a terminal using 1,2,3 and 4 GPUs and compare the speed. You can add <code>p.io.benchmark=”all”</code> to get performance benchmark numbers written by PtyPy into a file called “benchmark.json”</p>
 </div>
 </section>
 <hr class="docutils" />
@@ -622,7 +631,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-python-run-script-for-ptypy">Making a Python run script for PtyPy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executing-script-in-terminal-on-jupyterhub">Executing script in terminal on JupyterHub</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executing-script-in-terminal-on-jupyterhub-nersc">Executing script in terminal on JupyterHub @ NERSC</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-reconstruction-from-ptyr-file">Display reconstruction from ptyr file</a></li>
 </ul>
   </nav></div>
