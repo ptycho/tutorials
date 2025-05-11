@@ -469,16 +469,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-inspection-via-tree-search">The data - inspection via tree search</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-finding-the-required-bits-of-information">The data - finding the required bits of information</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-loading-into-memory-and-inspecting-metadata">The data - loading into memory and inspecting metadata</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-plotting-scan-positions">The data - plotting scan positions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-plotting-the-diffraction-patterns">The data - Plotting the diffraction patterns</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-creating-and-saving-a-mask-of-invalid-pixels">The data - creating and saving a mask of invalid pixels</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reconstruction-initial-steps">The reconstruction - initial steps</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reconstruction-optimising-the-initial-probe">The reconstruction - optimising the initial probe</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reconstruction-let-s-give-it-a-go">The reconstruction - let’s give it a go</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-reconstruction-let-s-make-it-work">Run the reconstruction - let’s make it work</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-inspection-via-tree-search">Data inspection via tree search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-required-bits-of-information">Finding the required bits of information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-data-into-memory-and-inspecting-metadata">Loading data into memory and inspecting metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-scan-positions">Plotting the scan positions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-diffraction-patterns">Plotting the diffraction patterns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-and-saving-a-mask-of-invalid-pixels">Creating and saving a mask of invalid pixels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-reconstruction-steps">Initial reconstruction steps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimising-the-initial-probe">Optimising the initial probe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-give-the-reconstruction-a-go">Let’s give the reconstruction a go</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-make-it-work">Let’s make it work</a></li>
 </ul>
             </nav>
         </div>
@@ -494,8 +494,8 @@ document.write(`
 <h1>Working with Data from SOLEIL - the SWING beamline<a class="headerlink" href="#working-with-data-from-soleil-the-swing-beamline" title="Link to this heading">#</a></h1>
 <p><strong>Learning how to reconstruct from scratch with collected at SWING - courtesy of Javier Perez</strong></p>
 <p>Imagine the following scenario: You have been given a fresh ptychographic data set to reconstruct but you don’t have all the details about the instrument the data was collected at or the structure of the raw data file. This can often be the reality for users of ptychography at synchrotrons or anybody who is tasked with supporting the analysis of a ptychographic data set. This tutorial is aiming to provide a rough guide on how to approach such from scratch reconstruction based on a Siemens Star data set provide by Javier Perez from the <a class="reference external" href="https://www.synchrotron-soleil.fr/en/beamlines/swing">SWING beamline at SOLEIL</a> in preparation for the <a class="reference external" href="https://www.synchrotron-soleil.fr/en/events/ptypy-2025">PtyPy 2025 workshop</a>.</p>
-<section id="the-data-inspection-via-tree-search">
-<h2>The data - inspection via tree search<a class="headerlink" href="#the-data-inspection-via-tree-search" title="Link to this heading">#</a></h2>
+<section id="data-inspection-via-tree-search">
+<h2>Data inspection via tree search<a class="headerlink" href="#data-inspection-via-tree-search" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p><strong>Data file</strong></p></th>
@@ -577,8 +577,8 @@ So first, we are trying to poke around a bit and inspect HDF5 files. The followi
 </div>
 </div>
 </section>
-<section id="the-data-finding-the-required-bits-of-information">
-<h2>The data - finding the required bits of information<a class="headerlink" href="#the-data-finding-the-required-bits-of-information" title="Link to this heading">#</a></h2>
+<section id="finding-the-required-bits-of-information">
+<h2>Finding the required bits of information<a class="headerlink" href="#finding-the-required-bits-of-information" title="Link to this heading">#</a></h2>
 <p>In order to attempt a successful reconstruction, we need</p>
 <ul class="simple">
 <li><p>an array/list of diffraction patterns</p></li>
@@ -613,8 +613,8 @@ So first, we are trying to poke around a bit and inspect HDF5 files. The followi
 </div>
 </div>
 </section>
-<section id="the-data-loading-into-memory-and-inspecting-metadata">
-<h2>The data - loading into memory and inspecting metadata<a class="headerlink" href="#the-data-loading-into-memory-and-inspecting-metadata" title="Link to this heading">#</a></h2>
+<section id="loading-data-into-memory-and-inspecting-metadata">
+<h2>Loading data into memory and inspecting metadata<a class="headerlink" href="#loading-data-into-memory-and-inspecting-metadata" title="Link to this heading">#</a></h2>
 <p>It is now time to look at the data a bit more closely. First, we load everything into memory and print out some overall information:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">data_key</span><span class="p">][:]</span>
@@ -655,8 +655,8 @@ So first, we are trying to poke around a bit and inspect HDF5 files. The followi
 </div>
 </div>
 </section>
-<section id="the-data-plotting-scan-positions">
-<h2>The data - plotting scan positions<a class="headerlink" href="#the-data-plotting-scan-positions" title="Link to this heading">#</a></h2>
+<section id="plotting-the-scan-positions">
+<h2>Plotting the scan positions<a class="headerlink" href="#plotting-the-scan-positions" title="Link to this heading">#</a></h2>
 <p>Let’s look at the actual data starting with the scan positions. First we plot the two position arrays (<code class="docutils literal notranslate"><span class="pre">posx</span></code> and <code class="docutils literal notranslate"><span class="pre">posz</span></code>) against each other</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
@@ -683,8 +683,8 @@ So first, we are trying to poke around a bit and inspect HDF5 files. The followi
 </div>
 </div>
 </section>
-<section id="the-data-plotting-the-diffraction-patterns">
-<h2>The data - Plotting the diffraction patterns<a class="headerlink" href="#the-data-plotting-the-diffraction-patterns" title="Link to this heading">#</a></h2>
+<section id="plotting-the-diffraction-patterns">
+<h2>Plotting the diffraction patterns<a class="headerlink" href="#plotting-the-diffraction-patterns" title="Link to this heading">#</a></h2>
 <p>Next, we look at the diffraction data. Plotting the first image</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">colors</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
@@ -712,8 +712,8 @@ So first, we are trying to poke around a bit and inspect HDF5 files. The followi
 </div>
 </div>
 </section>
-<section id="the-data-creating-and-saving-a-mask-of-invalid-pixels">
-<h2>The data - creating and saving a mask of invalid pixels<a class="headerlink" href="#the-data-creating-and-saving-a-mask-of-invalid-pixels" title="Link to this heading">#</a></h2>
+<section id="creating-and-saving-a-mask-of-invalid-pixels">
+<h2>Creating and saving a mask of invalid pixels<a class="headerlink" href="#creating-and-saving-a-mask-of-invalid-pixels" title="Link to this heading">#</a></h2>
 <p>To determine a mask of invalid pixels, it seems like we can simply threshold the first diffraction pattern</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">threshold</span> <span class="o">=</span> <span class="mf">4e9</span>
 <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)</span>
@@ -758,8 +758,8 @@ So first, we are trying to poke around a bit and inspect HDF5 files. The followi
 </div>
 </div>
 </section>
-<section id="the-reconstruction-initial-steps">
-<h2>The reconstruction - initial steps<a class="headerlink" href="#the-reconstruction-initial-steps" title="Link to this heading">#</a></h2>
+<section id="initial-reconstruction-steps">
+<h2>Initial reconstruction steps<a class="headerlink" href="#initial-reconstruction-steps" title="Link to this heading">#</a></h2>
 <p>There are other tutorials that already explain the different sections of the parameter tree, but it might be worth to go through them once again.
 After an initial part with imports</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ptypy</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
@@ -995,8 +995,8 @@ After an initial part with imports</p>
 </div>
 </div>
 </section>
-<section id="the-reconstruction-optimising-the-initial-probe">
-<h2>The reconstruction - optimising the initial probe<a class="headerlink" href="#the-reconstruction-optimising-the-initial-probe" title="Link to this heading">#</a></h2>
+<section id="optimising-the-initial-probe">
+<h2>Optimising the initial probe<a class="headerlink" href="#optimising-the-initial-probe" title="Link to this heading">#</a></h2>
 <p>In order to inspect the initial probe calculated by PtyPy, the easiest way is to take the first pod and look at <code class="docutils literal notranslate"><span class="pre">pod.probe</span></code>. We can also us the forward projector <code class="docutils literal notranslate"><span class="pre">pod.fw()</span></code> to calculate how our initial probe looks like in Fourier space and compare it to the diffraction data</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pod</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">pods</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">probe</span> <span class="o">=</span> <span class="n">pod</span><span class="o">.</span><span class="n">probe</span>
@@ -1039,8 +1039,8 @@ After an initial part with imports</p>
 </div>
 </div>
 </section>
-<section id="the-reconstruction-let-s-give-it-a-go">
-<h2>The reconstruction - let’s give it a go<a class="headerlink" href="#the-reconstruction-let-s-give-it-a-go" title="Link to this heading">#</a></h2>
+<section id="let-s-give-the-reconstruction-a-go">
+<h2>Let’s give the reconstruction a go<a class="headerlink" href="#let-s-give-the-reconstruction-a-go" title="Link to this heading">#</a></h2>
 <p>We can largerly use the same parameter as outlined above, with a few changes. First, we need to load the cupy engines</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This will import the GPU engines</span>
 <span class="n">ptypy</span><span class="o">.</span><span class="n">load_gpu_engines</span><span class="p">(</span><span class="s2">&quot;cupy&quot;</span><span class="p">)</span>
@@ -1210,8 +1210,8 @@ After an initial part with imports</p>
 </div>
 </div>
 </section>
-<section id="run-the-reconstruction-let-s-make-it-work">
-<h2>Run the reconstruction - let’s make it work<a class="headerlink" href="#run-the-reconstruction-let-s-make-it-work" title="Link to this heading">#</a></h2>
+<section id="let-s-make-it-work">
+<h2>Let’s make it work<a class="headerlink" href="#let-s-make-it-work" title="Link to this heading">#</a></h2>
 <p>We have now arrived at arguably the most difficult part of our task to reconstruct new data from scratch. We think that we have provided all the correct data or at least some reasonable estimates, but the reconstruction still looks completely wrong. At this point, it is advised to carefully check that all the provided numbers have the correct units, i.e. photon energy, detector distance, detector pixel size, the scan positions and they are indeed correct. If we are using a mask, we should also double check that it is loaded correctly or if it needs to be inverted. Once we have double checked all of this, there is one last barrier to overcome: choosing the correct coordinate system.</p>
 <p>Unfortunately, there is no guarantee that the coordinate system chosen and implemented by the PtyPy developers (right-handed with the X-axis pointing with the beam) and the local coordinate system used at the beamline together with how we have loaded in that data/posisitions (i.e. <code class="docutils literal notranslate"><span class="pre">positions.slow_key</span></code> vs. <code class="docutils literal notranslate"><span class="pre">positions.fast_key</span></code>) are actual matching precisely. It is actually quite likely that there is a mismatch. Here we could again reach out to the beamline scientist and figure out how the data has been collected and saved, but in most cases it might be faster to simply try all permutations. Fortunately, there are only 8 possible combinations and PtyPy has a convenient parameter <code class="docutils literal notranslate"><span class="pre">data.orientation</span></code> that allows us to quickly try all of these combinations - the default value is <span class="math notranslate nohighlight">\(0\)</span>. For a full description of the possible combinations and what they are, have a look at the definition <a class="reference internal" href="#"><span class="xref myst">here</span></a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Data loader</span>
@@ -1293,16 +1293,16 @@ After an initial part with imports</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-inspection-via-tree-search">The data - inspection via tree search</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-finding-the-required-bits-of-information">The data - finding the required bits of information</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-loading-into-memory-and-inspecting-metadata">The data - loading into memory and inspecting metadata</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-plotting-scan-positions">The data - plotting scan positions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-plotting-the-diffraction-patterns">The data - Plotting the diffraction patterns</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-creating-and-saving-a-mask-of-invalid-pixels">The data - creating and saving a mask of invalid pixels</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reconstruction-initial-steps">The reconstruction - initial steps</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reconstruction-optimising-the-initial-probe">The reconstruction - optimising the initial probe</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reconstruction-let-s-give-it-a-go">The reconstruction - let’s give it a go</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-reconstruction-let-s-make-it-work">Run the reconstruction - let’s make it work</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-inspection-via-tree-search">Data inspection via tree search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-required-bits-of-information">Finding the required bits of information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-data-into-memory-and-inspecting-metadata">Loading data into memory and inspecting metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-scan-positions">Plotting the scan positions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-diffraction-patterns">Plotting the diffraction patterns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-and-saving-a-mask-of-invalid-pixels">Creating and saving a mask of invalid pixels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-reconstruction-steps">Initial reconstruction steps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimising-the-initial-probe">Optimising the initial probe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-give-the-reconstruction-a-go">Let’s give the reconstruction a go</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-make-it-work">Let’s make it work</a></li>
 </ul>
   </nav></div>
 
