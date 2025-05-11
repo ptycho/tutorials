@@ -1,0 +1,1360 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Working with Data from SOLEIL - the SWING beamline &#8212; Tutorials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/experimental_xray_data/08_data_from_soleil_swing';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Working With Electron Data" href="../ptychography_with_electrons/00_electron_data.html" />
+    <link rel="prev" title="Using multiple GPUs" href="07_multi_gpu.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Tutorials - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Tutorials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../basic_examples/00_the_parameter_tree.html">The Parameter Tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_examples/01_using_yaml_or_json_config.html">JSON/YAML Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_examples/02_input_output_parameters.html">Input/Output Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_examples/03_scan_models.html">Scan Models</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basic_examples/04_choosing_engines.html">Reconstruction Engines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basic_examples/05_projectional_engines.html">Projectional Engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basic_examples/06_stochastic_engines.html">Stochastic Engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basic_examples/07_gradient_based_engines.html">Gradient-based Engines</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Experimental X-ray Data</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_data_loading.html">Loading HDF5 data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_working_with_large_data.html">Working With Large Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_fixing_data_issues.html">Fixing Issues Related to Data (Loading)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_partial_coherence.html">Partial Coherence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_position_refinement.html">Position Refinement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_missing_detector_frames.html">Missing Detector Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_testing_different_algorithms.html">Testing different algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_multi_gpu.html">Using multiple GPUs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Working with Data from SOLEIL - the SWING beamline</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Electron Ptychography Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ptychography_with_electrons/00_electron_data.html">Working With Electron Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ptychography_with_electrons/01_chaining_multiple_engines.html">Chaining Multiple Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ptychography_with_electrons/02_start_from_previous_reconstruction.html">Starting From a Previous Reconstruction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/00_nearfield_ptychography.html">Nearfield Ptychography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/01_object_regularisation.html">Modifying an Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/02_live_visualisation.html">Live visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/03_simulating_data.html">Simulating Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplementary_examples/04_modified_initial_probe.html">Modified Initial Probe</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../contribute.html">How to contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_examples/00_template.html">Template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_examples/01_super_resolution.html">Super resolution</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/ptycho/tutorials/main?urlpath=lab/tree/notebooks/experimental_xray_data/08_data_from_soleil_swing.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ptycho/tutorials/blob/main/notebooks/experimental_xray_data/08_data_from_soleil_swing.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ptycho/tutorials" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ptycho/tutorials/issues/new?title=Issue%20on%20page%20%2Fnotebooks/experimental_xray_data/08_data_from_soleil_swing.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/experimental_xray_data/08_data_from_soleil_swing.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Working with Data from SOLEIL - the SWING beamline</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-inspection-via-tree-search">The data - inspection via tree search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-finding-the-required-bits-of-information">The data - finding the required bits of information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-loading-into-memory-and-inspecting-metadata">The data - loading into memory and inspecting metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-plotting-scan-positions">The data - plotting scan positions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-plotting-the-diffraction-patterns">The data - Plotting the diffraction patterns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-creating-and-saving-a-mask-of-invalid-pixels">The data - creating and saving a mask of invalid pixels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reconstruction-initial-steps">The reconstruction - initial steps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reconstruction-optimising-the-initial-probe">The reconstruction - optimising the initial probe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reconstruction-let-s-give-it-a-go">The reconstruction - let’s give it a go</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-reconstruction-let-s-make-it-work">Run the reconstruction - let’s make it work</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="working-with-data-from-soleil-the-swing-beamline">
+<h1>Working with Data from SOLEIL - the SWING beamline<a class="headerlink" href="#working-with-data-from-soleil-the-swing-beamline" title="Link to this heading">#</a></h1>
+<p><strong>Learning how to reconstruct from scratch with collected at SWING - courtesy of Javier Perez</strong></p>
+<p>Imagine the following scenario: You have been given a fresh ptychographic data set to reconstruct but you don’t have all the details about the instrument the data was collected at or the structure of the raw data file. This can often be the reality for users of ptychography at synchrotrons or anybody who is tasked with supporting the analysis of a ptychographic data set. This tutorial is aiming to provide a rough guide on how to approach such from scratch reconstruction based on a Siemens Star data set provide by Javier Perez from the <a class="reference external" href="https://www.synchrotron-soleil.fr/en/beamlines/swing">SWING beamline at SOLEIL</a> in preparation for the <a class="reference external" href="https://www.synchrotron-soleil.fr/en/events/ptypy-2025">PtyPy 2025 workshop</a>.</p>
+<section id="the-data-inspection-via-tree-search">
+<h2>The data - inspection via tree search<a class="headerlink" href="#the-data-inspection-via-tree-search" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><strong>Data file</strong></p></th>
+<th class="head text-left"><p><strong>Type</strong></p></th>
+<th class="head text-left"><p><strong>Download</strong></p></th>
+<th class="head text-center"><p><strong>Courtesy of</strong></p></th>
+<th class="head text-center"><p><strong>Reference</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>nanoprobe3d_centrage_00031_2024-12-13_11-14-18.h5</p></td>
+<td class="text-left"><p>Raw data</p></td>
+<td class="text-left"><p><a class="reference internal" href="#"><span class="xref myst">Link to download</span></a></p></td>
+<td class="text-center"><p>Javier Perez</p></td>
+<td class="text-center"><p><a class="reference internal" href="#"><span class="xref myst">DOI</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>nanoprobe3d_centrage_00032_2024-12-13_11-25-06.h5</p></td>
+<td class="text-left"><p>Raw data</p></td>
+<td class="text-left"><p><a class="reference internal" href="#"><span class="xref myst">Link to download</span></a></p></td>
+<td class="text-center"><p>Javier Perez</p></td>
+<td class="text-center"><p><a class="reference internal" href="#"><span class="xref myst">DOI</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>There are two independent raw data files in HDF5 format which supposedly contain all the relevant information but the file structure is unknown.
+So first, we are trying to poke around a bit and inspect HDF5 files. The following snippet does a nested search and prints keys, shapes and types of datasets:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tree_search</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;group = </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">v</span><span class="p">[()]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">bytes_</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> | data: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> | shape: </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> | dtype: </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> | data: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Group</span><span class="p">):</span>
+            <span class="n">tree_search</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">tree_search</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h5py</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>
+<span class="n">scan_nr</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="c1">#dataset = f&quot;soleil_swing_siemens/nanoprobe3d_centrage_{scan_nr:05d}_2024-12-13_11-14-18.h5&quot;</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;soleil_swing_siemens/nanoprobe3d_centrage_</span><span class="si">{</span><span class="n">scan_nr</span><span class="si">:</span><span class="s2">05d</span><span class="si">}</span><span class="s2">_2024-12-13_11-25-06.h5&quot;</span>
+<span class="n">path_to_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">tree_search</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1">#print(f&quot;group = {v.name}&quot;)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">v</span><span class="p">[()]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">bytes_</span><span class="p">):</span>
+                <span class="c1">#print(f&quot;\t{v.name} | data: {str(data)}&quot;)</span>
+                <span class="k">pass</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> | shape: </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> | dtype: </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> | data: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">pass</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Group</span><span class="p">):</span>
+            <span class="n">tree_search</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">tree_search</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-data-finding-the-required-bits-of-information">
+<h2>The data - finding the required bits of information<a class="headerlink" href="#the-data-finding-the-required-bits-of-information" title="Link to this heading">#</a></h2>
+<p>In order to attempt a successful reconstruction, we need</p>
+<ul class="simple">
+<li><p>an array/list of diffraction patterns</p></li>
+<li><p>an array/list of scanning positions</p></li>
+<li><p>experimental properties (sample-detector distance, detector pixelsize, photon energy)</p></li>
+</ul>
+<p>By inspecting the HDF5 file, we can determine that the detector was an EIGER 4M with its pixel size and distance saved as <code class="docutils literal notranslate"><span class="pre">/SiemensStar_00032/SWING/EIGER-4M/pixel_size_x</span></code> and <code class="docutils literal notranslate"><span class="pre">/SiemensStar_00032/SWING/EIGER-4M/distance</span></code> respectively. The diffraction data seems to be located at <code class="docutils literal notranslate"><span class="pre">/SiemensStar_00032/scan_data/eiger_image</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">scan_data</span></code> section also seems to have a list of sample positions labelled <code class="docutils literal notranslate"><span class="pre">/SiemensStar_00032//scan_data/calc_gated_sample_tx</span></code> and <code class="docutils literal notranslate"><span class="pre">/SiemensStar_00032//scan_data/calc_gated_sample_tx</span></code>, and digging a bit further into the tree we can find <code class="docutils literal notranslate"><span class="pre">/SiemensStar_00032//SWING/i11-c-c03__op__mono/energy</span></code> which seems to provide us with the photon energy that is saved by the monochromator. In full we have identified the following entries in the HDF5 file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Keys to data and metadata</span>
+<span class="n">root_entry</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/SiemensStar_</span><span class="si">{</span><span class="n">scan_nr</span><span class="si">:</span><span class="s2">05d</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">data_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/scan_data/eiger_image&quot;</span>
+<span class="n">det_pixsize_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/SWING/EIGER-4M/pixel_size_x&quot;</span>
+<span class="n">det_distance_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/SWING/EIGER-4M/distance&quot;</span>
+<span class="n">sample_posx_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/scan_data/calc_gated_sample_tx&quot;</span>
+<span class="n">sample_posz_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/scan_data/calc_gated_sample_tz&quot;</span>
+<span class="n">photon_energy_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/SWING/i11-c-c03__op__mono/energy&quot;</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Keys to data and metadata</span>
+<span class="n">root_entry</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/SiemensStar_</span><span class="si">{</span><span class="n">scan_nr</span><span class="si">:</span><span class="s2">05d</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">data_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/scan_data/eiger_image&quot;</span>
+<span class="n">det_pixsize_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/SWING/EIGER-4M/pixel_size_x&quot;</span>
+<span class="n">det_distance_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/SWING/EIGER-4M/distance&quot;</span>
+<span class="n">sample_posx_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/scan_data/calc_gated_sample_tx&quot;</span>
+<span class="n">sample_posz_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/scan_data/calc_gated_sample_tz&quot;</span>
+<span class="n">photon_energy_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/SWING/i11-c-c03__op__mono/energy&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-data-loading-into-memory-and-inspecting-metadata">
+<h2>The data - loading into memory and inspecting metadata<a class="headerlink" href="#the-data-loading-into-memory-and-inspecting-metadata" title="Link to this heading">#</a></h2>
+<p>It is now time to look at the data a bit more closely. First, we load everything into memory and print out some overall information:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">data_key</span><span class="p">][:]</span>
+    <span class="n">posx</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">sample_posx_key</span><span class="p">][:]</span>
+    <span class="n">posz</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">sample_posz_key</span><span class="p">][:]</span>
+    <span class="n">photon_energy_kev</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">photon_energy_key</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">det_pixsize_um</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">det_pixsize_key</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">det_distance_mm</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">det_distance_key</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nr. of points: </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="se">\</span>
+<span class="s2">        Detector shape: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, </span><span class="se">\</span>
+<span class="s2">        Energy: </span><span class="si">{</span><span class="n">photon_energy_kev</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> keV, </span><span class="se">\</span>
+<span class="s2">        Detector distance: </span><span class="si">{</span><span class="n">det_distance_mm</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> mm, </span><span class="se">\</span>
+<span class="s2">        Detector pixelsize: </span><span class="si">{</span><span class="n">det_pixsize_um</span><span class="si">}</span><span class="s2"> um&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This gives us the following output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Nr.<span class="w"> </span>of<span class="w"> </span>points:<span class="w"> </span><span class="m">632</span>,<span class="w">         </span>Detector<span class="w"> </span>shape:<span class="w"> </span><span class="o">(</span><span class="m">1000</span>,<span class="w"> </span><span class="m">1000</span><span class="o">)</span>,<span class="w">         </span>Energy:<span class="w"> </span><span class="m">8</span>.0<span class="w"> </span>keV,<span class="w">         </span>Detector<span class="w"> </span>distance:<span class="w"> </span><span class="m">6491</span>.3<span class="w"> </span>mm,<span class="w">         </span>Detector<span class="w"> </span>pixelsize:<span class="w"> </span><span class="m">75</span>.0<span class="w"> </span>um
+</pre></div>
+</div>
+<p>and suggests that we have a scan with <span class="math notranslate nohighlight">\(632\)</span> points each with diffraction patterns of shape <span class="math notranslate nohighlight">\(1000 x 1000\)</span> pixels. The pixel size is <span class="math notranslate nohighlight">\(75\)</span>, the detector distance <span class="math notranslate nohighlight">\(6491.3\)</span> and the photon energy <span class="math notranslate nohighlight">\(8\)</span>. Knowing that SWING is a hard-xray beamline and looking at the technical facts provided on the beamline’s <a class="reference external" href="https://www.synchrotron-soleil.fr/en/beamlines/swing">website</a> we can safely assume that the pixel size is <span class="math notranslate nohighlight">\(75\)</span> microns, the distance is <span class="math notranslate nohighlight">\(6491.3\)</span> mm and the photon energy is <span class="math notranslate nohighlight">\(8\)</span> keV.</p>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">data_key</span><span class="p">][:]</span>
+    <span class="n">posx</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">sample_posx_key</span><span class="p">][:]</span>
+    <span class="n">posz</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">sample_posz_key</span><span class="p">][:]</span>
+    <span class="n">photon_energy_kev</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">photon_energy_key</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">det_pixsize_um</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">det_pixsize_key</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">det_distance_mm</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">det_distance_key</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nr. of points: </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="se">\</span>
+<span class="s2">        Detector shape: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, </span><span class="se">\</span>
+<span class="s2">        Energy: </span><span class="si">{</span><span class="n">photon_energy_kev</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> keV, </span><span class="se">\</span>
+<span class="s2">        Detector distance: </span><span class="si">{</span><span class="n">det_distance_mm</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> mm, </span><span class="se">\</span>
+<span class="s2">        Detector pixelsize: </span><span class="si">{</span><span class="n">det_pixsize_um</span><span class="si">}</span><span class="s2"> um&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-data-plotting-scan-positions">
+<h2>The data - plotting scan positions<a class="headerlink" href="#the-data-plotting-scan-positions" title="Link to this heading">#</a></h2>
+<p>Let’s look at the actual data starting with the scan positions. First we plot the two position arrays (<code class="docutils literal notranslate"><span class="pre">posx</span></code> and <code class="docutils literal notranslate"><span class="pre">posz</span></code>) against each other</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">posx</span><span class="p">,</span><span class="n">posz</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X [mm]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Z [mm]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>providing us with the following plot</p>
+<p><img alt="" src="../../_images/soleil_swing_positions.png" /></p>
+<p>the range of positions strongly suggests, that the most likely unit is millimiters meaning the scan was covering an area of roughly <span class="math notranslate nohighlight">\(14 x 14\)</span> micrometers.</p>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">posx</span><span class="p">,</span><span class="n">posz</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X [mm]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Z [mm]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-data-plotting-the-diffraction-patterns">
+<h2>The data - Plotting the diffraction patterns<a class="headerlink" href="#the-data-plotting-the-diffraction-patterns" title="Link to this heading">#</a></h2>
+<p>Next, we look at the diffraction data. Plotting the first image</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">colors</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span> <span class="c1"># normal scale</span>
+<span class="c1">#plt.imshow(data[0], interpolation=&quot;none&quot;, norm=colors.LogNorm()) # Log scale</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>quickly reveals that there are some masked areas (invalid pixels) that need to be dealt with</p>
+<p><img alt="" src="../../_images/soleil_swing_data_normal_scale.png" /></p>
+<p>here is the same image but on a log scale</p>
+<p><img alt="" src="../../_images/soleil_swing_data_log_scale.png" /></p>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">colors</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="c1">#plt.imshow(data[0], interpolation=&quot;none&quot;) # normal scale</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">())</span> <span class="c1"># Log scale</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-data-creating-and-saving-a-mask-of-invalid-pixels">
+<h2>The data - creating and saving a mask of invalid pixels<a class="headerlink" href="#the-data-creating-and-saving-a-mask-of-invalid-pixels" title="Link to this heading">#</a></h2>
+<p>To determine a mask of invalid pixels, it seems like we can simply threshold the first diffraction pattern</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">threshold</span> <span class="o">=</span> <span class="mf">4e9</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Histogram of active pixels&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">semilogy</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Mask of inactive pixels&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diffraction pattern&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="o">~</span><span class="n">mask</span><span class="p">),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mf">0.1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>to obtain clean diffraction patterns with values between <span class="math notranslate nohighlight">\(0\)</span> and slightly above <span class="math notranslate nohighlight">\(35,000\)</span> counts</p>
+<p><img alt="" src="../../_images/soleil_swing_mask_inactive_pixels.png" /></p>
+<p>We finally save the mask in a new HDF5 file called <code class="docutils literal notranslate"><span class="pre">eiger_mask.h5</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;./eiger_mask.h5&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">threshold</span> <span class="o">=</span> <span class="mf">4e9</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Histogram of active pixels&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">semilogy</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Mask of inactive pixels&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diffraction pattern&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="o">~</span><span class="n">mask</span><span class="p">),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mf">0.1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;./eiger_mask.h5&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-reconstruction-initial-steps">
+<h2>The reconstruction - initial steps<a class="headerlink" href="#the-reconstruction-initial-steps" title="Link to this heading">#</a></h2>
+<p>There are other tutorials that already explain the different sections of the parameter tree, but it might be worth to go through them once again.
+After an initial part with imports</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ptypy</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ptypy.utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">u</span>
+
+<span class="c1"># This will import the HDF5Loader class</span>
+<span class="n">ptypy</span><span class="o">.</span><span class="n">load_ptyscan_module</span><span class="p">(</span><span class="s2">&quot;hdf5_loader&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>we define how to obtain access to all relevant parts of the data file (path and keys)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to the raw data</span>
+<span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>
+<span class="n">scan_nr</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="c1">#dataset = f&quot;soleil_swing_siemens/nanoprobe3d_centrage_{scan_nr:05d}_2024-12-13_11-14-18.h5&quot;</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;soleil_swing_siemens/nanoprobe3d_centrage_</span><span class="si">{</span><span class="n">scan_nr</span><span class="si">:</span><span class="s2">05d</span><span class="si">}</span><span class="s2">_2024-12-13_11-25-06.h5&quot;</span>
+<span class="n">path_to_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+<span class="n">path_to_mask</span> <span class="o">=</span> <span class="s2">&quot;./eiger_mask.h5&quot;</span>
+
+<span class="c1"># Keys to data and metadata</span>
+<span class="n">root_entry</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/SiemensStar_</span><span class="si">{</span><span class="n">scan_nr</span><span class="si">:</span><span class="s2">05d</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">data_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/scan_data/eiger_image&quot;</span>
+<span class="n">det_pixsize_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/SWING/EIGER-4M/pixel_size_x&quot;</span>
+<span class="n">det_distance_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/SWING/EIGER-4M/distance&quot;</span>
+<span class="n">sample_posx_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/scan_data/calc_gated_sample_tx&quot;</span>
+<span class="n">sample_posz_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/scan_data/calc_gated_sample_tz&quot;</span>
+<span class="n">photon_energy_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/SWING/i11-c-c03__op__mono/energy&quot;</span>
+</pre></div>
+</div>
+<p>before starting to define the parameter tree, with the usual I/O settings for Jupyter notebooks and a <code class="docutils literal notranslate"><span class="pre">frames_per_block</span></code> of 100. This value could be increased, but given the scan has only <span class="math notranslate nohighlight">\(632\)</span> data points, <span class="math notranslate nohighlight">\(100\)</span> seems like a good compromise that should also work on GPUs with less memory.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create parameter tree</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+
+<span class="c1"># Set verbose level to interactive</span>
+<span class="n">p</span><span class="o">.</span><span class="n">verbose_level</span> <span class="o">=</span> <span class="s2">&quot;interactive&quot;</span>
+
+<span class="c1"># Data blocks for loading</span>
+<span class="n">p</span><span class="o">.</span><span class="n">frames_per_block</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Set io settings (no files saved)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Live-plotting during the reconstruction</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">active</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">threaded</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="s2">&quot;jupyter&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>Now, we need to define a “scan” and we choose the <code class="docutils literal notranslate"><span class="pre">BlockFull</span></code> model which is recommended for GPU reconstructions. We also need to provide an initial guess for the probe/illumination and this is one of the first more tricky parts. Probe retrieval is often the most difficult part of a ptychographic reconstruction and so defining a sensible initial guess can be very important for a successful reconstruction. The problem here is that we don’t know all that much about the properties of the illumination at the SWING beamline at specifically the experimental conditions for this particular data set. What we do know (by looking at the specs on their website) is that the beam is shaped by a KB system, which means we are expecting a rectangular aperture. At this point, the best thing would be to reach out to a beamline scientist and ask for the specifics, i.e. the size of the aperture (exit slit of the KB), the focal length (<code class="docutils literal notranslate"><span class="pre">propagation.focussed</span></code>) and how much the probe has been defocused during this experiment (<code class="docutils literal notranslate"><span class="pre">propagation.parallel</span></code>). But, let’s just carry on and see if we can figure it out by trial and error. Let’s assume a <span class="math notranslate nohighlight">\(5x5\)</span> mm aperture for now with a focal length of <span class="math notranslate nohighlight">\(32\)</span> m and <span class="math notranslate nohighlight">\(3\)</span> mm defocus</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the scan model</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;BlockFull&#39;</span>
+
+<span class="c1"># Initial illumination (based on simulated optics)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">photons</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">form</span> <span class="o">=</span> <span class="s2">&quot;rect&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mf">5e-3</span><span class="p">,</span><span class="mf">5e-3</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">focussed</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">parallel</span> <span class="o">=</span> <span class="mf">3e-3</span>
+</pre></div>
+</div>
+<p>Next, we need to tell PtyPy where to load the data from, for this we are going to use the <code class="docutils literal notranslate"><span class="pre">HDF5Loader</span></code> with the following settings</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Data loader</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Hdf5Loader&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Read diffraction data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">data_key</span>
+
+<span class="c1"># Read positions data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_key</span> <span class="o">=</span> <span class="n">sample_posx_key</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_key</span> <span class="o">=</span> <span class="n">sample_posz_key</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
+
+<span class="c1"># Read meta data: photon energy</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">photon_energy_key</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Read meta data: detector distance</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">det_distance_key</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
+
+<span class="c1"># Read meta data: detector pixelsize</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">det_pixsize_key</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mf">1e-6</span>
+
+<span class="c1"># Other metadata</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">auto_center</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Note, that we have set <code class="docutils literal notranslate"><span class="pre">data.shape</span></code> as <span class="math notranslate nohighlight">\(512x512\)</span> even the full size of the diffraction patterns is <span class="math notranslate nohighlight">\(1000x1000\)</span>, this is to make the data loading and processing faster at the beginning - we can later increase the shape to obtain the highest possible resolution for the reconstruction. We have also turned on <code class="docutils literal notranslate"><span class="pre">data.auto_center</span></code> to automatically find the global centre of the diffraction patterns.</p>
+<p>Finally, we can run PtyPy with <code class="docutils literal notranslate"><span class="pre">ptypy.core.Ptycho()</span></code> but we specify <code class="docutils literal notranslate"><span class="pre">level=4</span></code> to stop just after the data is loaded, all the views and pods are created and the initial model for object and probe have been made.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run up until the creation of the initial model</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ptypy</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ptypy.utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">u</span>
+
+<span class="c1"># This will import the HDF5Loader class</span>
+<span class="n">ptypy</span><span class="o">.</span><span class="n">load_ptyscan_module</span><span class="p">(</span><span class="s2">&quot;hdf5_loader&quot;</span><span class="p">)</span>
+
+<span class="c1"># Path to the raw data</span>
+<span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>
+<span class="n">scan_nr</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="c1">#dataset = f&quot;soleil_swing_siemens/nanoprobe3d_centrage_{scan_nr:05d}_2024-12-13_11-14-18.h5&quot;</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;soleil_swing_siemens/nanoprobe3d_centrage_</span><span class="si">{</span><span class="n">scan_nr</span><span class="si">:</span><span class="s2">05d</span><span class="si">}</span><span class="s2">_2024-12-13_11-25-06.h5&quot;</span>
+<span class="n">path_to_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+<span class="n">path_to_mask</span> <span class="o">=</span> <span class="s2">&quot;./eiger_mask.h5&quot;</span>
+
+<span class="c1"># Keys to data and metadata</span>
+<span class="n">root_entry</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/SiemensStar_</span><span class="si">{</span><span class="n">scan_nr</span><span class="si">:</span><span class="s2">05d</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">data_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/scan_data/eiger_image&quot;</span>
+<span class="n">det_pixsize_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/SWING/EIGER-4M/pixel_size_x&quot;</span>
+<span class="n">det_distance_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/SWING/EIGER-4M/distance&quot;</span>
+<span class="n">sample_posx_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/scan_data/calc_gated_sample_tx&quot;</span>
+<span class="n">sample_posz_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/scan_data/calc_gated_sample_tz&quot;</span>
+<span class="n">photon_energy_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/SWING/i11-c-c03__op__mono/energy&quot;</span>
+
+<span class="c1"># Create parameter tree</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+
+<span class="c1"># Set verbose level to interactive</span>
+<span class="n">p</span><span class="o">.</span><span class="n">verbose_level</span> <span class="o">=</span> <span class="s2">&quot;interactive&quot;</span>
+
+<span class="c1"># Data blocks for loading</span>
+<span class="n">p</span><span class="o">.</span><span class="n">frames_per_block</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Set io settings (no files saved)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Live-plotting during the reconstruction</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">active</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">threaded</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="s2">&quot;jupyter&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Define the scan model</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;BlockFull&#39;</span>
+
+<span class="c1"># Initial illumination (based on simulated optics)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">photons</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">form</span> <span class="o">=</span> <span class="s2">&quot;rect&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mf">5e-3</span><span class="p">,</span><span class="mf">5e-3</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">focussed</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">parallel</span> <span class="o">=</span> <span class="mf">3e-3</span>
+
+<span class="c1"># Data loader</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Hdf5Loader&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Read diffraction data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">data_key</span>
+
+<span class="c1"># Read positions data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_key</span> <span class="o">=</span> <span class="n">sample_posx_key</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_key</span> <span class="o">=</span> <span class="n">sample_posz_key</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
+
+<span class="c1"># Load mask from file</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_mask</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;data&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">invert</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Read meta data: photon energy</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">photon_energy_key</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Read meta data: detector distance</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">det_distance_key</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
+
+<span class="c1"># Read meta data: detector pixelsize</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">det_pixsize_key</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mf">1e-6</span>
+
+<span class="c1"># Other metadata</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">auto_center</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Run reconstruction</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-reconstruction-optimising-the-initial-probe">
+<h2>The reconstruction - optimising the initial probe<a class="headerlink" href="#the-reconstruction-optimising-the-initial-probe" title="Link to this heading">#</a></h2>
+<p>In order to inspect the initial probe calculated by PtyPy, the easiest way is to take the first pod and look at <code class="docutils literal notranslate"><span class="pre">pod.probe</span></code>. We can also us the forward projector <code class="docutils literal notranslate"><span class="pre">pod.fw()</span></code> to calculate how our initial probe looks like in Fourier space and compare it to the diffraction data</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pod</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">pods</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">probe</span> <span class="o">=</span> <span class="n">pod</span><span class="o">.</span><span class="n">probe</span>
+<span class="n">Fprobe</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">abs2</span><span class="p">(</span><span class="n">pod</span><span class="o">.</span><span class="n">fw</span><span class="p">(</span><span class="n">pod</span><span class="o">.</span><span class="n">probe</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>the following code will plot those images side by side</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ax0</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">PtyAxis</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">channel</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">)</span>
+<span class="n">ax0</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">probe</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Fprobe</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">180</span><span class="p">:</span><span class="mi">180</span><span class="o">+</span><span class="mi">512</span><span class="p">,</span><span class="mi">230</span><span class="p">:</span><span class="mi">230</span><span class="o">+</span><span class="mi">512</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>looking like this</p>
+<p><img alt="" src="../../_images/soleil_swing_initial_probe_comparison.png" /></p>
+<p>showing that our probe in the diffraction plane is too small. With a bit of trial and error, we can arrive at a reasonable initial probe at an aperture size of <span class="math notranslate nohighlight">\(15x15\)</span> mm, the same initial focal length of <span class="math notranslate nohighlight">\(32\)</span> m and a defocus of <span class="math notranslate nohighlight">\(5\)</span> mm to make sure the probe is filling the space nicely. Note that it does not matter that those optical properties could all be wrong, what matters is that we arrived at a reasonably shaped intial probe both in real and Fourier space. The final result looks like this</p>
+<p><img alt="" src="../../_images/soleil_swing_initial_probe_comparison_final.png" /></p>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pod</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">pods</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">probe</span> <span class="o">=</span> <span class="n">pod</span><span class="o">.</span><span class="n">probe</span>
+<span class="n">Fprobe</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">abs2</span><span class="p">(</span><span class="n">pod</span><span class="o">.</span><span class="n">fw</span><span class="p">(</span><span class="n">pod</span><span class="o">.</span><span class="n">probe</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ax0</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">PtyAxis</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">channel</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">)</span>
+<span class="n">ax0</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">probe</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Fprobe</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">180</span><span class="p">:</span><span class="mi">180</span><span class="o">+</span><span class="mi">512</span><span class="p">,</span><span class="mi">230</span><span class="p">:</span><span class="mi">230</span><span class="o">+</span><span class="mi">512</span><span class="p">],</span> <span class="n">norm</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">3e4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-reconstruction-let-s-give-it-a-go">
+<h2>The reconstruction - let’s give it a go<a class="headerlink" href="#the-reconstruction-let-s-give-it-a-go" title="Link to this heading">#</a></h2>
+<p>We can largerly use the same parameter as outlined above, with a few changes. First, we need to load the cupy engines</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This will import the GPU engines</span>
+<span class="n">ptypy</span><span class="o">.</span><span class="n">load_gpu_engines</span><span class="p">(</span><span class="s2">&quot;cupy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>we also need to load the mask of invalid pixels that we have generated earlier, note that you might need to use the <code class="docutils literal notranslate"><span class="pre">mask.invert</span></code> parameter to invert that masked values. By default the HDf5Loader is considering the valid pixels as masked (1 in the mask) and the invalid pixels as non-masked (0 in the mask).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load mask from file</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_mask</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;data&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">invert</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>and finally, we need to add a reconstruction - here we use difference map with mostly standard parameters but a few tweaks</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define reconstruction engine (using DM)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM_cupy&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>making sure that we start updating the probe from the very beginning (<code class="docutils literal notranslate"><span class="pre">engine.probe_update_start</span> <span class="pre">=</span> <span class="pre">0</span></code>, set alpha to <span class="math notranslate nohighlight">\(0.9\)</span> - this makes the difference map update a bit less agressive and is usually advantageous when working with real data. We set the nr. of iterations to <span class="math notranslate nohighlight">\(100\)</span> which is typically enough to judge whether a reconstruction is going in the right direction or if something is wrong.</p>
+<p>We can now start our first attempt and reconstructing the data</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run reconstruction</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and the result is…</p>
+<p><img alt="" src="../../_images/soleil_swing_recons_first_attempt.png" /></p>
+<p>hmm, that does not look right. We need to make some changes…</p>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ptypy</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ptypy.utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">u</span>
+
+<span class="c1"># This will import the HDF5Loader class</span>
+<span class="n">ptypy</span><span class="o">.</span><span class="n">load_ptyscan_module</span><span class="p">(</span><span class="s2">&quot;hdf5_loader&quot;</span><span class="p">)</span>
+
+<span class="c1"># This will import the GPU engines</span>
+<span class="n">ptypy</span><span class="o">.</span><span class="n">load_gpu_engines</span><span class="p">(</span><span class="s2">&quot;cupy&quot;</span><span class="p">)</span>
+
+<span class="c1"># Path to the raw data</span>
+<span class="n">tutorial_data_home</span> <span class="o">=</span> <span class="s2">&quot;../../data/&quot;</span>
+<span class="n">scan_nr</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="c1">#dataset = f&quot;soleil_swing_siemens/nanoprobe3d_centrage_{scan_nr:05d}_2024-12-13_11-14-18.h5&quot;</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;soleil_swing_siemens/nanoprobe3d_centrage_</span><span class="si">{</span><span class="n">scan_nr</span><span class="si">:</span><span class="s2">05d</span><span class="si">}</span><span class="s2">_2024-12-13_11-25-06.h5&quot;</span>
+<span class="n">path_to_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutorial_data_home</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+<span class="n">path_to_mask</span> <span class="o">=</span> <span class="s2">&quot;./eiger_mask.h5&quot;</span>
+
+<span class="c1"># Keys to data and metadata</span>
+<span class="n">root_entry</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/SiemensStar_</span><span class="si">{</span><span class="n">scan_nr</span><span class="si">:</span><span class="s2">05d</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">data_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/scan_data/eiger_image&quot;</span>
+<span class="n">det_pixsize_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/SWING/EIGER-4M/pixel_size_x&quot;</span>
+<span class="n">det_distance_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/SWING/EIGER-4M/distance&quot;</span>
+<span class="n">sample_posx_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/scan_data/calc_gated_sample_tx&quot;</span>
+<span class="n">sample_posz_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/scan_data/calc_gated_sample_tz&quot;</span>
+<span class="n">photon_energy_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">root_entry</span><span class="si">}</span><span class="s2">/SWING/i11-c-c03__op__mono/energy&quot;</span>
+
+<span class="c1"># Create parameter tree</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+
+<span class="c1"># Set verbose level to interactive</span>
+<span class="n">p</span><span class="o">.</span><span class="n">verbose_level</span> <span class="o">=</span> <span class="s2">&quot;interactive&quot;</span>
+
+<span class="c1"># Data blocks for loading</span>
+<span class="n">p</span><span class="o">.</span><span class="n">frames_per_block</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Set io settings (no files saved)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autosave</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">interaction</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Live-plotting during the reconstruction</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">active</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">threaded</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="s2">&quot;jupyter&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">autoplot</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Define the scan model</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;BlockFull&#39;</span>
+
+<span class="c1"># Initial illumination (based on simulated optics)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">photons</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">form</span> <span class="o">=</span> <span class="s2">&quot;rect&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">aperture</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mf">15e-3</span><span class="p">,</span><span class="mf">15e-3</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">focussed</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">illumination</span><span class="o">.</span><span class="n">propagation</span><span class="o">.</span><span class="n">parallel</span> <span class="o">=</span> <span class="mf">5e-3</span>
+
+<span class="c1"># Data loader</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Hdf5Loader&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mi">6</span>
+
+<span class="c1"># Read diffraction data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">data_key</span>
+
+<span class="c1"># Read positions data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_key</span> <span class="o">=</span> <span class="n">sample_posx_key</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">slow_multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_key</span> <span class="o">=</span> <span class="n">sample_posz_key</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">fast_multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
+
+<span class="c1"># Load mask from file</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_mask</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;data&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">invert</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Read meta data: photon energy</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">photon_energy_key</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_energy</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Read meta data: detector distance</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">det_distance_key</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_distance</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mf">1e-3</span>
+
+<span class="c1"># Read meta data: detector pixelsize</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_data</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">det_pixsize_key</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">recorded_psize</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="mf">1e-6</span>
+
+<span class="c1"># Load mask from file</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path_to_mask</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;data&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">invert</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Other metadata</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">auto_center</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DM_cupy&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">numiter_contiguous</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_support</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">p</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">probe_update_start</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Run reconstruction</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">ptypy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Ptycho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-the-reconstruction-let-s-make-it-work">
+<h2>Run the reconstruction - let’s make it work<a class="headerlink" href="#run-the-reconstruction-let-s-make-it-work" title="Link to this heading">#</a></h2>
+<p>We have now arrived at arguably the most difficult part of our task to reconstruct new data from scratch. We think that we have provided all the correct data or at least some reasonable estimates, but the reconstruction still looks completely wrong. At this point, it is advised to carefully check that all the provided numbers have the correct units, i.e. photon energy, detector distance, detector pixel size, the scan positions and they are indeed correct. If we are using a mask, we should also double check that it is loaded correctly or if it needs to be inverted. Once we have double checked all of this, there is one last barrier to overcome: choosing the correct coordinate system.</p>
+<p>Unfortunately, there is no guarantee that the coordinate system chosen and implemented by the PtyPy developers (right-handed with the X-axis pointing with the beam) and the local coordinate system used at the beamline together with how we have loaded in that data/posisitions (i.e. <code class="docutils literal notranslate"><span class="pre">positions.slow_key</span></code> vs. <code class="docutils literal notranslate"><span class="pre">positions.fast_key</span></code>) are actual matching precisely. It is actually quite likely that there is a mismatch. Here we could again reach out to the beamline scientist and figure out how the data has been collected and saved, but in most cases it might be faster to simply try all permutations. Fortunately, there are only 8 possible combinations and PtyPy has a convenient parameter <code class="docutils literal notranslate"><span class="pre">data.orientation</span></code> that allows us to quickly try all of these combinations - the default value is <span class="math notranslate nohighlight">\(0\)</span>. For a full description of the possible combinations and what they are, have a look at the definition <a class="reference internal" href="#"><span class="xref myst">here</span></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Data loader</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Param</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Hdf5Loader&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">scans</span><span class="o">.</span><span class="n">scan_00</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">Challenge</p>
+<p>Change the orientation parameter until you are satisfied with the result.</p>
+</div>
+<p>Once you find the correct orientation, i.e. a match between PtyPy’s coordinate system and the way how this dataset has been collected and loaded, the final result should look like this</p>
+<p><img alt="" src="../../_images/soleil_swing_recons_final.png" /></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ptypy_env"
+        },
+        kernelOptions: {
+            name: "ptypy_env",
+            path: "./notebooks/experimental_xray_data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ptypy_env'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="07_multi_gpu.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Using multiple GPUs</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../ptychography_with_electrons/00_electron_data.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Working With Electron Data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-inspection-via-tree-search">The data - inspection via tree search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-finding-the-required-bits-of-information">The data - finding the required bits of information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-loading-into-memory-and-inspecting-metadata">The data - loading into memory and inspecting metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-plotting-scan-positions">The data - plotting scan positions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-plotting-the-diffraction-patterns">The data - Plotting the diffraction patterns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-creating-and-saving-a-mask-of-invalid-pixels">The data - creating and saving a mask of invalid pixels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reconstruction-initial-steps">The reconstruction - initial steps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reconstruction-optimising-the-initial-probe">The reconstruction - optimising the initial probe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reconstruction-let-s-give-it-a-go">The reconstruction - let’s give it a go</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-reconstruction-let-s-make-it-work">Run the reconstruction - let’s make it work</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Benedikt J.Daurer
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
