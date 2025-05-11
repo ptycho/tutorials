@@ -27,6 +27,7 @@ parts:
   - file: notebooks/experimental_xray_data/06_testing_different_algorithms
   - file: notebooks/experimental_xray_data/07_multi_gpu
   - file: notebooks/experimental_xray_data/08_data_from_soleil_swing
+  - file: notebooks/experimental_xray_data/09_wavefield_preconditioner
 - caption: Electron Ptychography Data
   numbered: false
   chapters:
