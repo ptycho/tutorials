@@ -27,6 +27,7 @@ The table below gives an overview of all examples with associated data and a lin
 |  [](notebooks/experimental_xray_data/07_multi_gpu)                    |  [dls_i08_nanogold_spiral.zip](https://zenodo.org/records/11501765/files/dls_i08_nanogold_spiral.zip?download=1) |  1.11 GB |  [DOI](https://doi.org/10.5281/zenodo.11501765) |
 |  [](notebooks/experimental_xray_data/08_data_from_soleil_swing)       |  TBA                                                                                                             | 4.8 GB   | TBA  |
 |  [](notebooks/experimental_xray_data/09_wavefield_preconditioner)     |  TBA                                                                                                             | 4.8 GB   | TBA  |
+|  [](notebooks/experimental_xray_data/10_data_from_nanomax)            |  NanoMax example dataset [10_keV.zip](https://zenodo.org/records/18241822/files/10_keV.zip?download=1)           | 432 MB   | [DOI](https://doi.org/10.5281/zenodo.18241822)  |
 | **Electron Ptychography Data** |
 |  [](notebooks/ptychography_with_electrons/00_electron_data)                       | [dls_epsic_80kV_graphene.zip](https://zenodo.org/records/11501765/files/dls_epsic_80kV_graphene.zip?download=1)  |  270 MB  |  [DOI](https://doi.org/10.5281/zenodo.11501765) |
 |  [](notebooks/ptychography_with_electrons/01_chaining_multiple_engines)           | [dls_epsic_80kV_graphene.zip](https://zenodo.org/records/11501765/files/dls_epsic_80kV_graphene.zip?download=1)  |  270 MB  |  [DOI](https://doi.org/10.5281/zenodo.11501765) |
