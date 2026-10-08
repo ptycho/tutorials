@@ -9,7 +9,7 @@ on:
     - docs/*.md
     - notebooks/**
 
-# This job installs dependencies, builds the book, and pushes it to `gh-pages`
+# This job installs dependencies, builds the book, and deploys to github pages
 jobs:
   deploy-book:
     runs-on: ubuntu-latest
@@ -17,10 +17,10 @@ jobs:
     - uses: actions/checkout@v6
 
     # Install dependencies
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v6
+    - name: Set up Python 3.13
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.10'
+        python-version: '3.13'
 
     - name: Install dependencies
       run: |
@@ -33,9 +33,13 @@ jobs:
         python docs/scripts/convert.py --actions
         jupyter-book build docs
 
-    # Push the book's HTML to github-pages
-    - name: GitHub Pages action
-      uses: peaceiris/actions-gh-pages@v4.1.0
+    # Upload the book's HTML as an artifact
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs/_build/html
+        path: ./docs/_build/html
+
+    # Deploy the book's HTML to GitHub Pages
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
