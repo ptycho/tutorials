@@ -59,3 +59,52 @@ In order to execute the code cell (or any other cell), simply select the cell an
 ```{figure} ./jupyter_notebook_2.PNG
 :name: jupyterlab2
 ```
+
+## Working with this tutorial within an HPC environment
+
+It might not always be possible to run Jupyter Notebooks with access to accelerated GPU hardware, for example in the case of only having terminal-based access to an HPC cluster. Below are a few pointers as to how best to run the PtyPy tutorials on an interactive HPC compute node, e.g. using Slurm.
+
+1. Start an interactive session in the terminal, e.g. single GPU on slurm: ```srun --ntasks 1 --cpus-per-task 1 --gpus 1 --time 02:00:00 --pty bash```
+
+2. Create a new Python file and paste the full-length code block at the end of the Jupyter-based tutorial into it
+
+3. Some of the settings in the PtyPy parameter tree are optimised for running it as a Jupyter Notebook, in particular the following should be modified when running interactively with Python
+
+```python
+# Give your reconstruction a name
+p.run = "test"
+
+# Set verbose level to info
+p.verbose_level = "info"
+
+# Set io settings (no files saved)
+p.io = u.Param()
+p.io.home = "./"
+p.io.rfile = "recons/%(run)s/%(run)s_%(engine)s_%(iterations)04d.ptyr"
+p.io.autosave = u.Param(active=False)
+p.io.interaction = u.Param(active=False)
+p.io.autoplot = u.Param(active=False)
+```
+
+this will turn off all interactive plotting that is configured in all Jupyter Notebook tutorials, and it will save the results in a folder called ```recons``` in the folder defined as ```p.io.home```.
+
+## How to visualise PtyPy output from a .ptyr file
+
+### From a terminal with Graphics
+
+The simplest way to inspect the reconstruction results saved in the .ptyr file is to use the following command from a terminal with access to Graphics
+
+```bash
+ptypy.plot <PATH-TO-PTYR-FILE>
+```
+
+### From a Jupyter Notebook or a Python script
+
+An alternative approach is to visualise the results in a Jupyter Notebook or from a Python script using the following code
+
+```python
+import os
+import ptypy.utils.plot_client as pc
+ptyr_filename = "<PATH-TO-PTYR-FILE>"
+fig = pc.figure_from_ptyr(ptyr_filename)
+```
