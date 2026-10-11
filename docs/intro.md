@@ -102,7 +102,7 @@ ptypy.plot <PATH-TO-PTYR-FILE>
 
 An alternative approach is to visualise the results in a Jupyter Notebook or from a Python script using the following code
 
-```
+```python
 import os
 import ptypy.utils.plot_client as pc
 ptyr_filename = "<PATH-TO-PTYR-FILE>"
