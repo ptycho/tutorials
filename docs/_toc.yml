@@ -29,6 +29,9 @@ parts:
   - file: notebooks/experimental_xray_data/08_data_from_soleil_swing
   - file: notebooks/experimental_xray_data/09_wavefield_preconditioner
   - file: notebooks/experimental_xray_data/10_data_from_nanomax
+  - file: notebooks/experimental_xray_data/11_data_from_softimax
+  - file: notebooks/experimental_xray_data/12_data_from_cosaxs
+  
 - caption: Electron Ptychography Data
   numbered: false
   chapters:
